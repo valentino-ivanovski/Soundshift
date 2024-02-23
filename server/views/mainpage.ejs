@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soundshift</title>
+    <style>
+        body {
+            font-family: Helvetica;
+            margin: 0;
+            padding-left:0px;
+            padding-right:0px;
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+            background: linear-gradient(-135deg, #7e2ffc, #26acff);
+            background-color: rgb(53, 53, 145);
+            background-attachment: fixed; /* Keeps the background fixed */
+            background-size: 100% 100%; /* Scales the background to cover the entire viewport */
+}
+
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px;
+            justify-content: center;
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .navbar li {
+            color: #261f37;
+            display: inline;
+            margin-right: 40px;
+            font-family: Helvetica Neue Bold;
+            font-size: 20px;
+        }
+
+        .navbar li a {
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit the text color from the parent element */
+        }
+
+        .navbar li:hover a {
+            cursor: pointer;
+            color: aqua;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .left-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding:50px;
+        }
+
+        .right-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding:50px;
+        }
+
+        .circle-inner {
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: -webkit-radial-gradient(65% 15%, circle, white 1px, aqua 3%, darkblue 60%, aqua 100%); 
+            background: -moz-radial-gradient(65% 15%, circle, white 1px, aqua 3%, darkblue 60%, aqua 100%); 
+            background: -o-radial-gradient(65% 15%, circle, white 1px, aqua 3%, darkblue 60%, aqua 100%);
+            background: radial-gradient(circle at 65% 15%, white 1px, aqua 3%, darkblue 60%, aqua 100%);       
+            transition: opacity 0.5s;
+            box-shadow: 0 0 100px rgba(0, 0, 255, 0.5);
+        }
+
+        .circle-inner:hover {
+            cursor: pointer;
+            background: -webkit-radial-gradient(65% 15%, circle, white 1px, aqua 3%, darkblue 60%, aqua 100%); 
+            background: -moz-radial-gradient(65% 15%, circle, white 1px, aqua 3%, darkblue 60%, aqua 100%); 
+            background: -o-radial-gradient(65% 15%, circle, white 1px, aqua 3%, darkblue 60%, aqua 100%);
+            background: radial-gradient(circle at 65% 15%, white 1px, aqua 3%, darkblue 60%, aqua 100%);       
+            opacity: 0.9;
+        }
+
+        .square-inner {
+            width: 700px;
+            height: 500px;
+            background-color: #e9e9e9;
+            border-radius: 15px;
+            box-shadow: 5px 5px 10px rgba(72, 72, 72, 0.3);
+        }
+
+        .footer {
+            color: #91aaff;
+            text-align: center;
+            padding-bottom: 15px;
+            font-size: 12px;
+        }
+
+        .circle-label {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <ul>
+            <li><a href="/mainpage">Home</a></li>
+            <li>Profile</li>
+            <li>Settings</li>
+            <li><a href="/logout">Log Out</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="left-side">
+            <div class="circle-inner">
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div class="square-inner">
+                <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue">Soundshift 🎶</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Your Info and Links Here
+    </div>
+</body>
+</html>

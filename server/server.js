@@ -1,0 +1,49 @@
+const express = require('express');
+const session = require('express-session'); // Import express-session
+require('dotenv').config();
+const app = express();
+const dbConn = require('./database/dbConn');
+
+app.set('view engine', 'ejs');
+
+app.use(express.urlencoded({ extended: true }));
+
+const secretKey = require('crypto').randomBytes(32).toString('hex');
+// Configure express-session middleware
+app.use(session({
+  secret: secretKey, // Change this to a secure secret key
+  resave: false,
+  saveUninitialized: true,
+}));
+
+// Middleware to check if the user is logged in
+function requireLogin(req, res, next) {
+  if (req.session.user) {
+    next(); // Continue to the next middleware or route
+  } else {
+    res.redirect('/login'); // Redirect to the login page if the user is not logged in
+  }
+}
+
+app.get('/', (req, res) => {
+  console.log("Page started/refreshed")
+  res.render("index");
+});
+
+app.get('/logout', (req, res) => {
+    // Clear the user session to log out
+    req.session.user = null;
+    res.redirect('/');
+  });
+
+// Routing
+const loginRouter = require('./routes/login');
+app.use("/login", loginRouter);
+
+const registerRouter = require('./routes/register');
+app.use("/register", registerRouter);
+
+const mainpageRouter = require('./routes/mainpage');
+app.use("/mainpage", requireLogin, mainpageRouter);
+
+app.listen(3000);

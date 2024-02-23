@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(-135deg, #7e2ffc, #26acff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 20%;
+        }
+    
+        h1 {
+            font-size: 24px;
+        }
+    
+        form {
+            text-align: center; /* Center-align the form contents */
+        }
+    
+        input {
+            width: 70%; /* Set the input fields to 80% width */
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            min-width: 30%;
+        }
+
+        button:hover {
+            background-color: #555;
+            min-width: 30%;
+        }
+    </style>
+      
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form action="/login/login" method="POST">
+            <input type="text" placeholder="Username" name="username" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        
+    </div>
+</body>
+</html>
