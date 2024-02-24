@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
     <title>Soundshift</title>
     <style>
         body {
@@ -23,7 +26,7 @@
         .navbar {
             display: flex;
             justify-content: space-between;
-            padding: 30px;
+            padding: 25px;
             justify-content: center;
         }
 
@@ -38,7 +41,7 @@
             color: #261f37;
             display: inline;
             margin-right: 40px;
-            font-family: Helvetica Neue Bold;
+            font-family: 'Inter', Helvetica;
             font-size: 20px;
         }
 
@@ -49,13 +52,15 @@
 
         .navbar li:hover a {
             cursor: pointer;
-            color: aqua;
+            color: yellow;
+            text-shadow: 4px 4px 0 #224189;
         }
 
         .content {
             flex: 1;
             display: flex;
             flex-wrap: wrap;
+            max-width: 1200px;
         }
 
         .left-side {
@@ -67,6 +72,7 @@
         }
 
         .right-side {
+            overflow-y: hidden; /* Hide vertical overflow */
             flex: 1;
             display: flex;
             justify-content: center;
@@ -96,11 +102,13 @@
         }
 
         .square-inner {
+            overflow-y: auto; /* Allow vertical scroll */
             width: 700px;
             height: 500px;
             background-color: #e9e9e9;
             border-radius: 15px;
             box-shadow: 5px 5px 10px rgba(72, 72, 72, 0.3);
+            padding: 25px;
         }
 
         .footer {
@@ -117,7 +125,19 @@
         }
     </style>
 </head>
-<body>
+<body><center>
+    <div class="navbar">
+        <h1 style="
+            text-align: center;
+            font-family: 'Inter', Helvetica Neue;
+            font-size: 40px;
+            margin-bottom: -20px; 
+            margin-top: 10px;
+            color: yellow;
+            text-shadow: 4px 4px 0 #224189;
+            transform: perspective(100px) rotateX(15deg);
+            ">SOUNDSHIFT</h1>
+    </div>
 
     <div class="navbar">
         <ul>
@@ -133,16 +153,46 @@
             <div class="circle-inner">
             </div>
         </div>
-
+    
         <div class="right-side">
             <div class="square-inner">
-                <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue">Soundshift 🎶</h1>
+                <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue" >Submit a fav song:</h1>
+                
+                <!-- Song Title -->
+                <div style="margin-bottom: 10px;">
+                    <label for="songTitle">Song Title:</label>
+                    <input type="text" id="songTitle" name="songTitle">
+                    <input type="checkbox" id="explicit" name="explicit">
+                    <label for="explicit">Explicit</label>
+                </div>
+    
+                <!-- Artist Name -->
+                <div style="margin-bottom: 10px;">
+                    <label for="artistName">Artist Name:</label>
+                    <input type="text" id="artistName" name="artistName">
+                </div>
+    
+                <!-- Genre -->
+                <div style="margin-bottom: 10px;">
+                    <label for="genre">Genre:</label>
+                    <input type="text" id="genre" name="genre">
+                </div>
+    
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+                
+                <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue">How it works:</h1>
+                <p style="font-family: Helvetica Light;">Soundshift provides a user-friendly way for people to make their music experience more diverse. By
+                    simply pressing the “Shift” button, users can instantly access a randomly selected song, breaking the
+                    cycle of repetitive music listening.</p>
             </div>
         </div>
     </div>
+    
 
     <div class="footer">
-        Your Info and Links Here
+        Made by: Valentino Ivanovski for Systems 3 - 2024
     </div>
 </body>
 </html>
