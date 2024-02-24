@@ -56,6 +56,11 @@
             background-color: #555;
             min-width: 30%;
         }
+
+        .error {
+            color: red; /* Set text color to red */
+            margin-top: 5px; /* Add space between the error message and the login button */
+        }
     </style>
       
 </head>
@@ -65,6 +70,7 @@
         <form action="/login/login" method="POST">
             <input type="text" placeholder="Username" name="username" required>
             <input type="password" placeholder="Password" name="password" required>
+            <p style="color: red;font-size: 13px;"><%= locals.error %></p>
             <button type="submit">Login</button>
         </form>
         
