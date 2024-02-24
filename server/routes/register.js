@@ -6,20 +6,31 @@ router.get('/', (req, res) => {
     res.render("register");
 })
 
-router.post('/registerUser', (req, res) => { //creating a route like above but this one for POST
+router.post('/registerUser', (req, res) => {
     const { username, email, password } = req.body;
 
-    // Insert the user data into the database using your dbConn functions <3333
-    dbConn.insertUser(username, email, password, (err, result) => {
+    // Check if the username already exists
+    dbConn.checkUsernameExists(username, email, (err, exists) => {
         if (err) {
-            console.error("Error inserting user:", err);
+            console.error("Error checking username:", err);
             res.status(500).send("Registration failed. Please try again.");
+        } else if (exists) {
+            res.render('register', { errorReg: "Username or email already exists." });
         } else {
-            console.log("User registered successfully");
-            res.redirect('/'); // Redirect to the login page after successful registration
+            // Username doesn't exist, proceed with registration
+            dbConn.insertUser(username, email, password, (err, result) => {
+                if (err) {
+                    console.error("Error inserting user:", err);
+                    res.status(500).send("Registration failed. Please try again.");
+                } else {
+                    console.log("User registered successfully");
+                    res.redirect('/'); // Redirect to the login page after successful registration
+                }
+            });
         }
     });
 });
+
 
 module.exports = router; //exporting the module for users
 

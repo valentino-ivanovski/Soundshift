@@ -38,8 +38,21 @@ const checkUserCredentials = (username, password, callback) => {
     });
 };
 
+const checkUsernameExists = (username, email, callback) => {
+    const sql = "SELECT COUNT(*) AS count FROM users WHERE username = ? OR email = ?";
+    conn.query(sql, [username, email], (err, results) => {
+        if (err) {
+            callback(err, null);
+        } else {
+            // If count is greater than 0, username or email already exists
+            callback(null, results[0].count > 0);
+        }
+    });
+};
+
 module.exports = {
     insertUser,
     checkUserCredentials,
+    checkUsernameExists
     // Other database-related functions
 };
