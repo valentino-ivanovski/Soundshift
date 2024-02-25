@@ -50,9 +50,56 @@ const checkUsernameExists = (username, email, callback) => {
     });
 };
 
+// Function to check if a song already exists in the database
+const checkSongExists = (title, artist, callback) => {
+    const sql = "SELECT COUNT(*) AS count FROM songs WHERE title = ? AND artist = ?";
+    conn.query(sql, [title, artist], (err, results) => {
+        if (err) {
+            callback(err, null);
+        } else {
+            // If count is greater than 0, the song already exists
+            callback(null, results[0].count > 0);
+        }
+    });
+};
+
+// Function to insert a new song into the database
+function insertSong(title, artist, userId, genre, explicit, callback) {
+    // Generate links
+    const ytLink = `https://www.youtube.com/results?search_query=${encodeURIComponent(title)}%20${encodeURIComponent(artist)}`;
+    const spotifyLink = `https://open.spotify.com/search/${encodeURIComponent(title)}%20${encodeURIComponent(artist)}`;
+    const soundcloudLink = `https://soundcloud.com/search?q=${encodeURIComponent(title)}%20${encodeURIComponent(artist)}`;
+
+    // Prepare query and data
+    const query = `
+        INSERT INTO songs 
+            (title, artist, genre, yt_link, spotify_link, soundcloud_link, user_id, upload_date, like_count, comment_count, explicit) 
+        VALUES 
+            (?, ?, ?, ?, ?, ?, ?, NOW(), 0, 0, ?)
+    `;
+    const data = [title, artist, genre, ytLink, spotifyLink, soundcloudLink, userId, explicit];
+
+    // Execute query
+    conn.query(query, data, (error, results) => {
+        if (error) {
+            console.error('Error inserting song:', error);
+            callback('Error inserting song into the database');
+            return;
+        }
+        callback(null);
+    });
+}
+
+
+
+
+
+
 module.exports = {
     insertUser,
     checkUserCredentials,
-    checkUsernameExists
+    checkUsernameExists,
+    insertSong,
+    checkSongExists
     // Other database-related functions
 };
