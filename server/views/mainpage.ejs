@@ -157,10 +157,9 @@
         </div>
     
         <div class="right-side">
-            <div class="square-inner">
+            <div class="square-inner" id="song-info-container">
                 <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue" >Filter Songs:</h1>
                 <!-- Select Genre -->
-                <form>
                     <div style="margin-bottom: 10px;">
                         <label for="genre1">Genre:</label>
                         <select id="genre1" name="genre1">
@@ -185,7 +184,6 @@
                         <input type="checkbox" id="explicit1" name="explicit">
                         <label for="explicit1">Explicit</label>
                     </div>
-                </form>
     
                 <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue" >Submit a fav song:</h1>
 
@@ -247,5 +245,53 @@
     <div class="footer">
         Made by: Valentino Ivanovski for Systems 3 - 2024
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const circle = document.querySelector('.circle-inner');
+            const genreSelect = document.getElementById('genre1');
+            const explicitCheckbox = document.getElementById('explicit1');
+
+            circle.addEventListener('click', function() {
+                // Change background color to red
+                circle.style.backgroundColor = 'red';
+
+                // Gather data
+                const genre = genreSelect.value;
+                const explicit = explicitCheckbox.checked;
+
+                // Prepare data for POST request
+                const data = {
+                    genre: genre,
+                    explicit: explicit
+                };
+
+                // Send POST request
+                fetch('/mainpage/getrandomsong', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    // Handle response
+                    if (response.ok) {
+                        // Handle success
+                        console.log('Request successful', data);
+                    } else {
+                        // Handle error
+                        console.error('Error:', response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
+    
+      
+    
 </body>
 </html>

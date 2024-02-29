@@ -28,10 +28,10 @@ const checkUserCredentials = (username, password, callback) => {
             callback(err, null);
         } else {
             if (results.length === 1) {
-                // If a matching user is found, return the user data
+                //if a matching user is found, return the user data
                 callback(null, results[0]);
             } else {
-                // If no matching user is found, return null
+                //if no matching user is found, return null
                 callback(null, null);
             }
         }
@@ -44,33 +44,33 @@ const checkUsernameExists = (username, email, callback) => {
         if (err) {
             callback(err, null);
         } else {
-            // If count is greater than 0, username or email already exists
+            //if count is greater than 0, username or email already exists
             callback(null, results[0].count > 0);
         }
     });
 };
 
-// Function to check if a song already exists in the database
+//function to check if a song already exists in the database
 const checkSongExists = (title, artist, callback) => {
     const sql = "SELECT COUNT(*) AS count FROM songs WHERE title = ? AND artist = ?";
     conn.query(sql, [title, artist], (err, results) => {
         if (err) {
             callback(err, null);
         } else {
-            // If count is greater than 0, the song already exists
+            //if count is greater than 0, the song already exists
             callback(null, results[0].count > 0);
         }
     });
 };
 
-// Function to insert a new song into the database
+//function to insert a new song into the database
 function insertSong(title, artist, userId, genre, explicit, callback) {
     // Generate links
     const ytLink = `https://www.youtube.com/results?search_query=${encodeURIComponent(title)}%20${encodeURIComponent(artist)}`;
     const spotifyLink = `https://open.spotify.com/search/${encodeURIComponent(title)}%20${encodeURIComponent(artist)}`;
     const soundcloudLink = `https://soundcloud.com/search?q=${encodeURIComponent(title)}%20${encodeURIComponent(artist)}`;
 
-    // Prepare query and data
+    //prepare query and data
     const query = `
         INSERT INTO songs 
             (title, artist, genre, yt_link, spotify_link, soundcloud_link, user_id, upload_date, like_count, comment_count, explicit) 
@@ -79,7 +79,7 @@ function insertSong(title, artist, userId, genre, explicit, callback) {
     `;
     const data = [title, artist, genre, ytLink, spotifyLink, soundcloudLink, userId, explicit];
 
-    // Execute query
+    //execute query
     conn.query(query, data, (error, results) => {
         if (error) {
             console.error('Error inserting song:', error);
@@ -89,6 +89,27 @@ function insertSong(title, artist, userId, genre, explicit, callback) {
         callback(null);
     });
 }
+
+//function to get a random song from the database
+function getRandomSong(songGenre, explicit, callback) {
+    const sql = `
+        SELECT 
+            *
+        FROM 
+            songs
+        ORDER BY
+            RAND()
+        LIMIT 1;
+    `;
+
+    conn.query(sql, [songGenre, explicit], (err, results) => {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, results);
+    });
+}
+
 
 
 
@@ -100,6 +121,6 @@ module.exports = {
     checkUserCredentials,
     checkUsernameExists,
     insertSong,
-    checkSongExists
-    // Other database-related functions
+    checkSongExists,
+    getRandomSong
 };
