@@ -4,6 +4,8 @@ require('dotenv').config();
 const app = express();
 const dbConn = require('./database/dbConn');
 
+app.use(express.json());
+
 app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: true }));

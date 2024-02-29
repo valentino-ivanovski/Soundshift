@@ -97,6 +97,8 @@ function getRandomSong(songGenre, explicit, callback) {
             *
         FROM 
             songs
+        WHERE genre = ?
+        AND explicit = ?
         ORDER BY
             RAND()
         LIMIT 1;
@@ -109,12 +111,6 @@ function getRandomSong(songGenre, explicit, callback) {
         callback(null, results);
     });
 }
-
-
-
-
-
-
 
 module.exports = {
     insertUser,

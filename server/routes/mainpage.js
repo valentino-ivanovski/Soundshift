@@ -38,19 +38,16 @@ router.post('/submitsong', (req, res) => {
 });
 
 router.post('/getrandomsong', (req, res) => {
-    // Retrieve genre and explicit from the request body
+    //retrieve genre and explicit from the request body
     const genre = req.body.genre;
     const explicit = req.body.explicit;
 
-    // Call dbConn.getRandomSong function to retrieve a random song
     dbConn.getRandomSong(genre, explicit, (error, song) => {
         if (error) {
-            // Handle error
             console.error('Error retrieving random song:', error);
-            // Send an error response
             res.status(500).json({ error: 'An error occurred while retrieving the random song.' });
         } else {
-            // Send the retrieved song as the response
+            //send the retrieved song as the response
             res.json(song);
             console.log(song);
         }
