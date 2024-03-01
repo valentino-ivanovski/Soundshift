@@ -253,20 +253,18 @@
             const explicitCheckbox = document.getElementById('explicit1');
 
             circle.addEventListener('click', function() {
-                // Change background color to red
                 circle.style.backgroundColor = 'red';
 
-                // Gather data
                 const genre = genreSelect.value;
                 const explicit = explicitCheckbox.checked;
 
-                // Prepare data for POST request
+                //prepare data for POST request
                 const data = {
                     genre: genre,
                     explicit: explicit
                 };
 
-                // Send POST request
+                //send POST request
                 fetch('/mainpage/getrandomsong', {
                     method: 'POST',
                     headers: {
@@ -275,12 +273,9 @@
                     body: JSON.stringify(data)
                 })
                 .then(response => {
-                    // Handle response
                     if (response.ok) {
-                        // Handle success
                         console.log('Request successful', data);
                     } else {
-                        // Handle error
                         console.error('Error:', response.statusText);
                     }
                 })

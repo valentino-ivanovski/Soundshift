@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 router.post('/registerUser', (req, res) => {
     const { username, email, password } = req.body;
 
-    // Check if the username already exists
+    //check if the username already exists
     dbConn.checkUsernameExists(username, email, (err, exists) => {
         if (err) {
             console.error("Error checking username:", err);
@@ -17,14 +17,14 @@ router.post('/registerUser', (req, res) => {
         } else if (exists) {
             res.render('register', { errorReg: "Username or email already exists." });
         } else {
-            // Username doesn't exist, proceed with registration
+            //username doesn't exist, proceed with registration
             dbConn.insertUser(username, email, password, (err, result) => {
                 if (err) {
                     console.error("Error inserting user:", err);
                     res.status(500).send("Registration failed. Please try again.");
                 } else {
                     console.log("User registered successfully");
-                    res.redirect('/'); // Redirect to the login page after successful registration
+                    res.redirect('/'); //redirect to the login page after successful registration
                 }
             });
         }
