@@ -37,27 +37,34 @@ router.post('/submitsong', (req, res) => {
     });
 });
 
-router.post('/getrandomsong', (req, res) => {
+router.post("/getrandomsong", (req, res) => {
     //retrieve genre and explicit from the request body
     const genre = req.body.genre;
     const explicit = req.body.explicit;
 
-    if (genre === 'Any') {
+    if (genre === "Any") {
         dbConn.getRandomSongAny(explicit, (error, song) => {
             if (error) {
-                console.error('Error retrieving random song:', error);
-                res.status(500).json({ error: 'An error occurred while retrieving the random song.' });
+                console.error("Error retrieving random song:", error);
+                res.status(500).json({
+                    error: "An error occurred while retrieving the random song.",
+                });
             } else {
                 //send the retrieved song as the response
                 res.json(song);
                 console.log(song);
             }
         });
+
+        //DODAJ ZA EXPLICIT DA BIRAT I EXPLICIT I NON EXPLICIT A KO KE E UNCHECKED, TOGAS DA E SAMO NON EXPLICIT
+
     } else {
         dbConn.getRandomSong(genre, explicit, (error, song) => {
             if (error) {
-                console.error('Error retrieving random song:', error);
-                res.status(500).json({ error: 'An error occurred while retrieving the random song.' });
+                console.error("Error retrieving random song:", error);
+                res.status(500).json({
+                    error: "An error occurred while retrieving the random song.",
+                });
             } else {
                 //send the retrieved song as the response
                 res.json(song);
@@ -67,13 +74,6 @@ router.post('/getrandomsong', (req, res) => {
     }
 });
 
-
-
-
-
 router.post
-
-
-
 
 module.exports = router; //exporting the module for users
