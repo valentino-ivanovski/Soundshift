@@ -112,11 +112,32 @@ function getRandomSong(songGenre, explicit, callback) {
     });
 }
 
+function getRandomSongAny(explicit, callback) {
+    const sql = `
+        SELECT 
+            *
+        FROM 
+            songs
+        WHERE explicit = ?
+        ORDER BY
+            RAND()
+        LIMIT 1;
+    `;
+
+    conn.query(sql, [explicit], (err, results) => {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, results);
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
     checkUsernameExists,
     insertSong,
     checkSongExists,
-    getRandomSong
+    getRandomSong,
+    getRandomSongAny
 };

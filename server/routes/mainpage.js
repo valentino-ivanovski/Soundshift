@@ -42,16 +42,29 @@ router.post('/getrandomsong', (req, res) => {
     const genre = req.body.genre;
     const explicit = req.body.explicit;
 
-    dbConn.getRandomSong(genre, explicit, (error, song) => {
-        if (error) {
-            console.error('Error retrieving random song:', error);
-            res.status(500).json({ error: 'An error occurred while retrieving the random song.' });
-        } else {
-            //send the retrieved song as the response
-            res.json(song);
-            console.log(song);
-        }
-    });
+    if (genre === 'Any') {
+        dbConn.getRandomSongAny(explicit, (error, song) => {
+            if (error) {
+                console.error('Error retrieving random song:', error);
+                res.status(500).json({ error: 'An error occurred while retrieving the random song.' });
+            } else {
+                //send the retrieved song as the response
+                res.json(song);
+                console.log(song);
+            }
+        });
+    } else {
+        dbConn.getRandomSong(genre, explicit, (error, song) => {
+            if (error) {
+                console.error('Error retrieving random song:', error);
+                res.status(500).json({ error: 'An error occurred while retrieving the random song.' });
+            } else {
+                //send the retrieved song as the response
+                res.json(song);
+                console.log(song);
+            }
+        });
+    }
 });
 
 

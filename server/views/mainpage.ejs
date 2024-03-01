@@ -15,8 +15,8 @@
             flex-direction: column;
             background: linear-gradient(-135deg, #7e2ffc, #26acff);
             background-color: rgb(53, 53, 145);
-            background-attachment: fixed; /* Keeps the background fixed */
-            background-size: 100% 100%; /* Scales the background to cover the entire viewport */
+            background-attachment: fixed; 
+            background-size: 100% 100%; 
 }
 
 
@@ -184,6 +184,7 @@
                         </select>
                         <input type="checkbox" id="explicit1" name="explicit">
                         <label for="explicit1">Explicit</label>
+                        <p id="error-message" style="color: red;font-size: 13px;"></p>
                     </div>
     
                 <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue" >Submit a fav song:</h1>
@@ -330,11 +331,13 @@
             });
     } else {
         console.error('No songs found');
+        document.getElementById('error-message').innerText = 'No songs found';
     }
 })
 
         .catch(error => {
             console.error('Error:', error);
+            document.getElementById('error-message').innerText = 'Error fetching songs';
         });
     });
 });
