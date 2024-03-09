@@ -208,7 +208,8 @@
                 <!-- Genre -->
                 <div style="margin-bottom: 10px;">
                     <label for="genre">Genre:</label>
-                    <select id="genre" name="genre">
+                    <select id="genre" name="genre" required>
+                        <option>-</option>
                         <option value="Pop">Pop</option>
                         <option value="Rock">Rock</option>
                         <option value="Hip Hop/Rap">Hip Hop/Rap</option>
@@ -247,6 +248,7 @@
     <div class="footer">
         Made by: Valentino Ivanovski for Systems 3 - 2024
     </div>
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -293,6 +295,7 @@
         const genre = song.genre ? song.genre : 'Unknown';
         const explicitStatus = song.explicit ? 'Yes' : 'No';
         const uploadDate = new Date(song.upload_date).toLocaleDateString();
+        const username = song.username;
 
         // Populate song details in HTML
         const songDetailsHTML = `
@@ -302,6 +305,7 @@
         <p><strong>Genre:</strong> ${genre}</p>
         <p><strong>Explicit:</strong> ${explicitStatus}</p>
         <p><strong>Uploaded Date:</strong> ${uploadDate}</p>
+        <p><strong>Uploaded By:</strong> ${username}</p>
         `;
         songInfoContainer.innerHTML = songDetailsHTML;
 

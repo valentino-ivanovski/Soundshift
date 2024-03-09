@@ -27,6 +27,11 @@ function requireLogin(req, res, next) {
   }
 }
 
+app.use(function(req, res, next) {
+  res.locals.user = req.session.user;
+  next();
+});
+
 app.get('/', (req, res) => {
   console.log("Page started/refreshed")
   res.render("index");

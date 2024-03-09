@@ -10,20 +10,42 @@
             background: linear-gradient(-135deg, #7e2ffc, #26acff);
             margin: 0;
             padding: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+        }
+
+        .animated-bg {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-270deg, #ee5050, #e622a5);
+            background-size: 200% 200%;
+            animation: gradient 5s infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 100% 0;
+            }
+
+            50% {
+                background-position: 0 100%;
+            }
+
+            100% {
+                background-position: 100% 0;
+            }
         }
 
         .container {
             text-align: center;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 20%;
+            width: 50%;
+            height: 50%;
         }
 
         h1 {
@@ -31,44 +53,74 @@
         }
 
         form {
-            text-align: center; /* Center-align the form contents */
+            text-align: center;
         }
 
         input {
-            width: 70%; /* Set the input fields to 80% width */
-            padding: 10px;
+            width: 70%;
+            padding: 15px;
             margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 1px solid #ffffff;
+            border-radius: 80px;
+            background-color: transparent;
+            color: white;
+            font-size: 13px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.66);
         }
 
         button {
-            background-color: #333;
+            padding: 13px 20px;
+            background-color: transparent;
             color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            text-decoration: none;
+            border: 1.5px solid #fff;
+            border-radius: 50px;
+            font-size: 18px;
+            font-family: Inter, Helvetica;
             cursor: pointer;
-            min-width: 30%;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         button:hover {
-            background-color: #555;
-            min-width: 30%;
+            background-color: #513ad0;
+            border: 1.5px solid #513ad0;
         }
 
+        .error {
+            color: rgb(255, 255, 255);
+            /*set text color to red*/
+            font-family: "Inter", Helvetica;
+            font-weight: 300;
+            margin-top: 10px;
+            margin-bottom: 22px;
+            color: rgb(225, 255, 0);
+            font-size: 15px;
+            /*add space between the error message and the login button*/
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Register</h1>
-        <form action="/register/registerUser" method="POST">
-            <input type="text" placeholder="Username" name="username" required>
-            <input type="email" placeholder="Email" name="email" required>
-            <input type="password" placeholder="Password" name="password" required>
-            <p style="color: red;font-size: 13px;"><%= locals.errorReg %></p>
-            <button type="submit">Register</button>
-        </form>
+    <div class="animated-bg">
+        <div class="container">
+            <h1 style="font-family: 'Inter', Helvetica; font-size: 80px; color: white; margin: 0; margin-bottom: 20px; cursor: default;">
+                Register</h1>
+            <form action="/register/registerUser" method="POST">
+                <input type="text" placeholder="Username" name="username" required>
+                <input type="text" placeholder="Email" name="email" required>
+                <input type="password" placeholder="Password" name="password" required>
+                <p class="error">
+                    <%= locals.errorReg %>
+                </p>
+                <button type="submit">Register</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

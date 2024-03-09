@@ -29,5 +29,15 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.get('/mainpage', (req, res) => {
+    // Check if the user is logged in
+    if (req.session.user) {
+        const username = req.session.user.username;
+        res.render('mainpage', { username: username });
+    } else {
+        // Redirect to the login page if user is not logged in
+        res.redirect('/login');
+    }
+  });
 
 module.exports = router; //exporting the module for users

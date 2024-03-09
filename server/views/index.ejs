@@ -128,12 +128,22 @@
         .welcome2:hover{
             cursor: default;
         }
+
+        @media screen and (max-width: 768px) {
+            .welcome1 {
+                font-size: 60px;
+            }
+
+            .welcome2 {
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div id="animated-bg"></div>
-    <div>
+    <div id="welcomeContainer">
         <h1 class="welcome1" id="animated-text">Soundshift</h1>
         <p class="welcome2">Discover and share your favorite songs with others.</p>
         <a href="https://www.omfgdogs.com">

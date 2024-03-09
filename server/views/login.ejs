@@ -60,7 +60,7 @@
 
         input {
             width: 70%;
-            padding: 20px;
+            padding: 15px;
             margin: 10px 0;
             border: 1px solid #ffffff;
             border-radius: 80px;
@@ -96,9 +96,14 @@
         }
 
         .error {
-            color: red;
+            color: rgb(255, 255, 255);
             /*set text color to red*/
-            margin-top: 5px;
+            font-family: "Inter", Helvetica;
+            font-weight: 300;
+            margin-top: 10px;
+            margin-bottom: 22px;
+            color: rgb(225, 255, 0);
+            font-size: 15px;
             /*add space between the error message and the login button*/
         }
     </style>
@@ -113,12 +118,12 @@
             <form action="/login/login" method="POST">
                 <input type="text" placeholder="Username" name="username" required>
                 <input type="password" placeholder="Password" name="password" required>
-                <p style="color: red;font-size: 13px;">
+                <p class="error">
                     <%= locals.error %>
                 </p>
                 <button type="submit">Login</button>
                 <p style="font-family: 'Inter', Helvetica; font-weight: 300; color: antiquewhite; margin-top: 25px;">Don't have an
-                    account? <a href="/register" style="color:antiquewhite;">Register</a></p>
+                    account? <a href="/register" style="color:antiquewhite;">Register✨</a></p>
             </form>
         </div>
     </div>
