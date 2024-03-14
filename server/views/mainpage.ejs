@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
     <title>Soundshift</title>
     <style>
         body {
@@ -24,38 +24,55 @@
             display: flex;
             justify-content: space-between;
             padding: 25px;
-            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
         }
 
         .navbar ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            padding-left: 20px;
         }
 
         .navbar li {
             color: #261f37;
             display: inline;
-            margin-right: 40px;
+            margin-right:20px;
             font-family: 'Inter', Helvetica;
             font-size: 20px;
         }
 
         .navbar li a{
-            text-decoration: none; /* Remove underline */
-            color: inherit; /* Inherit the text color from the parent element */
-            display: inline-block; /* Make the anchor/button behave like a block element */
-            padding: 8px 16px;
-            border: 2px solid #333;
-            border-radius: 70px;
+            padding: 11px 17px;
             background-color: transparent;
+            color: #fff;
+            text-decoration: none;
+            border: 1.5px solid #fff;
+            border-radius: 50px;
+            font-size: 16px;
+            font-family: Inter, Helvetica;
             cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .navbar li a:hover{
+        .navbar li a:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .navbar li aLM{
+            padding: 13px 20px;
+            background-color: transparent;
+            color: #fff;
+            text-decoration: none;
+            border: 1.5px solid #fff;
+            border-radius: 50px;
+            font-size: 18px;
+            font-family: Inter, Helvetica;
             cursor: pointer;
-            background-color: #f4f4f4; /* Change background color on hover */
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 20%;
+            margin-top: 30px;
         }
 
         .content {
@@ -126,27 +143,27 @@
             font-size: 18px;
             margin-top: 20px;
         }
+
+        .soundshiftText{
+            font-family: 'Inter', Helvetica Neue;
+            font-size: 31px;
+            font-weight: 800;
+            color: white;
+            font-variation-settings: "slnt" -10;
+            margin-left: 40px;
+            text-decoration: none;
+        }
+        .soundshiftText:hover{
+            color: #f5f5f5;
+        }
     </style>
 </head>
 <body><center>
     <div class="navbar">
-        <h1 style="
-            text-align: center;
-            font-family: 'Inter', Helvetica Neue;
-            font-size: 40px;
-            margin-bottom: -20px; 
-            margin-top: 10px;
-            color: yellow;
-            text-shadow: 4px 4px 0 #224189;
-            transform: perspective(100px) rotateX(15deg);
-            ">SOUNDSHIFT</h1>
-    </div>
-
-    <div class="navbar">
+        <a class="soundshiftText" href="/mainpage">Soundshift</a>
         <ul>
-            <li><a href="/mainpage">Home</a></li>
-            <li><a href="/profile">Profile</a></li>
             <li><a href="/search">Search</a></li>
+            <li><a href="/profile">Profile</a></li>
             <li><a href="/logout">Log Out</a></li>
         </ul>
     </div>
