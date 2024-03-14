@@ -96,7 +96,7 @@ function getRandomSong(songGenre, explicit, callback) {
         SELECT songs.*, users.username 
         FROM songs 
         LEFT JOIN users ON songs.user_id = users.id 
-        WHERE songs.explicit = ? 
+        WHERE songs.genre = ? AND songs.explicit = ?
         ORDER BY RAND() 
         LIMIT 1
     `;
@@ -114,7 +114,7 @@ function getRandomSongAny(explicit, callback) {
         SELECT songs.*, users.username 
         FROM songs 
         LEFT JOIN users ON songs.user_id = users.id 
-        WHERE songs.explicit = ? 
+        WHERE songs.explicit = ?
         ORDER BY RAND() 
         LIMIT 1
     `;
