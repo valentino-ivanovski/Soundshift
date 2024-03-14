@@ -17,15 +17,19 @@
             background-color: rgb(53, 53, 145);
             background-attachment: fixed; 
             background-size: 100% 100%; 
-}
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
 
 
         .navbar {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             padding: 25px;
             align-items: center;
-            margin-top: 20px;
+            height: 25px;
         }
 
         .navbar ul {
@@ -44,35 +48,27 @@
 
         .navbar li a{
             padding: 11px 17px;
-            background-color: transparent;
             color: #fff;
             text-decoration: none;
-            border: 1.5px solid #fff;
-            border-radius: 50px;
             font-size: 16px;
+            font-weight: 300;
             font-family: Inter, Helvetica;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
         }
 
         .navbar li a:hover {
-            background-color: #fff;
             color: #000;
         }
 
         .navbar li aLM{
-            padding: 13px 20px;
-            background-color: transparent;
+            padding: 11px 17px;
             color: #fff;
             text-decoration: none;
-            border: 1.5px solid #fff;
-            border-radius: 50px;
-            font-size: 18px;
+            font-size: 16px;
             font-family: Inter, Helvetica;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-            margin-left: 20%;
-            margin-top: 30px;
         }
 
         .content {
@@ -132,7 +128,7 @@
         }
 
         .footer {
-            color: #91aaff;
+            color: rgba(245, 245, 245, 0.5);
             text-align: center;
             padding-bottom: 15px;
             font-size: 12px;
@@ -144,28 +140,57 @@
             margin-top: 20px;
         }
 
-        .soundshiftText{
+        .soundshiftText {
             font-family: 'Inter', Helvetica Neue;
-            font-size: 31px;
+            font-size: 25px;
             font-weight: 800;
             color: white;
             font-variation-settings: "slnt" -10;
             margin-left: 40px;
             text-decoration: none;
+            transition: color 0.2s;
         }
-        .soundshiftText:hover{
-            color: #f5f5f5;
+
+        .soundshiftText:hover {
+            color: rgba(245, 245, 245, 0.5);
         }
+
+        .animated-bg {
+            position: fixed;
+
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-270deg, #ee5050, #e622a5);
+            background-size: 200% 200%;
+            animation: gradient 5s infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 100% 0;
+            }
+
+            50% {
+                background-position: 0 100%;
+            }
+
+            100% {
+                background-position: 100% 0;
+            }
+        }
+
     </style>
 </head>
 <body><center>
+    <div class="animated-bg">
     <div class="navbar">
-        <a class="soundshiftText" href="/mainpage">Soundshift</a>
+        <a class="soundshiftText" href="/mainpage">soundshift</a>
         <ul>
+            <li><a href="/mainpage">Home</a></li>
             <li><a href="/search">Search</a></li>
             <li><a href="/profile">Profile</a></li>
-            <li><a href="/logout">Log Out</a></li>
         </ul>
+        <li><a href="/logout">Log Out</a></li>
     </div>
 
     <div class="content">
@@ -259,13 +284,10 @@
             </div>
         </div>
     </div>
-    
-    
-
     <div class="footer">
         Made by: Valentino Ivanovski for Systems 3 - 2024
     </div>
-    
+</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
