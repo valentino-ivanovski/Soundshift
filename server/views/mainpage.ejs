@@ -74,7 +74,8 @@
             display: flex;
             flex-wrap: wrap;
             max-width: 1200px;
-            height: 80%;
+            height: 60%;
+            padding-top: 20px;
 }
 
         .left-side {
@@ -86,6 +87,7 @@
             padding-left: 50px;
             max-width: 1200px; /* Limit the maximum width */
             margin: auto; /* Center the elements horizontally */
+            position: relative;
 }
 
         .right-side {
@@ -95,8 +97,9 @@
             justify-content: center;
             align-items: center;
             padding-right: 50px;
-            padding-top: 20px;
+            padding-top: 80px;
             max-width: 1200px; /* Limit the maximum width */
+            max-height: 100%;
             margin: auto; /* Center the elements horizontally */
         }
 
@@ -115,7 +118,6 @@
             0 0 50px #fff,
             10px 0 400px #f0f;
             transition: box-shadow 0.6s;
-            position: relative;
         }
 
         .circle-inner:hover {
@@ -146,7 +148,7 @@
         .square-inner {
             width: 700px;
             height: 500px;
-            padding: 25px;
+            padding-top: 120px;
             text-align: center;
             color: white;
         }
@@ -222,7 +224,8 @@
             appearance: none; /* removes the default appearance */
             background-color: #e0f7fa; /* change this to your preferred color */
             color: #333;
-            width: 20%;
+            text-align-last: center;
+            max-width:80px;
             outline: none; /* removes the default outline */
             transition: all 0.1s ease 0s; /* makes the changes animate smoothly */
         }   
@@ -268,6 +271,17 @@
             border-color: #624be8;
         }
 
+        .genreExDiv{
+            position: absolute;
+            top: 240px;
+            left: 218px;
+        }
+
+        #error-message{
+            font-family: "Inter", Helvetica;
+            color: yellow;font-size: 13px;
+        }
+
     </style>
 </head>
 <body><center>
@@ -289,38 +303,35 @@
                     <p>Click Me! -></p>
                 </div>
             </div>
+            <div class="genreExDiv">
+                <label for="genre1" class="labelGenre">Genre:</label>
+                <select id="genre1" name="genre1">
+                    <option value="Any">Any</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Hip Hop/Rap">Hip Hop/Rap</option>
+                    <option value="Electronic">Electronic</option>
+                    <option value="R&B/Soul">R&B/Soul</option>
+                    <option value="Country">Country</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Reggae">Reggae</option>
+                    <option value="Classical">Classical</option>
+                    <option value="Folk">Folk</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Blues">Blues</option>
+                    <option value="Gospel">Gospel</option>
+                    <option value="World">World</option>
+                    <option value="Experimental">Experimental</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input type="checkbox" id="explicit1" name="explicit">
+                <label for="explicit1" class="explicitLabel">Explicit</label>
+                <p id="error-message"></p>
+            </div>
         </div>
     
         <div class="right-side">
             <div class="square-inner" id="song-info-container">
-                <h1 class="headers" >filter songs:</h1>
-                <!-- Select Genre -->
-                    <div style="margin-bottom: 10px;">
-                        <label for="genre1" class="labelGenre">Genre:</label>
-                        <select id="genre1" name="genre1">
-                            <option value="Any">Any</option>
-                            <option value="Pop">Pop</option>
-                            <option value="Rock">Rock</option>
-                            <option value="Hip Hop/Rap">Hip Hop/Rap</option>
-                            <option value="Electronic">Electronic</option>
-                            <option value="R&B/Soul">R&B/Soul</option>
-                            <option value="Country">Country</option>
-                            <option value="Jazz">Jazz</option>
-                            <option value="Reggae">Reggae</option>
-                            <option value="Classical">Classical</option>
-                            <option value="Folk">Folk</option>
-                            <option value="Metal">Metal</option>
-                            <option value="Blues">Blues</option>
-                            <option value="Gospel">Gospel</option>
-                            <option value="World">World</option>
-                            <option value="Experimental">Experimental</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <input type="checkbox" id="explicit1" name="explicit">
-                        <label for="explicit1" class="explicitLabel">Explicit</label>
-                        <p id="error-message" style="color: yellow;font-size: 13px;"></p>
-                    </div>
-    
                 <h1 class="headers" >submit a fav song:</h1>
 
                 <form action="/mainpage/submitsong" method="post">
@@ -335,7 +346,7 @@
                 <!-- Artist Name -->
                 <div style="margin-bottom: 10px;">
                     <label for="artistName" class="artistLabel">Artist Name:</label>
-                    <input type="text" id="artistName" placeholder="Travis Scott" name="artistName"> <!-- artistName -->
+                    <input type="text" id="artistName" placeholder="Travis Scott" name="artistName" required> <!-- artistName -->
                 </div>
     
                 <!-- Genre -->

@@ -92,14 +92,26 @@ function insertSong(title, artist, userId, genre, explicit, callback) {
 
 //function to get a random song from the database
 function getRandomSong(songGenre, explicit, callback) {
-    const sql = `
+    let sql = ``;
+    if (explicit === false) {
+    sql = `
         SELECT songs.*, users.username 
         FROM songs 
         LEFT JOIN users ON songs.user_id = users.id 
-        WHERE songs.genre = ? AND songs.explicit = ?
+        WHERE songs.genre = ? AND songs.explicit = 0
         ORDER BY RAND() 
         LIMIT 1
     `;
+    }else{
+        sql = `
+        SELECT songs.*, users.username 
+        FROM songs 
+        LEFT JOIN users ON songs.user_id = users.id 
+        WHERE songs.genre = ? 
+        ORDER BY RAND() 
+        LIMIT 1
+    `;
+    }
 
     conn.query(sql, [songGenre, explicit], (err, results) => {
         if (err) {
@@ -110,7 +122,9 @@ function getRandomSong(songGenre, explicit, callback) {
 }
 
 function getRandomSongAny(explicit, callback) {
-    const sql = `
+    let sql = ``;
+    if (explicit === false) {
+    sql = `
         SELECT songs.*, users.username 
         FROM songs 
         LEFT JOIN users ON songs.user_id = users.id 
@@ -118,7 +132,15 @@ function getRandomSongAny(explicit, callback) {
         ORDER BY RAND() 
         LIMIT 1
     `;
-
+    }else{
+        sql = `
+        SELECT songs.*, users.username 
+        FROM songs 
+        LEFT JOIN users ON songs.user_id = users.id 
+        ORDER BY RAND() 
+        LIMIT 1
+    `;
+    }
     conn.query(sql, [explicit], (err, results) => {
         if (err) {
             return callback(err);
