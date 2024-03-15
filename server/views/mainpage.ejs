@@ -110,17 +110,30 @@
             0 0 50px #fff,
             10px 0 400px #f0f;
             transition: box-shadow 0.6s;
+            position: relative;
         }
 
         .circle-inner:hover {
-    cursor: pointer;
-    box-shadow: inset 0 0 50px #fff,
-    inset 20px 0 80px #FF69B4, /* Hot Pink */
-    inset -20px 0 80px #40E0D0, /* Turquoise */
-    inset 20px 0 300px #FF69B4,
-    inset -20px 0 300px #40E0D0,
-    0 0 50px #fff,
-    10px 0 400px #FF69B4;
+            cursor: pointer;
+            box-shadow: inset 0 0 50px #fff,
+            inset 20px 0 80px #FF69B4, /* Hot Pink */
+            inset -20px 0 80px #40E0D0, /* Turquoise */
+            inset 20px 0 300px #FF69B4,
+            inset -20px 0 300px #40E0D0,
+            0 0 50px #fff,
+            10px 0 400px #FF69B4;
+        }
+        
+        .circle-label {
+    color: rgba(245, 245, 245, 0.286);
+    position: absolute;
+    right: 90%; /* positions the right edge of the element just to the left of the parent's left edge */
+    top: 50%; /* positions the top edge of the element at the vertical middle of its parent */
+    transform: translateY(-75%); /* vertically centers the element */
+    font-size: 20px;
+    font-family: "Inter", Helvetica;
+    font-weight: 300;
+    width: 100%;
 }
 
         .square-inner {
@@ -203,6 +216,9 @@
     <div class="content">
         <div class="left-side">
             <div class="circle-inner">
+                <div class="circle-label">
+                    <p>Click Me! -></p>
+                </div>
             </div>
         </div>
     
