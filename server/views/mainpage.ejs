@@ -210,9 +210,9 @@
         }
 
         #genre1, #genre {
-            padding: 10px;
+            padding: 8px;
             font-family: "Inter", Helvetica;
-            font-size: 13px; /* make the text a bit larger */
+            font-size: 12px; /* make the text a bit larger */
             border-radius: 20px;
             font-weight: 400;
             border: 1px solid #ccc;
@@ -227,6 +227,24 @@
         #genre1:hover, #genre:hover {
             border-color: #888;
             transform: translateY(-3px); /* moves the element up when hovered over */
+        }
+
+        #songTitle, #artistName {
+            width: 30%;
+            padding: 10px;
+            border: none;
+            background-color: rgba(245, 245, 245, 0.11);
+            border-radius: 50px;
+            color: white;
+            font-size: 11px;
+        }
+
+        #songTitle:focus, #artistName:focus {
+            outline: none;
+        }
+
+        #songTitle::placeholder, #artistName::placeholder {
+            color: rgba(255, 255, 255, 0.30);
         }
 
     </style>
@@ -279,7 +297,7 @@
                         </select>
                         <input type="checkbox" id="explicit1" name="explicit">
                         <label for="explicit1" class="explicitLabel">Explicit</label>
-                        <p id="error-message" style="color: red;font-size: 13px;"></p>
+                        <p id="error-message" style="color: yellow;font-size: 13px;"></p>
                     </div>
     
                 <h1 class="headers" >submit a fav song:</h1>
@@ -288,8 +306,8 @@
                 <form action="/mainpage/submitsong" method="post">
                 <!-- Song Title -->
                 <div style="margin-bottom: 10px;">
-                    <label for="songTitle" class="songTitleLabel">Song Title:</label>
-                    <input type="text" id="songTitle" name="songTitle" required><!-- songTitle -->
+                    <label for="songTitle" class="songTitleLabel" >Song Title:</label>
+                    <input type="text" id="songTitle" placeholder="First Take" name="songTitle" required><!-- songTitle -->
                     <input type="checkbox" id="explicit" name="explicit"><!-- explicit -->
                     <label for="explicit" class="explicitLabel2">Explicit</label>
                 </div>
@@ -297,14 +315,14 @@
                 <!-- Artist Name -->
                 <div style="margin-bottom: 10px;">
                     <label for="artistName" class="artistLabel">Artist Name:</label>
-                    <input type="text" id="artistName" name="artistName"> <!-- artistName -->
+                    <input type="text" id="artistName" placeholder="Travis Scott" name="artistName"> <!-- artistName -->
                 </div>
     
                 <!-- Genre -->
                 <div style="margin-bottom: 10px;">
                     <label for="genre" class="genreLabel">Genre:</label>
                     <select id="genre" name="genre" required>
-                        <option>-</option>
+                        <option>None</option>
                         <option value="Pop">Pop</option>
                         <option value="Rock">Rock</option>
                         <option value="Hip Hop/Rap">Hip Hop/Rap</option>
@@ -322,7 +340,7 @@
                         <option value="Experimental">Experimental</option>
                         <option value="Other">Other</option>
                     </select>
-                    <p style="color: red;font-size: 13px;"><%= locals.errorSongExists %></p>
+                    <p style="color: yellow;font-size: 13px;"><%= locals.errorSongExists %></p>
                 </div>
                     <div>
                         <input type="submit" value="Submit">
