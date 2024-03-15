@@ -4,24 +4,21 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#C16148">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
     <title>Soundshift</title>
     <style>
         body {
-            font-family: Helvetica;
-            display: flex;
-            flex-direction: column;
-            background: linear-gradient(-135deg, #7e2ffc, #26acff);
-            background-color: rgb(53, 53, 145);
-            background-attachment: fixed; 
-            background-size: 100% 100%; 
-            height: 100vh;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-        }
+    font-family: Helvetica;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Changed from height: 100% */
+    margin: 0;
+    padding: 0;
+    overflow: auto; /* Changed from overflow: hidden */
+}
 
 
         .navbar {
@@ -72,27 +69,32 @@
         }
 
         .content {
-            flex: 1;
             display: flex;
             flex-wrap: wrap;
             max-width: 1200px;
-        }
+            height: 84%;
+}
 
         .left-side {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding:50px;
-        }
+            padding: 50px;
+            padding-left: 100px;
+            max-width: 1200px; /* Limit the maximum width */
+        margin: auto; /* Center the elements horizontally */
+}
 
         .right-side {
-            overflow-y: hidden; /* Hide vertical overflow */
+            overflow-y: hidden;
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             padding:50px;
+            max-width: 1200px; /* Limit the maximum width */
+            margin: auto; /* Center the elements horizontally */
         }
 
         .circle-inner {
@@ -116,48 +118,44 @@
         .circle-inner:hover {
             cursor: pointer;
             box-shadow: inset 0 0 50px #fff,
-            inset 20px 0 80px #FF69B4, /* Hot Pink */
+            inset 20px 0 80px #fa4554, /* Hot Pink */
             inset -20px 0 80px #40E0D0, /* Turquoise */
-            inset 20px 0 300px #FF69B4,
+            inset 20px 0 300px #fa4554,
             inset -20px 0 300px #40E0D0,
             0 0 50px #fff,
             10px 0 400px #FF69B4;
         }
         
         .circle-label {
-    color: rgba(245, 245, 245, 0.286);
-    position: absolute;
-    right: 90%; /* positions the right edge of the element just to the left of the parent's left edge */
-    top: 50%; /* positions the top edge of the element at the vertical middle of its parent */
-    transform: translateY(-75%); /* vertically centers the element */
-    font-size: 20px;
-    font-family: "Inter", Helvetica;
-    font-weight: 300;
-    width: 100%;
-}
+            color: rgba(245, 245, 245, 0.286);
+            position: absolute;
+            right: 90%; /* positions the right edge of the element just to the left of the parent's left edge */
+            top: 50%; /* positions the top edge of the element at the vertical middle of its parent */
+            transform: translateY(-75%); /* vertically centers the element */
+            font-size: 18px;
+            font-family: "Inter", Helvetica;
+            font-weight: 350;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
 
         .square-inner {
-            overflow-y: auto; /* Allow vertical scroll */
             width: 700px;
             height: 500px;
-            background-color: #e9e9e9;
-            border-radius: 15px;
-            box-shadow: 5px 5px 10px rgba(72, 72, 72, 0.3);
             padding: 25px;
-            
+            text-align: left;
+            color: white;
         }
 
         .footer {
             color: rgba(245, 245, 245, 0.5);
             text-align: center;
-            padding-bottom: 15px;
+            padding-bottom: 1%;
             font-size: 12px;
-        }
-
-        .circle-label {
-            text-align: center;
-            font-size: 18px;
-            margin-top: 20px;
+            position: fixed; /* Changed from position: static */
+            bottom: 0; /* Stick to the bottom */
+            width: 100%; /* Full width */
         }
 
         .soundshiftText {
@@ -199,6 +197,12 @@
             }
         }
 
+        .headers{
+            text-align: left;color:#fff; font-family: "Inter", Helvetica; font-weight: 700 ;
+            font-variation-settings:
+    "slnt" -10;
+        }
+
     </style>
 </head>
 <body><center>
@@ -224,7 +228,7 @@
     
         <div class="right-side">
             <div class="square-inner" id="song-info-container">
-                <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue" >Filter Songs:</h1>
+                <h1 class="headers" >filter songs:</h1>
                 <!-- Select Genre -->
                     <div style="margin-bottom: 10px;">
                         <label for="genre1">Genre:</label>
@@ -252,7 +256,7 @@
                         <p id="error-message" style="color: red;font-size: 13px;"></p>
                     </div>
     
-                <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue" >Submit a fav song:</h1>
+                <h1 class="headers" >submit a fav song:</h1>
 
 
                 <form action="/mainpage/submitsong" method="post">
@@ -300,7 +304,7 @@
                 </form>
                 
                 
-                <h1 style="text-align: center;color:#393939; font-family: Helvetica Neue">How it works:</h1>
+                <h1 class="headers">how it works:</h1>
                 <p style="font-family: Helvetica Light;">Soundshift provides a user-friendly way for people to make their music experience more diverse. By
                     simply pressing the “Shift” button, users can instantly access a randomly selected song, breaking the
                     cycle of repetitive music listening.</p>
