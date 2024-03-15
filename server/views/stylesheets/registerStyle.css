@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.animated-bg {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-270deg, #ee5050, #e622a5);
+    background-size: 200% 200%;
+    animation: gradient 5s infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 100% 0;
+    }
+
+    50% {
+        background-position: 0 100%;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.container {
+    text-align: center;
+    width: 50%;
+    height: 50%;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+form {
+    text-align: center;
+}
+
+input {
+    width: 30%;
+    padding: 15px;
+    margin: 15px 10px;
+    border: none;
+    background-color: rgba(245, 245, 245, 0.11);
+    border-radius: 50px;
+    color: white;
+    font-size: 15px;
+}
+input:focus {
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.66);
+}
+
+button {
+    padding: 13px 20px;
+    background-color: transparent;
+    color: #fff;
+    text-decoration: none;
+    border: 1.5px solid #fff;
+    border-radius: 50px;
+    font-size: 17px;
+    font-family: Inter, Helvetica;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    background-color: #513ad0;
+    border: 1.5px solid #513ad0;
+}
+
+.error {
+    color: rgb(255, 255, 255);
+    /*set text color to red*/
+    font-family: "Inter", Helvetica;
+    font-weight: 300;
+    margin-top: 10px;
+    margin-bottom: 22px;
+    color: rgb(225, 255, 0);
+    font-size: 15px;
+    /*add space between the error message and the login button*/
+}

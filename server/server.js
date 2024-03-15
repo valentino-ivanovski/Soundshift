@@ -3,10 +3,13 @@ const session = require('express-session'); // Import express-session
 require('dotenv').config();
 const app = express();
 const dbConn = require('./database/dbConn');
+const path = require('path');
 
 app.use(express.json());
 
 app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'views')));
 
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script src="https://www.youtube.com/iframe_api"></script>
     <meta charset="UTF-8">
@@ -7,488 +8,217 @@
     <meta name="theme-color" content="#C16148">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="stylesheets/mainpageStyle.css"> <!-- Link to the new CSS file -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
     <title>Soundshift</title>
-    <style>
-        body {
-            font-family: Helvetica;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh; /* Changed from height: 100% */
-            margin: 0;
-            padding: 0;
-            overflow: auto; /* Changed from overflow: hidden */
-        }
-
-
-        .navbar {
-            display: flex;
-            justify-content: space-around;
-            padding: 25px;
-            align-items: center;
-            height: 10px;
-            background-color: #a7533e4a;
-            box-shadow: 0 2px 15px 0 rgba(142, 57, 57, 0.2);
-        }
-
-        .navbar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navbar li {
-            color: #261f37;
-            display: inline;
-            margin-right:20px;
-            font-family: 'Inter', Helvetica;
-            font-size: 20px;
-        }
-
-        .navbar li a{
-            padding: 11px 17px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 300;
-            font-family: Inter, Helvetica;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .navbar li a:hover {
-            color: rgba(245, 245, 245, 0.745);
-        }
-
-        .navbar li aLM{
-            padding: 11px 17px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-            font-family: Inter, Helvetica;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .content {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            height: 60%;
-            padding-top: 20px;
-}
-
-        .left-side {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-top: 40px;
-            padding-left: 50px;
-            max-width: 1200px; /* Limit the maximum width */
-            margin: auto; /* Center the elements horizontally */
-            position: relative;
-}
-
-        .right-side {
-            overflow-y: hidden;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-right: 50px;
-            padding-top: 80px;
-            max-width: 1200px; /* Limit the maximum width */
-            max-height: 100%;
-            margin: auto; /* Center the elements horizontally */
-        }
-
-        .circle-inner {
-            position: absolute;
-            top: calc (50% - 150px);
-            left: calc (50% - 150px);
-            height: 300px;
-            width: 300px;
-            border-radius: 50%;
-            box-shadow: inset 0 0 50px #fff,
-            inset 20px 0 80px #f0f,
-            inset -20px 0 80px #0ff,
-            inset 20px 0 300px #f0f,
-            inset -20px 0 300px #0ff,
-            0 0 50px #fff,
-            10px 0 400px #f0f;
-            transition: box-shadow 0.6s;
-        }
-
-        .circle-inner:hover {
-            cursor: pointer;
-            box-shadow: inset 0 0 50px #fff,
-            inset 20px 0 80px #fa4554, /* Hot Pink */
-            inset -20px 0 80px #40E0D0, /* Turquoise */
-            inset 20px 0 300px #fa4554,
-            inset -20px 0 300px #40E0D0,
-            0 0 50px #fff,
-            10px 0 400px #FF69B4;
-        }
-        
-        .circle-label {
-            color: rgba(245, 245, 245, 0.286);
-            position: absolute;
-            right: 90%; /* positions the right edge of the element just to the left of the parent's left edge */
-            top: 50%; /* positions the top edge of the element at the vertical middle of its parent */
-            transform: translateY(-75%); /* vertically centers the element */
-            font-size: 18px;
-            font-family: "Inter", Helvetica;
-            font-weight: 350;
-            width: 100%;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .square-inner {
-            width: 700px;
-            height: 500px;
-            padding-top: 120px;
-            text-align: center;
-            color: white;
-        }
-
-        .footer {
-            color: rgba(245, 245, 245, 0.5);
-            text-align: center;
-            padding-bottom: 1%;
-            font-size: 12px;
-            position: fixed; /* Changed from position: static */
-            bottom: 0; /* Stick to the bottom */
-            width: 100%; /* Full width */
-        }
-
-        .soundshiftText {
-            font-family: 'Inter', Helvetica Neue;
-            font-size: 25px;
-            font-weight: 800;
-            color: white;
-            font-variation-settings: "slnt" -10;
-            margin-left: 40px;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .soundshiftText:hover {
-            color: rgba(245, 245, 245, 0.5);
-        }
-
-        .animated-bg {
-            position: fixed;
-
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-270deg, #ee5050, #e622a5);
-            background-size: 200% 200%;
-            animation: gradient 5s infinite;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 100% 0;
-            }
-
-            50% {
-                background-position: 0 100%;
-            }
-
-            100% {
-                background-position: 100% 0;
-            }
-        }
-
-        .headers{
-            text-align: center;color:#fff; font-family: "Inter", Helvetica; font-weight: 700 ;
-            font-variation-settings: "slnt" -10;
-        }
-
-        .labelGenre, .songTitleLabel, .explicitLabel, .explicitLabel2, .artistLabel, .genreLabel, .infoText{
-            color: #fff;
-            font-family: "Inter", Helvetica;
-            font-weight: 350;
-            font-size: 17px;
-        }
-
-        #genre1, #genre {
-            padding: 8px;
-            font-family: "Inter", Helvetica;
-            font-size: 12px; /* make the text a bit larger */
-            border-radius: 20px;
-            font-weight: 400;
-            border: 1px solid #e0f7fa;
-            appearance: none; /* removes the default appearance */
-            background-color: #e0f7fa; /* change this to your preferred color */
-            color: #333;
-            text-align-last: center;
-            max-width:80px;
-            outline: none; /* removes the default outline */
-            transition: all 0.1s ease 0s; /* makes the changes animate smoothly */
-        }   
-
-        #genre1:hover, #genre:hover {
-            border-color: #888;
-            transform: translateX(1px); /* moves the element up when hovered over */
-        }
-
-        #songTitle, #artistName {
-            width: 30%;
-            padding: 10px;
-            border: none;
-            background-color: rgba(245, 245, 245, 0.11);
-            border-radius: 50px;
-            color: white;
-            font-size: 11px;
-        }
-
-        #songTitle:focus, #artistName:focus {
-            outline: none;
-        }
-
-        #songTitle::placeholder, #artistName::placeholder {
-            color: rgba(255, 255, 255, 0.30);
-        }
-
-        .submitButton{
-            padding: 7px 11px;
-            background-color: transparent;
-            color: #fff;
-            text-decoration: none;
-            border: 1.5px solid #ffffff;
-            border-radius: 50px;
-            font-size: 14px;
-            font-family: "Inter", Helvetica;
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .submitButton:hover {
-            background-color: #624be8;
-            border-color: #624be8;
-        }
-
-        .genreExDiv{
-            position: absolute;
-            top: 240px;
-            left: 218px;
-        }
-
-        #error-message{
-            font-family: "Inter", Helvetica;
-            color: yellow;font-size: 13px;
-        }
-
-    </style>
 </head>
-<body><center>
-    <div class="animated-bg">
-    <div class="navbar">
-        <a class="soundshiftText" href="/mainpage">soundshift</a>
-        <ul>
-            <li><a href="/mainpage">Home</a></li>
-            <li><a href="/search">Search</a></li>
-            <li><a href="/profile">Profile</a></li>
-        </ul>
-        <li><a href="/logout">Log Out</a></li>
-    </div>
 
-    <div class="content">
-        <div class="left-side">
-            <div class="circle-inner">
-                <div class="circle-label">
-                    <p>Click Me! -></p>
-                </div>
+<body>
+    <center>
+        <div class="animated-bg">
+            <div class="navbar">
+                <a class="soundshiftText" href="/mainpage">soundshift</a>
+                <ul>
+                    <li><a href="/mainpage">Home</a></li>
+                    <li><a href="/search">Search</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                </ul>
+                <li><a href="/logout">Log Out</a></li>
             </div>
-            <div class="genreExDiv">
-                <label for="genre1" class="labelGenre">Genre:</label>
-                <select id="genre1" name="genre1">
-                    <option value="Any">Any</option>
-                    <option value="Pop">Pop</option>
-                    <option value="Rock">Rock</option>
-                    <option value="Hip Hop/Rap">Hip Hop/Rap</option>
-                    <option value="Electronic">Electronic</option>
-                    <option value="R&B/Soul">R&B/Soul</option>
-                    <option value="Country">Country</option>
-                    <option value="Jazz">Jazz</option>
-                    <option value="Reggae">Reggae</option>
-                    <option value="Classical">Classical</option>
-                    <option value="Folk">Folk</option>
-                    <option value="Metal">Metal</option>
-                    <option value="Blues">Blues</option>
-                    <option value="Gospel">Gospel</option>
-                    <option value="World">World</option>
-                    <option value="Experimental">Experimental</option>
-                    <option value="Other">Other</option>
-                </select>
-                <input type="checkbox" id="explicit1" name="explicit">
-                <label for="explicit1" class="explicitLabel">Explicit</label>
-                <p id="error-message"></p>
-            </div>
-        </div>
-    
-        <div class="right-side">
-            <div class="square-inner" id="song-info-container">
-                <h1 class="headers" >submit a fav song:</h1>
 
-                <form action="/mainpage/submitsong" method="post">
-                <!-- Song Title -->
-                <div style="margin-bottom: 10px;">
-                    <label for="songTitle" class="songTitleLabel" >Song Title:</label>
-                    <input type="text" id="songTitle" placeholder="First Take" name="songTitle" required><!-- songTitle -->
-                    <input type="checkbox" id="explicit" name="explicit"><!-- explicit -->
-                    <label for="explicit" class="explicitLabel2">Explicit</label>
-                </div>
-    
-                <!-- Artist Name -->
-                <div style="margin-bottom: 10px;">
-                    <label for="artistName" class="artistLabel">Artist Name:</label>
-                    <input type="text" id="artistName" placeholder="Travis Scott" name="artistName" required> <!-- artistName -->
-                </div>
-    
-                <!-- Genre -->
-                <div style="margin-bottom: 10px;">
-                    <label for="genre" class="genreLabel">Genre:</label>
-                    <select id="genre" name="genre" required>
-                        <option>None</option>
-                        <option value="Pop">Pop</option>
-                        <option value="Rock">Rock</option>
-                        <option value="Hip Hop/Rap">Hip Hop/Rap</option>
-                        <option value="Electronic">Electronic</option>
-                        <option value="R&B/Soul">R&B/Soul</option>
-                        <option value="Country">Country</option>
-                        <option value="Jazz">Jazz</option>
-                        <option value="Reggae">Reggae</option>
-                        <option value="Classical">Classical</option>
-                        <option value="Folk">Folk</option>
-                        <option value="Metal">Metal</option>
-                        <option value="Blues">Blues</option>
-                        <option value="Gospel">Gospel</option>
-                        <option value="World">World</option>
-                        <option value="Experimental">Experimental</option>
-                        <option value="Other">Other</option>
-                    </select>
-                    <p style="color: yellow;font-size: 13px;"><%= locals.errorSongExists %></p>
-                </div>
-                    <div>
-                        <input type="submit" class="submitButton" value="Submit">
+            <div class="content">
+                <div class="left-side">
+                    <div class="circle-inner">
+                        <div class="circle-label">
+                            <p class="clickMeAnimation">Click Me! -></p>
+                        </div>
                     </div>
-                </form>
-                
-                
-                <h1 class="headers">how it works:</h1>
-                <p class="infoText">Soundshift provides a user-friendly way for people to make their music experience more diverse. By
-                    simply pressing the “Shift” button, users can instantly access a randomly selected song, breaking the
-                    cycle of repetitive music listening.</p>
+                    <div class="genreExDiv">
+                        <label for="genre1" class="labelGenre">Genre:</label>
+                        <select id="genre1" name="genre1">
+                            <option value="Any">Any</option>
+                            <option value="Pop">Pop</option>
+                            <option value="Rock">Rock</option>
+                            <option value="Hip Hop/Rap">Hip Hop/Rap</option>
+                            <option value="Electronic">Electronic</option>
+                            <option value="R&B/Soul">R&B/Soul</option>
+                            <option value="Country">Country</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Reggae">Reggae</option>
+                            <option value="Classical">Classical</option>
+                            <option value="Folk">Folk</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Blues">Blues</option>
+                            <option value="Gospel">Gospel</option>
+                            <option value="World">World</option>
+                            <option value="Experimental">Experimental</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input type="checkbox" id="explicit1" name="explicit">
+                        <label for="explicit1" class="explicitLabel">Explicit</label>
+                        <p id="error-message"></p>
+                    </div>
+                </div>
+                <div class="divider">
+
+                </div>
+                <div class="right-side">
+                    <div class="square-inner" id="song-info-container">
+                        <h1 class="headers">submit a fav song:</h1>
+                        <form action="/mainpage/submitsong" method="post">
+                            <!-- Song Title -->
+                            <div style="margin-bottom: 10px;">
+                                <label for="songTitle" class="songTitleLabel">Song Title:</label>
+                                <input type="text" id="songTitle" placeholder="First Take" name="songTitle"
+                                    required><!-- songTitle -->
+                            </div>
+
+                            <!-- Artist Name -->
+                            <div style="margin-bottom: 10px;">
+                                <label for="artistName" class="artistLabel">Artist Name:</label>
+                                <input type="text" id="artistName" placeholder="Travis Scott" name="artistName"
+                                    required> <!-- artistName -->
+                            </div>
+
+                            <!-- Genre -->
+                            <div style="margin-bottom: 10px;">
+                                <label for="genre" class="genreLabel">Genre:</label>
+                                <select id="genre" name="genre" required>
+                                    <option>None</option>
+                                    <option value="Pop">Pop</option>
+                                    <option value="Rock">Rock</option>
+                                    <option value="Hip Hop/Rap">Hip Hop/Rap</option>
+                                    <option value="Electronic">Electronic</option>
+                                    <option value="R&B/Soul">R&B/Soul</option>
+                                    <option value="Country">Country</option>
+                                    <option value="Jazz">Jazz</option>
+                                    <option value="Reggae">Reggae</option>
+                                    <option value="Classical">Classical</option>
+                                    <option value="Folk">Folk</option>
+                                    <option value="Metal">Metal</option>
+                                    <option value="Blues">Blues</option>
+                                    <option value="Gospel">Gospel</option>
+                                    <option value="World">World</option>
+                                    <option value="Experimental">Experimental</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <label for="explicit" class="explicitLabel2">Explicit</label>
+                                <input type="checkbox" id="explicit" name="explicit"><!-- explicit -->
+                                <p style="color: yellow;font-size: 13px;">
+                                    <%= locals.errorSongExists %>
+                                </p>
+                            </div>
+                            <div>
+                                <input type="submit" class="submitButton" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                Made by: Valentino Ivanovski for Systems 3 - 2024
             </div>
         </div>
-    </div>
-    <div class="footer">
-        Made by: Valentino Ivanovski for Systems 3 - 2024
-    </div>
-</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const circle = document.querySelector('.circle-inner');
-    const genreSelect = document.getElementById('genre1');
-    const explicitCheckbox = document.getElementById('explicit1');
-    const songInfoContainer = document.getElementById('song-info-container');
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const circle = document.querySelector('.circle-inner');
+                const genreSelect = document.getElementById('genre1');
+                const explicitCheckbox = document.getElementById('explicit1');
+                const songInfoContainer = document.getElementById('song-info-container');
 
-    circle.addEventListener('click', function() {
-        circle.style.backgroundColor = 'red';
+                circle.addEventListener('click', function () {
 
-        const genre = genreSelect.value;
-        const explicit = explicitCheckbox.checked;
+                    const genre = genreSelect.value;
+                    const explicit = explicitCheckbox.checked;
 
-        // Prepare data for POST request
-        const data = {
-            genre: genre,
-            explicit: explicit
-        };
+                    // Prepare data for POST request
+                    const data = {
+                        genre: genre,
+                        explicit: explicit
+                    };
 
-        // Send POST request
-        fetch('/mainpage/getrandomsong', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json(); // Parse the response JSON
-            } else {
-                console.error('Error:', response.statusText);
-            }
-        })
-        .then(songs => {
-    // Check if songs array is not empty and extract the first song object
-    if (songs.length > 0) {
-        const song = songs[0];
+                    // Send POST request
+                    fetch('/mainpage/getrandomsong', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json(); // Parse the response JSON
+                            } else {
+                                console.error('Error:', response.statusText);
+                            }
+                        })
+                        .then(songs => {
+                            // Check if songs array is not empty and extract the first song object
+                            if (songs.length > 0) {
+                                const song = songs[0];
 
-        // Check for undefined values and display the song details
-        const title = song.title ? song.title : 'Unknown';
-        const artist = song.artist ? song.artist : 'Unknown';
-        const genre = song.genre ? song.genre : 'Unknown';
-        const explicitStatus = song.explicit ? 'Yes' : 'No';
-        const uploadDate = new Date(song.upload_date).toLocaleDateString();
-        const username = song.username;
+                                // Check for undefined values and display the song details
+                                const title = song.title ? song.title : 'Unknown';
+                                const artist = song.artist ? song.artist : 'Unknown';
+                                const genre = song.genre ? song.genre : 'Unknown';
+                                const explicitStatus = song.explicit ? 'Yes' : 'No';
+                                const uploadDate = new Date(song.upload_date).toLocaleDateString();
+                                const username = song.username;
+                                const spotifyLink = song.spotify_link;
+                                const soundcloudLink = song.soundcloud_link;
+                                const youtubeLink = song.yt_link;
 
-        // Populate song details in HTML
-        const songDetailsHTML = `
-        <h1 style="text-align: center; color: #393939; font-family: Helvetica Neue;">Random Song Details:</h1>
-        <p><strong>Title:</strong> ${title}</p>
-        <p><strong>Artist:</strong> ${artist}</p>
-        <p><strong>Genre:</strong> ${genre}</p>
-        <p><strong>Explicit:</strong> ${explicitStatus}</p>
-        <p><strong>Uploaded Date:</strong> ${uploadDate}</p>
-        <p><strong>Uploaded By:</strong> ${username}</p>
-        `;
-        songInfoContainer.innerHTML = songDetailsHTML;
+                                // Populate song details in HTML
+                                const songDetailsHTML = `
+                                <div style="margin-top: -100px">
+                                    <h1 style="color: #fff; font-family: "Inter", Helvetica; font-weight: 350; font-size: 17px;">Random Song Details:</h1>
+                                    <p>Song: <strong>${title}</strong>, by <strong>${artist}</strong>.</p>
+                                    <p>Genre: <strong>${genre}</strong>, Explicit: <strong>${explicitStatus}</strong></p>
+                                    <p>Uploaded By: <strong>${username}</strong>, on <strong>${uploadDate}</strong></p>
+                                </div>
+                                `;
+                                songInfoContainer.innerHTML = songDetailsHTML;
 
-        // Use YouTube Data API to search for the video based on song title and artist
-        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + ' ' + artist)}&key=AIzaSyAwEFqINoDrNr9sWjIXwuNVI4cZvBjW43E&type=video`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.items && data.items.length > 0) {
-                    const videoId = data.items[0].id.videoId; // Extract the video ID from search results
+                                // Use YouTube Data API to search for the video based on song title and artist
+                                fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + ' ' + artist)}&key=AIzaSyAwEFqINoDrNr9sWjIXwuNVI4cZvBjW43E&type=video`)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.items && data.items.length > 0) {
+                                            const videoId = data.items[0].id.videoId; // Extract the video ID from search results
 
-                    // Create YouTube player
-                    const playerContainer = document.createElement('div');
-                    playerContainer.id = 'player';
-                    songInfoContainer.appendChild(playerContainer);
+                                            // Create YouTube player
+                                            const playerContainer = document.createElement('div');
+                                            playerContainer.id = 'player';
+                                            playerContainer.style.marginTop = '0px'; // Adjust the margin-bottom value as needed
+                                            songInfoContainer.appendChild(playerContainer);
 
-                    const player = new YT.Player('player', {
-                        height: '50%',
-                        width: '60%',
-                        videoId: videoId,
-                    });
-                } else {
-                    console.error('No YouTube video found for the song');
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching YouTube video:', error);
+
+                                            const player = new YT.Player('player', {
+                                                height: '40%',
+                                                width: '70%',
+                                                videoId: videoId,
+                                            });
+                                        } else {
+                                            console.error('No YouTube video found for the song');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching YouTube video:', error);
+                                    });
+                            } else {
+                                console.error('No songs found');
+                                document.getElementById('error-message').innerText = 'No songs found';
+                            }
+                        })
+
+                        .catch(error => {
+                            console.error('Error:', error);
+                            document.getElementById('error-message').innerText = 'Error fetching songs';
+                        });
+                });
             });
-    } else {
-        console.error('No songs found');
-        document.getElementById('error-message').innerText = 'No songs found';
-    }
-})
-
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('error-message').innerText = 'Error fetching songs';
-        });
-    });
-});
-
-    </script>
-    
-    
+        </script>
 </body>
+
 </html>
