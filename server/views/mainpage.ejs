@@ -215,18 +215,18 @@
             font-size: 12px; /* make the text a bit larger */
             border-radius: 20px;
             font-weight: 400;
-            border: 1px solid #ccc;
+            border: 1px solid #e0f7fa;
             appearance: none; /* removes the default appearance */
             background-color: #e0f7fa; /* change this to your preferred color */
             color: #333;
             width: 20%;
             outline: none; /* removes the default outline */
-            transition: all 0.3s ease 0s; /* makes the changes animate smoothly */
+            transition: all 0.1s ease 0s; /* makes the changes animate smoothly */
         }   
 
         #genre1:hover, #genre:hover {
             border-color: #888;
-            transform: translateY(-3px); /* moves the element up when hovered over */
+            transform: translateX(1px); /* moves the element up when hovered over */
         }
 
         #songTitle, #artistName {
@@ -245,6 +245,24 @@
 
         #songTitle::placeholder, #artistName::placeholder {
             color: rgba(255, 255, 255, 0.30);
+        }
+
+        .submitButton{
+            padding: 5px 10px;
+            background-color: transparent;
+            color: #fff;
+            text-decoration: none;
+            border: 1.5px solid #ffffff;
+            border-radius: 50px;
+            font-size: 14px;
+            font-family: "Inter", Helvetica;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .submitButton:hover {
+            background-color: #624be8;
+            border-color: #624be8;
         }
 
     </style>
@@ -302,7 +320,6 @@
     
                 <h1 class="headers" >submit a fav song:</h1>
 
-
                 <form action="/mainpage/submitsong" method="post">
                 <!-- Song Title -->
                 <div style="margin-bottom: 10px;">
@@ -343,7 +360,7 @@
                     <p style="color: yellow;font-size: 13px;"><%= locals.errorSongExists %></p>
                 </div>
                     <div>
-                        <input type="submit" value="Submit">
+                        <input type="submit" class="submitButton" value="Submit">
                     </div>
                 </form>
                 
