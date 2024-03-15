@@ -72,7 +72,7 @@
             display: flex;
             flex-wrap: wrap;
             max-width: 1200px;
-            height: 84%;
+            height: 80%;
 }
 
         .left-side {
@@ -80,10 +80,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px;
+            padding-bottom: 0px;
             padding-left: 100px;
             max-width: 1200px; /* Limit the maximum width */
-        margin: auto; /* Center the elements horizontally */
+            margin: auto; /* Center the elements horizontally */
 }
 
         .right-side {
@@ -92,7 +92,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding:50px;
+            padding-bottom: 0px;
             max-width: 1200px; /* Limit the maximum width */
             margin: auto; /* Center the elements horizontally */
         }
@@ -199,8 +199,34 @@
 
         .headers{
             text-align: left;color:#fff; font-family: "Inter", Helvetica; font-weight: 700 ;
-            font-variation-settings:
-    "slnt" -10;
+            font-variation-settings: "slnt" -10;
+        }
+
+        .labelGenre, .songTitleLabel, .explicitLabel, .explicitLabel2, .artistLabel, .genreLabel, .infoText{
+            color: #fff;
+            font-family: "Inter", Helvetica;
+            font-weight: 350;
+            font-size: 17px;
+        }
+
+        #genre1, #genre {
+            padding: 10px;
+            font-family: "Inter", Helvetica;
+            font-size: 13px; /* make the text a bit larger */
+            border-radius: 20px;
+            font-weight: 400;
+            border: 1px solid #ccc;
+            appearance: none; /* removes the default appearance */
+            background-color: #e0f7fa; /* change this to your preferred color */
+            color: #333;
+            width: 20%;
+            outline: none; /* removes the default outline */
+            transition: all 0.3s ease 0s; /* makes the changes animate smoothly */
+        }   
+
+        #genre1:hover, #genre:hover {
+            border-color: #888;
+            transform: translateY(-3px); /* moves the element up when hovered over */
         }
 
     </style>
@@ -231,7 +257,7 @@
                 <h1 class="headers" >filter songs:</h1>
                 <!-- Select Genre -->
                     <div style="margin-bottom: 10px;">
-                        <label for="genre1">Genre:</label>
+                        <label for="genre1" class="labelGenre">Genre:</label>
                         <select id="genre1" name="genre1">
                             <option value="Any">Any</option>
                             <option value="Pop">Pop</option>
@@ -252,7 +278,7 @@
                             <option value="Other">Other</option>
                         </select>
                         <input type="checkbox" id="explicit1" name="explicit">
-                        <label for="explicit1">Explicit</label>
+                        <label for="explicit1" class="explicitLabel">Explicit</label>
                         <p id="error-message" style="color: red;font-size: 13px;"></p>
                     </div>
     
@@ -262,21 +288,21 @@
                 <form action="/mainpage/submitsong" method="post">
                 <!-- Song Title -->
                 <div style="margin-bottom: 10px;">
-                    <label for="songTitle">Song Title:</label>
+                    <label for="songTitle" class="songTitleLabel">Song Title:</label>
                     <input type="text" id="songTitle" name="songTitle" required><!-- songTitle -->
                     <input type="checkbox" id="explicit" name="explicit"><!-- explicit -->
-                    <label for="explicit">Explicit</label>
+                    <label for="explicit" class="explicitLabel2">Explicit</label>
                 </div>
     
                 <!-- Artist Name -->
                 <div style="margin-bottom: 10px;">
-                    <label for="artistName">Artist Name:</label>
+                    <label for="artistName" class="artistLabel">Artist Name:</label>
                     <input type="text" id="artistName" name="artistName"> <!-- artistName -->
                 </div>
     
                 <!-- Genre -->
                 <div style="margin-bottom: 10px;">
-                    <label for="genre">Genre:</label>
+                    <label for="genre" class="genreLabel">Genre:</label>
                     <select id="genre" name="genre" required>
                         <option>-</option>
                         <option value="Pop">Pop</option>
@@ -305,7 +331,7 @@
                 
                 
                 <h1 class="headers">how it works:</h1>
-                <p style="font-family: Helvetica Light;">Soundshift provides a user-friendly way for people to make their music experience more diverse. By
+                <p class="infoText">Soundshift provides a user-friendly way for people to make their music experience more diverse. By
                     simply pressing the “Shift” button, users can instantly access a randomly selected song, breaking the
                     cycle of repetitive music listening.</p>
             </div>
