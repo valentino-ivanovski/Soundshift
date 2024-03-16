@@ -180,6 +180,57 @@
                                 `;
                                 songInfoContainer.innerHTML = songDetailsHTML;
 
+                                // Create a div to contain the buttons
+                                const buttonsDiv = document.createElement('div');
+                                buttonsDiv.style.marginTop = '20px'; // Add margin to the top
+
+                                // Create buttons
+                                const spotifyButton = document.createElement('button');
+                                spotifyButton.innerText = 'Spotify';
+                                spotifyButton.style.cssText = `
+                                    padding: 10px 15px;
+                                    margin-top: 0px;
+                                    margin-right: 10px;
+                                    background-color: white;
+                                    color: #0000000;
+                                    text-decoration: none;
+                                    border: 1.5px solid #ffffff;
+                                    border-radius: 50px;
+                                    font-size: 15px;
+                                    font-family: "Inter", Helvetica;
+                                    cursor: pointer;
+                                    transition: background-color 0.2s, color 0.2s;
+                                `;
+                                spotifyButton.onclick = function() {
+                                    window.open(spotifyLink, '_blank');
+                                };
+                                buttonsDiv.appendChild(spotifyButton);
+
+
+
+                                const soundcloudButton = document.createElement('button');
+                                soundcloudButton.innerText = 'SoundCloud';
+                                soundcloudButton.style.cssText = spotifyButton.style.cssText; // Copy styles from spotifyButton
+                                soundcloudButton.onclick = function() {
+                                    window.open(soundcloudLink, '_blank');
+                                };
+                                buttonsDiv.appendChild(soundcloudButton);
+
+
+
+                                const youtubeButton = document.createElement('button');
+                                youtubeButton.innerText = 'YouTube';
+                                youtubeButton.style.cssText = spotifyButton.style.cssText; // Copy styles from spotifyButton
+                                youtubeButton.onclick = function() {
+                                    window.open(youtubeLink, '_blank');
+                                };
+                                buttonsDiv.appendChild(youtubeButton);
+
+
+
+                                // Append the div to the songInfoContainer
+                                songInfoContainer.appendChild(buttonsDiv);
+
                                 // Use YouTube Data API to search for the video based on song title and artist
                                 fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + ' ' + artist)}&key=AIzaSyAwEFqINoDrNr9sWjIXwuNVI4cZvBjW43E&type=video`)
                                     .then(response => response.json())
