@@ -268,11 +268,11 @@
 
         #genre1,
         #genre {
-            padding: 8px;
+            padding: 7px;
             font-family: "Inter", Helvetica;
             font-size: 12px;
             /* make the text a bit larger */
-            border-radius: 20px;
+            border-radius: 13px;
             font-weight: 400;
             border: 1px solid #e0f7fa;
             appearance: none;
@@ -334,6 +334,42 @@
         .submitButton:hover {
             background-color: #624be8;
             border-color: #624be8;
+        }
+
+        .spotifyButton, .youtubeButton, .soundcloudButton{
+            padding: 10px 15px;
+            margin-top: 0px;
+            margin-right: 10px;
+            background-color: white;
+            color: #464444;
+            text-decoration: none;
+            border: 0px solid #ffffff;
+            border-radius: 50px;
+            font-size: 15px;
+            font-family: "Inter", Helvetica;
+            font-weight: 350;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .spotifyButton:hover {
+            background-color: #ebebeb;
+            color: #464444;
+        }
+
+        #player{
+            border-radius: 10px;
+        }
+
+
+        .soundcloudButton:hover {
+            background-color: #ebebeb;
+            color: #464444;
+        }
+
+        .youtubeButton:hover {
+            background-color: #ebebeb;
+            color: #464444;
         }
 
         .genreExDiv {
