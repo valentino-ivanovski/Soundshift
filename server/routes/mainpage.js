@@ -29,7 +29,7 @@ router.post('/submitsong', (req, res) => {
                         res.status(500).send('Error submitting song');
                     } else {
                         console.log("Successfully sent song.");
-                        res.redirect("/mainpage");
+                        res.render('mainpage', { errorSongExists: "Song Submitted!" });
                     }
                 });
             }
