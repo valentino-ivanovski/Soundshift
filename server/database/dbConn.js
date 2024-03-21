@@ -149,6 +149,21 @@ function getRandomSongAny(explicit, callback) {
     });
 }
 
+function updateLocation(location, userId, callback) {
+    console.log('Updating location for user:', userId, 'New location:', location);
+
+    const sql = `UPDATE usersNew SET location = ? WHERE id = ?`;
+    conn.query(sql, [location, userId], (err, results) => {
+        if (err) {
+            console.error('Error executing SQL query:', err);
+            callback(err);
+        } else {
+            console.log('SQL query executed successfully. Affected rows:', results.affectedRows);
+            callback(null);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -156,5 +171,6 @@ module.exports = {
     insertSong,
     checkSongExists,
     getRandomSong,
-    getRandomSongAny
+    getRandomSongAny,
+    updateLocation
 };

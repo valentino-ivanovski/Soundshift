@@ -138,6 +138,17 @@
                     .then (data => {
                         console.log(data);
                         console.log(data.principalSubdivision + ", " + data.countryName);
+                        const location = data.principalSubdivision + ", " + data.countryName;
+
+                        fetch('/mainpage/updateUserLocation', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                location: location
+                            })
+                        })
                     })
                 }
 
@@ -195,7 +206,7 @@
                                 const genre = song.genre ? song.genre : 'Unknown';
                                 const explicitStatus = song.explicit ? 'Yes' : 'No';
                                 const uploadDate = new Date(song.upload_date).toLocaleDateString();
-                                const userLocation = song.location = 'Unknown' ? 'Earth 🌎' : song.location;
+                                const userLocation = song.location = song.location;
                                 const username = song.username;
                                 const spotifyLink = song.spotify_link;
                                 const soundcloudLink = song.soundcloud_link;

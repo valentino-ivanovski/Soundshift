@@ -74,6 +74,22 @@ router.post("/getrandomsong", (req, res) => {
     }
 });
 
+router.post('/updateUserLocation', (req, res) => {
+    const location = req.body.location; // Retrieve location from request body
+    const userId = req.session.user.id; // Assuming you also need userId
+
+    dbConn.updateLocation(location, userId, (err) => {
+        if (err) {
+            console.error('Error updating location:', err);
+            res.status(500).send('Error updating location');
+        } else {
+            res.status(200).send('Location updated');
+        }
+    });
+
+});
+
+
 router.post
 
 module.exports = router; //exporting the module for users
