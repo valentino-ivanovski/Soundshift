@@ -97,19 +97,19 @@ body {
 
 @keyframes colorfulAnimation {
     0% {
-        background-color: #ff0000;
+        background-color: #f95e5e;
     }
 
     20% {
-        background-color: #00ff00;
+        background-color: #6eea6e;
     }
 
     40% {
-        background-color: #3b3bda;
+        background-color: #6868d1;
     }
 
     60% {
-        background-color: #ff00ff;
+        background-color: #e665e6;
     }
 
     80% {
@@ -117,7 +117,7 @@ body {
     }
 
     100% {
-        background-color: #ff0000;
+        background-color: #f95e5e;
     }
 
     /* Same as the starting color */
@@ -138,7 +138,7 @@ body {
         0 0 50px #fff,
         10px 0 400px #f0f;
     transition: box-shadow 0.6s;
-    animation: colorfulAnimation 7s infinite;
+    animation: colorfulAnimation 15s infinite;
 }
 
 .circle-inner:hover {
