@@ -15,14 +15,14 @@ conn.connect((err) => {
 });
 
 const insertUser = (username, email, password, callback) => {
-    const sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+    const sql = "INSERT INTO usersNew (username, email, password) VALUES (?, ?, ?)";
     conn.query(sql, [username, email, password], (err, result) => {
         callback(err, result);
     });
 };
 
 const checkUserCredentials = (username, password, callback) => {
-    const sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+    const sql = "SELECT * FROM usersNew WHERE username = ? AND password = ?";
     conn.query(sql, [username, password], (err, results) => {
         if (err) {
             callback(err, null);
@@ -39,7 +39,7 @@ const checkUserCredentials = (username, password, callback) => {
 };
 
 const checkUsernameExists = (username, email, callback) => {
-    const sql = "SELECT COUNT(*) AS count FROM users WHERE username = ? OR email = ?";
+    const sql = "SELECT COUNT(*) AS count FROM usersNew WHERE username = ? OR email = ?";
     conn.query(sql, [username, email], (err, results) => {
         if (err) {
             callback(err, null);
@@ -52,7 +52,7 @@ const checkUsernameExists = (username, email, callback) => {
 
 //function to check if a song already exists in the database
 const checkSongExists = (title, artist, callback) => {
-    const sql = "SELECT COUNT(*) AS count FROM songs WHERE title = ? AND artist = ?";
+    const sql = "SELECT COUNT(*) AS count FROM songsNew WHERE title = ? AND artist = ?";
     conn.query(sql, [title, artist], (err, results) => {
         if (err) {
             callback(err, null);
@@ -72,7 +72,7 @@ function insertSong(title, artist, userId, genre, explicit, callback) {
 
     //prepare query and data
     const query = `
-        INSERT INTO songs 
+        INSERT INTO songsNew 
             (title, artist, genre, yt_link, spotify_link, soundcloud_link, user_id, upload_date, like_count, comment_count, explicit) 
         VALUES 
             (?, ?, ?, ?, ?, ?, ?, NOW(), 0, 0, ?)
@@ -95,19 +95,19 @@ function getRandomSong(songGenre, explicit, callback) {
     let sql = ``;
     if (explicit === false) {
     sql = `
-        SELECT songs.*, users.username 
-        FROM songs 
-        LEFT JOIN users ON songs.user_id = users.id 
-        WHERE songs.genre = ? AND songs.explicit = 0
+        SELECT songsNew.*, usersNew.username 
+        FROM songsNew 
+        LEFT JOIN usersNew ON songsNew.user_id = usersNew.id 
+        WHERE songsNew.genre = ? AND songsNew.explicit = 0
         ORDER BY RAND() 
         LIMIT 1
     `;
     }else{
         sql = `
-        SELECT songs.*, users.username 
-        FROM songs 
-        LEFT JOIN users ON songs.user_id = users.id 
-        WHERE songs.genre = ? 
+        SELECT songsNew.*, usersNew.username 
+        FROM songsNew 
+        LEFT JOIN usersNew ON songsNew.user_id = usersNew.id 
+        WHERE songsNew.genre = ? 
         ORDER BY RAND() 
         LIMIT 1
     `;
@@ -125,18 +125,18 @@ function getRandomSongAny(explicit, callback) {
     let sql = ``;
     if (explicit === false) {
     sql = `
-        SELECT songs.*, users.username 
-        FROM songs 
-        LEFT JOIN users ON songs.user_id = users.id 
-        WHERE songs.explicit = ?
+        SELECT songsNew.*, usersNew.username, usersNew.location 
+        FROM songsNew 
+        LEFT JOIN usersNew ON songsNew.user_id = usersNew.id 
+        WHERE songsNew.explicit = ?
         ORDER BY RAND() 
         LIMIT 1
     `;
     }else{
         sql = `
-        SELECT songs.*, users.username 
-        FROM songs 
-        LEFT JOIN users ON songs.user_id = users.id 
+        SELECT songsNew.*, usersNew.username, usersNew,location 
+        FROM songsNew 
+        LEFT JOIN usersNew ON songsNew.user_id = usersNew.id 
         ORDER BY RAND() 
         LIMIT 1
     `;

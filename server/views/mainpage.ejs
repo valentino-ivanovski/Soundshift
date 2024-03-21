@@ -195,6 +195,7 @@
                                 const genre = song.genre ? song.genre : 'Unknown';
                                 const explicitStatus = song.explicit ? 'Yes' : 'No';
                                 const uploadDate = new Date(song.upload_date).toLocaleDateString();
+                                const userLocation = song.location = 'Unknown' ? 'Earth 🌎' : song.location;
                                 const username = song.username;
                                 const spotifyLink = song.spotify_link;
                                 const soundcloudLink = song.soundcloud_link;
@@ -206,7 +207,7 @@
                                     <h1 style="color: #fff; font-family: "Inter", Helvetica; font-weight: 350; font-size: 17px;">Random Song Details:</h1>
                                     <p>Song: <strong>${title}</strong>, by <strong>${artist}</strong>.</p>
                                     <p>Genre: <strong>${genre}</strong>, Explicit: <strong>${explicitStatus}</strong></p>
-                                    <p>Uploaded By: <strong>${username}</strong>, on <strong>${uploadDate}</strong></p>
+                                    <p>Uploaded By: <strong>${username}</strong>, on <strong>${uploadDate}</strong> from <strong>${userLocation}</strong></p>
                                 </div>
                                 `;
                                 songInfoContainer.innerHTML = songDetailsHTML;
