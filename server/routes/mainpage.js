@@ -89,6 +89,19 @@ router.post('/updateUserLocation', (req, res) => {
 
 });
 
+router.post('/updateLikeCount', (req, res) => {
+    const songId = req.body.songid; // Retrieve songId from request body
+
+    dbConn.incrementLikeCount(songId, (err) => {
+        if (err) {
+            console.error('Error updating like count:', err);
+            res.status(500).send('Error updating like count');
+        } else {
+            res.status(200).send('Like count updated');
+        }
+    });
+});
+
 
 router.post
 

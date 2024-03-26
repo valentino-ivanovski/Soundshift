@@ -164,6 +164,19 @@ function updateLocation(location, userId, callback) {
     });
 }
 
+function incrementLikeCount(songId, callback) {
+    const sql = `UPDATE songsNew SET like_count = like_count + 1 WHERE song_id = ?`;
+    conn.query(sql, [songId], (err, results) => {
+        if (err) {
+            console.error('Error executing SQL query:', err);
+            callback(err);
+        } else {
+            console.log('SQL query executed successfully. Affected rows:', results.affectedRows);
+            callback(null);
+        }
+    });
+};
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -172,5 +185,6 @@ module.exports = {
     checkSongExists,
     getRandomSong,
     getRandomSongAny,
-    updateLocation
+    updateLocation,
+    incrementLikeCount
 };
