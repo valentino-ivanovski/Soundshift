@@ -96,7 +96,6 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: yellow;
 }
 
 .right-side {
@@ -105,7 +104,6 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: yellow;
 }
 
 .square-inner {
@@ -120,19 +118,9 @@ body {
     margin-bottom: 60px;
     margin-left: 10px;
     margin-right:50px;
-    background-color: blue;
 }
 
-/*.square-inner {
-    width: 700px;
-    height: 500px;
-    padding-top: 220px;
-    text-align: center;
-    color: white;
-}*/
-
 .square-innermore{
-    background-color: black;
     padding: 10px;
 }
 
@@ -144,7 +132,6 @@ body {
     width: 80%;
     position: relative;
     margin-bottom: 60px;
-    background-color: blue;
     margin-left: 50px;
     margin-right:10px;
 }
@@ -335,7 +322,7 @@ body {
 
 #songTitle,
 #artistName {
-    width: 30%;
+    width: 30wh;
     padding: 12px;
     border: none;
     background-color: rgba(245, 245, 245, 0.11);
@@ -433,7 +420,7 @@ body {
     width: 1px;
     background-color: #ffffff64;
     height: 70%;
-    margin-top: 80px;
+    margin-top: 100px;
 }
 
 @keyframes moveLeftRight {
