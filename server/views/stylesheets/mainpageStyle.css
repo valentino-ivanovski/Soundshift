@@ -7,6 +7,29 @@ body {
     overflow: hidden;
 }
 
+.animated-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-270deg, #ee5050, #e622a5);
+    background-size: 200% 200%;
+    animation: gradient 5s infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 100% 0;
+    }
+
+    50% {
+        background-position: 0 100%;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
 .navbar {
     display: flex;
     justify-content: space-around;
@@ -64,35 +87,57 @@ body {
     display: flex;
     flex-wrap: wrap;
     max-width: 1200px;
-    height: 70%;
+    height: 100vh;
 }
 
 .left-side {
     flex: 1;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding-top: 0px;  
-    padding-left: 50px;
-    padding-right:10px;
-    max-width: 1200px;
-    /* Limit the maximum width */
-    margin: auto;
-    /* Center the elements horizontally */
-    position: relative;
-
+    justify-content: center;
+    /*padding-left: 50px;*/
+    /*padding-right:10px;*/
+    height: 100vh;
+    background-color: yellow;
 }
 
 .right-side {
-    overflow-y: hidden;
     flex: 1;
     display: flex;
     align-items: center;
-    padding-right: 50px;
-    padding-top: 50px;  
-    padding-left: 10px;
-    max-width: 1200px;
-    max-height: 100%;
+    justify-content: center;
+    /*padding-right: 50px;*/
+    /*padding-left: 10px;*/
+    height: 100vh;
+    background-color: yellow;
+}
+
+.square-inner {
+    display: flex;
+    text-align: center;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 80%;
+    margin-bottom: 60px;
+    background-color: blue;
+}
+
+.square-innermore{
+    background-color: black;
+    padding: 10px;
+}
+
+.circle-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 80%;
+    position: relative;
+    margin-bottom: 60px;
+    background-color: blue;
 }
 
 @keyframes colorfulAnimation {
@@ -126,10 +171,11 @@ body {
 .circle-inner {
     position: absolute;
     margin-top: 30px;
-    width: 50%;
+    width: 65%;
     height: auto;
     border-radius: 50%;
     aspect-ratio: 1/1;
+    margin-bottom: 80px;
     box-shadow: inset 0 0 50px #fff,
         inset 20px 0 80px #f0f,
         inset -20px 0 80px #0ff,
@@ -154,6 +200,13 @@ body {
         10px 0 400px #FF69B4;
 }
 
+.genreExDiv {
+    position: static;
+    margin-top: 370px;
+    width: 100%;
+    transition: width 0.5s ease, margin-top 0.5s ease;
+}
+
 .circle-label {
     color: rgba(245, 245, 245, 0.286);
     position: absolute;
@@ -175,14 +228,6 @@ body {
         font-size: 14px; /* Reduce the font size to 14px when the window is narrower than 800px */
         right:80%;
     }
-}
-
-.square-inner {
-    width: 700px;
-    height: 500px;
-    padding-top: 220px;
-    text-align: center;
-    color: white;
 }
 
 .footer {
@@ -211,29 +256,6 @@ body {
 
 .soundshiftText:hover {
     color: rgba(245, 245, 245, 0.5);
-}
-
-.animated-bg {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(-270deg, #ee5050, #e622a5);
-    background-size: 200% 200%;
-    animation: gradient 5s infinite;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 100% 0;
-    }
-
-    50% {
-        background-position: 0 100%;
-    }
-
-    100% {
-        background-position: 100% 0;
-    }
 }
 
 .headers {
@@ -377,13 +399,6 @@ body {
 .youtubeButton:hover {
     background-color: #ebebeb;
     color: #464444;
-}
-
-.genreExDiv {
-    position: static;
-    margin-top: 450px;
-    width: 100%;
-    transition: width 0.5s ease, margin-top 0.5s ease;
 }
 
 @media screen and (max-width: 975px) {

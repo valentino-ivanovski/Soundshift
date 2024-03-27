@@ -28,11 +28,13 @@
 
             <div class="content">
                 <div class="left-side">
+                    <div class="circle-container">
                     <div class="circle-inner">
                         <div class="circle-label">
                             <p class="clickMeAnimation">Click Me! -></p>
                         </div>
                     </div>
+
                     <div class="genreExDiv">
                         <label for="genre1" class="labelGenre">Genre:</label>
                         <select id="genre1" name="genre1">
@@ -59,11 +61,13 @@
                         <p id="error-message"></p>
                     </div>
                 </div>
+                </div>
                 <div class="divider">
 
                 </div>
                 <div class="right-side">
                     <div class="square-inner" id="song-info-container">
+                        <div class="square-innermore">
                         <h1 class="headers" id="submitafavsong">submit a fav song:</h1>
                         <form action="/mainpage/submitsong" method="post">
                             <!-- Song Title -->
@@ -112,6 +116,7 @@
                                 <input type="submit" class="submitButton" value="Submit">
                             </div>
                         </form>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -283,6 +288,10 @@
                                             commentButton.innerText = 'Comment';
                                             commentButton.className = 'commentButton';
                                             likeCommentDiv.appendChild(commentButton);
+
+                                            commentButton.addEventListener('click', function() {
+                                                
+                                            });
 
                                             songInfoContainer.appendChild(likeCommentDiv);
 
