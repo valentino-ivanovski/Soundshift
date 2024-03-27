@@ -110,6 +110,7 @@ body {
 
 .square-inner {
     display: flex;
+    flex-direction: column;
     text-align: center;
     color: white;
     align-items: center;
@@ -121,6 +122,14 @@ body {
     margin-right:50px;
     background-color: blue;
 }
+
+/*.square-inner {
+    width: 700px;
+    height: 500px;
+    padding-top: 220px;
+    text-align: center;
+    color: white;
+}*/
 
 .square-innermore{
     background-color: black;
