@@ -91,14 +91,35 @@ router.post('/updateUserLocation', (req, res) => {
 
 router.post('/updateLikeCount', (req, res) => {
     const songId = req.body.songid; // Retrieve songId from request body
+    const userId = req.session.user.id; // Assuming you also need userId
 
     dbConn.incrementLikeCount(songId, (err) => {
         if (err) {
             console.error('Error updating like count:', err);
-            res.status(500).send('Error updating like count');
-        } else {
-            res.status(200).send('Like count updated');
+            return res.status(500).send('Error updating like count');
         }
+
+        dbConn.recordLike(songId, userId, (err) => {
+            if (err) {
+                console.error('Error recording like:', err);
+                return res.status(500).send('Error recording like');
+            } 
+
+            res.status(200).send('Like count updated and like recorded');
+        });
+    });
+});
+
+router.post('/checkIfUserLiked', (req, res) => {
+    const songId = req.body.songid;
+    const userId = req.session.user.id;
+
+    dbConn.checkIfUserLiked(songId, userId, (err, liked) => {
+        if (err) {
+            console.error('Error checking if user liked:', err);
+            return res.status(500).send('Error checking if user liked');
+        }
+        res.json({ liked: liked });
     });
 });
 

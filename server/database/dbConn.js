@@ -171,8 +171,34 @@ function incrementLikeCount(songId, callback) {
             console.error('Error executing SQL query:', err);
             callback(err);
         } else {
-            console.log('SQL query executed successfully. Affected rows:', results.affectedRows);
+            console.log('Successfully incremented like count:', results.affectedRows);
             callback(null);
+        }
+    });
+};
+
+function recordLike(songId, userId, callback) {
+    const sql = `INSERT INTO liked_songs (song_id, user_id) VALUES (?, ?)`;
+    conn.query(sql, [songId, userId], (err, results) => {
+        if (err) {
+            console.error('Error liking SQL query recordLike():', err);
+            callback(err);
+        } else {
+            console.log('Successfully recorded like:', results.affectedRows);
+            callback(null);
+        }
+    });
+};
+
+function checkIfUserLiked(songId, userId, callback) {
+    const sql = `SELECT * FROM liked_songs WHERE song_id = ? AND user_id = ?`;
+    conn.query(sql, [songId, userId], (err, results) => {
+        if (err) {
+            console.error('Error executing SQL query:', err);
+            callback(err);
+        } else {
+            console.log('Successfully checked if user liked:', results.length > 0);
+            callback(null, results.length > 0);
         }
     });
 };
@@ -186,5 +212,7 @@ module.exports = {
     getRandomSong,
     getRandomSongAny,
     updateLocation,
-    incrementLikeCount
+    incrementLikeCount,
+    recordLike,
+    checkIfUserLiked
 };

@@ -122,6 +122,7 @@
             </div>
             <div class="footer">
                 Made by: <a href="https://github.com/valentino-ivanovski" style="color: inherit;">Valentino Ivanovski</a> for Systems 3 - 2024
+                - Welcome, <strong><%= user.username %></strong>
             </div>
         </div>
 
@@ -258,6 +259,27 @@
                                             const likeCount = document.createElement('p');
                                             likeButton.innerText = 'Like';
                                             likeButton.className = 'likeButton';
+
+                                            fetch('/mainpage/checkIfUserLiked', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify({
+                                                    songid: song.song_id,
+                                                })
+                                            })
+                                            .then(response => {
+                                                if (response.ok) {
+                                                    return response.json();
+                                                } 
+                                            })
+                                            .then(data => {
+                                                if (data.liked) {
+                                                    likeButton.disabled = true;
+                                                }
+                                            });
+
                                             likeCommentDiv.appendChild(likeButton);
                                             likeCount.innerText = likes;
                                             likeCount.style.marginLeft = '10px';
@@ -271,7 +293,7 @@
                                                         'Content-Type': 'application/json'
                                                     },
                                                     body: JSON.stringify({
-                                                        songid: song.song_id
+                                                        songid: song.song_id,
                                                     })
                                                 })
                                                 .then(response => {
