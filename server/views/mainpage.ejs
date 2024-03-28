@@ -356,6 +356,13 @@
                                             // Append the div to the songInfoContainer
                                             songInfoContainer.appendChild(buttonsDiv);
 
+                                            const arrowDiv = document.createElement('div');
+                                            const arrow = document.createElement('img');
+                                            arrow.src = '/images/downArrow.png';
+                                            arrow.style.width = '20px';
+                                            arrow.style.marginTop = '20px';
+                                            arrowDiv.appendChild(arrow);
+                                            songInfoContainer.appendChild(arrowDiv);
 
                                             // COMMENT SECTION
                                             fetch(`/mainpage/comments/${songid}`, {
@@ -374,11 +381,17 @@
                                                 console.log(comments); // add this line
 
                                                 const commentsDiv = document.createElement('div');
-                                                commentsDiv.className = 'comments';
+                                                const commentsHeader = document.createElement('h1');
+                                                commentsHeader.innerText = 'Comments';
+                                                commentsHeader.className = 'commentsHeader';
+                                                commentsDiv.appendChild(commentsHeader);
+                                                commentsDiv.className = 'commentsDiv';
+
 
                                                 comments.forEach(comment => {
                                                     const commentP = document.createElement('p');
-                                                    commentP.innerText = `${comment.user_id}: ${comment.content}`;
+                                                    commentP.className = 'commentP';
+                                                    commentP.innerText = `${comment.username}: ${comment.content}`;
                                                     commentsDiv.appendChild(commentP);
                                                 });
 

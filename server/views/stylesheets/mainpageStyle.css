@@ -451,3 +451,38 @@ body {
     
     margin-top: 10px;
 }
+
+.commentsDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+    margin-top: 17px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #f5f5f5;
+    width: 80%;
+    color: #464444;
+    text-align: left;
+}
+
+.commentP{
+    font-size: 15px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    margin-top: 5px;
+    border-radius: 15px;
+    background-color: #e0e0e0;
+    padding: 10px;
+}
+
+.commentsHeader{
+    font-size: 20px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    margin-top: 5px;
+    border-radius: 15px;
+    background-color: #e0e0e0;
+    padding: 10px;
+}
