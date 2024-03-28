@@ -158,7 +158,7 @@ function updateLocation(location, userId, callback) {
             console.error('Error executing SQL query:', err);
             callback(err);
         } else {
-            console.log('SQL query executed successfully. Affected rows:', results.affectedRows);
+            console.log('Location set successfully. Affected rows:', results.affectedRows);
             callback(null);
         }
     });
@@ -203,6 +203,19 @@ function checkIfUserLiked(songId, userId, callback) {
     });
 };
 
+function getCommentsBySongId(songId, callback) {
+    const sql = `SELECT * FROM comments WHERE song_id = ?`;
+    conn.query(sql, [songId], (err, results) => {
+        if (err) {
+            console.error('Error executing SQL query:', err);
+            callback(err);
+        } else {
+            console.log('Successfully fetched comments:', results);
+            callback(null, results);
+        }
+    });
+};
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -214,5 +227,6 @@ module.exports = {
     updateLocation,
     incrementLikeCount,
     recordLike,
-    checkIfUserLiked
+    checkIfUserLiked,
+    getCommentsBySongId
 };

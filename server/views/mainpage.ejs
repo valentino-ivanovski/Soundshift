@@ -219,7 +219,7 @@
                                 const soundcloudLink = song.soundcloud_link;
                                 const youtubeLink = song.yt_link;
                                 const likes = song.like_count;
-                                const tempLink = "";
+                                const songid = song.song_id;
 
                                 /*ova mojs da go naprajs ko so gi napraj buttons i yt viewer*/
                                 const songDetailsHTML = `
@@ -355,6 +355,39 @@
 
                                             // Append the div to the songInfoContainer
                                             songInfoContainer.appendChild(buttonsDiv);
+
+
+                                            // COMMENT SECTION
+                                            fetch(`/mainpage/comments/${songid}`, {
+                                                method: 'GET',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                }
+                                            })
+                                            .then(response => {
+                                                if (!response.ok) {
+                                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                                }
+                                                return response.json();
+                                            })
+                                            .then(comments => {
+                                                console.log(comments); // add this line
+
+                                                const commentsDiv = document.createElement('div');
+                                                commentsDiv.className = 'comments';
+
+                                                comments.forEach(comment => {
+                                                    const commentP = document.createElement('p');
+                                                    commentP.innerText = `${comment.user_id}: ${comment.content}`;
+                                                    commentsDiv.appendChild(commentP);
+                                                });
+
+                                            songInfoContainer.appendChild(commentsDiv);
+                                        })
+                                            .catch(error => {
+                                                console.error('Error:', error);
+                                            });
+
 
                                         } else {
                                             console.error('No YouTube video found for the song');

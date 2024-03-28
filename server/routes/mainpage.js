@@ -123,6 +123,23 @@ router.post('/checkIfUserLiked', (req, res) => {
     });
 });
 
+router.get('/comments/:songid', (req, res) => {
+    // Get the songId from the request parameters
+    const songId = req.params.songid;
+    console.log("songId is:" + songId);
+
+    // Query the database for comments with the songId
+    dbConn.getCommentsBySongId(songId, (err, comments) => {
+        if (err) {
+            console.error('Error fetching comments:', err);
+            return res.status(500).send('Error fetching comments');
+        }
+        // Send the comments as a JSON response
+        console.log("comments are:" + comments);
+        res.json(comments);
+    });
+});
+
 
 router.post
 
