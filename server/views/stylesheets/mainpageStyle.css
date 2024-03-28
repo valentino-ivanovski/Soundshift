@@ -119,9 +119,15 @@ body {
     margin-left: 10px;
     margin-right:50px;
 }
-
+/*justify-content: flex-start*/
 .square-innermore{
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: auto;
+    padding: 20px;
+    max-height: 75%;
 }
 
 .circle-container{

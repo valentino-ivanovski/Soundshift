@@ -66,8 +66,8 @@
 
                 </div>
                 <div class="right-side">
-                    <div class="square-inner" id="song-info-container">
-                        <div class="square-innermore">
+                    <div class="square-inner">
+                        <div class="square-innermore" id="song-info-container">
                         <h1 class="headers" id="submitafavsong">submit a fav song:</h1>
                         <form action="/mainpage/submitsong" method="post">
                             <!-- Song Title -->
@@ -219,6 +219,7 @@
                                 const soundcloudLink = song.soundcloud_link;
                                 const youtubeLink = song.yt_link;
                                 const likes = song.like_count;
+                                const tempLink = "";
 
                                 /*ova mojs da go naprajs ko so gi napraj buttons i yt viewer*/
                                 const songDetailsHTML = `
@@ -348,16 +349,12 @@
                                             youtubeButton.innerText = 'YouTube';
                                             youtubeButton.className = 'youtubeButton';
                                             youtubeButton.onclick = function () {
-                                                window.open(youtubeLink, '_blank');
+                                                window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
                                             };
                                             buttonsDiv.appendChild(youtubeButton);
 
-
-
                                             // Append the div to the songInfoContainer
                                             songInfoContainer.appendChild(buttonsDiv);
-
-
 
                                         } else {
                                             console.error('No YouTube video found for the song');
