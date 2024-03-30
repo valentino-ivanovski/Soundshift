@@ -351,10 +351,10 @@ body {
 .submitButton {
     padding: 10px 15px;
     margin-top: 10px;
-    background-color: #7058fa;
+    background-color: #c5c5c55c;
     color: #fff;
     text-decoration: none;
-    border: 1.5px solid #7058fa;
+    border: 1.5px solid #7058fa00;
     border-radius: 50px;
     font-size: 15px;
     font-family: "Inter", Helvetica;
@@ -364,7 +364,6 @@ body {
 
 .submitButton:hover {
     background-color: #624be8;
-    border-color: #624be8;
 }
 
 .spotifyButton, .youtubeButton, .soundcloudButton{
