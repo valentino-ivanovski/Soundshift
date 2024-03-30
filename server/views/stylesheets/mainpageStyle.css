@@ -534,14 +534,19 @@ body {
 }
 
 .commentFormDiv button {
-    padding: 10px 15px;
-    background-color: #7058fa;
+    padding: 5px 7px;
+    background-color: #7862f1;
     color: #fff;
     text-decoration: none;
     border: 1.5px solid #7058fa;
     border-radius: 50%;
-    font-size: 15px;
+    font-size: 13px;
     font-family: "Inter", Helvetica;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
+}
+
+.commentFormDiv button:hover {
+    background-color: #624be8;
+    border-color: #624be8;
 }

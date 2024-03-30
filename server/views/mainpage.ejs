@@ -29,38 +29,38 @@
             <div class="content">
                 <div class="left-side">
                     <div class="circle-container">
-                    <div class="circle-inner">
-                        <div class="circle-label">
-                            <p class="clickMeAnimation">Click Me! -></p>
+                        <div class="circle-inner">
+                            <div class="circle-label">
+                                <p class="clickMeAnimation">Click Me! -></p>
+                            </div>
+                        </div>
+
+                        <div class="genreExDiv">
+                            <label for="genre1" class="labelGenre">Genre:</label>
+                            <select id="genre1" name="genre1">
+                                <option value="Any">Any</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Rock">Rock</option>
+                                <option value="Hip Hop/Rap">Hip Hop/Rap</option>
+                                <option value="Electronic">Electronic</option>
+                                <option value="R&B/Soul">R&B/Soul</option>
+                                <option value="Country">Country</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Reggae">Reggae</option>
+                                <option value="Classical">Classical</option>
+                                <option value="Folk">Folk</option>
+                                <option value="Metal">Metal</option>
+                                <option value="Blues">Blues</option>
+                                <option value="Gospel">Gospel</option>
+                                <option value="World">World</option>
+                                <option value="Experimental">Experimental</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input type="checkbox" id="explicit1" name="explicit">
+                            <label for="explicit1" class="explicitLabel">Explicit</label>
+                            <p id="error-message"></p>
                         </div>
                     </div>
-
-                    <div class="genreExDiv">
-                        <label for="genre1" class="labelGenre">Genre:</label>
-                        <select id="genre1" name="genre1">
-                            <option value="Any">Any</option>
-                            <option value="Pop">Pop</option>
-                            <option value="Rock">Rock</option>
-                            <option value="Hip Hop/Rap">Hip Hop/Rap</option>
-                            <option value="Electronic">Electronic</option>
-                            <option value="R&B/Soul">R&B/Soul</option>
-                            <option value="Country">Country</option>
-                            <option value="Jazz">Jazz</option>
-                            <option value="Reggae">Reggae</option>
-                            <option value="Classical">Classical</option>
-                            <option value="Folk">Folk</option>
-                            <option value="Metal">Metal</option>
-                            <option value="Blues">Blues</option>
-                            <option value="Gospel">Gospel</option>
-                            <option value="World">World</option>
-                            <option value="Experimental">Experimental</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <input type="checkbox" id="explicit1" name="explicit">
-                        <label for="explicit1" class="explicitLabel">Explicit</label>
-                        <p id="error-message"></p>
-                    </div>
-                </div>
                 </div>
                 <div class="divider">
 
@@ -68,61 +68,64 @@
                 <div class="right-side">
                     <div class="square-inner">
                         <div class="square-innermore" id="song-info-container">
-                        <h1 class="headers" id="submitafavsong">submit a fav song:</h1>
-                        <form action="/mainpage/submitsong" method="post">
-                            <!-- Song Title -->
-                            <div style="margin-bottom: 10px;">
-                                <label for="songTitle" class="songTitleLabel">Song Title:</label>
-                                <input type="text" id="songTitle" placeholder="First Take" name="songTitle"
-                                    required><!-- songTitle -->
-                            </div>
+                            <h1 class="headers" id="submitafavsong">submit a fav song:</h1>
+                            <form action="/mainpage/submitsong" method="post">
+                                <!-- Song Title -->
+                                <div style="margin-bottom: 10px;">
+                                    <label for="songTitle" class="songTitleLabel">Song Title:</label>
+                                    <input type="text" id="songTitle" placeholder="First Take" name="songTitle"
+                                        required><!-- songTitle -->
+                                </div>
 
-                            <!-- Artist Name -->
-                            <div style="margin-bottom: 10px;">
-                                <label for="artistName" class="artistLabel">Artist Name:</label>
-                                <input type="text" id="artistName" placeholder="Travis Scott" name="artistName"
-                                    required> <!-- artistName -->
-                            </div>
+                                <!-- Artist Name -->
+                                <div style="margin-bottom: 10px;">
+                                    <label for="artistName" class="artistLabel">Artist Name:</label>
+                                    <input type="text" id="artistName" placeholder="Travis Scott" name="artistName"
+                                        required> <!-- artistName -->
+                                </div>
 
-                            <!-- Genre -->
-                            <div style="margin-bottom: 10px;">
-                                <label for="genre" class="genreLabel">Genre:</label>
-                                <select id="genre" name="genre" required>
-                                    <option>None</option>
-                                    <option value="Pop">Pop</option>
-                                    <option value="Rock">Rock</option>
-                                    <option value="Hip Hop/Rap">Hip Hop/Rap</option>
-                                    <option value="Electronic">Electronic</option>
-                                    <option value="R&B/Soul">R&B/Soul</option>
-                                    <option value="Country">Country</option>
-                                    <option value="Jazz">Jazz</option>
-                                    <option value="Reggae">Reggae</option>
-                                    <option value="Classical">Classical</option>
-                                    <option value="Folk">Folk</option>
-                                    <option value="Metal">Metal</option>
-                                    <option value="Blues">Blues</option>
-                                    <option value="Gospel">Gospel</option>
-                                    <option value="World">World</option>
-                                    <option value="Experimental">Experimental</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <label for="explicit" class="explicitLabel2">Explicit</label>
-                                <input type="checkbox" id="explicit" name="explicit"><!-- explicit -->
-                                <p style="color: yellow;font-size: 13px; margin-top: 20px;">
-                                    <%= locals.errorSongExists %>
-                                </p>
-                            </div>
-                            <div>
-                                <input type="submit" class="submitButton" value="Submit">
-                            </div>
-                        </form>
-                    </div>
+                                <!-- Genre -->
+                                <div style="margin-bottom: 10px;">
+                                    <label for="genre" class="genreLabel">Genre:</label>
+                                    <select id="genre" name="genre" required>
+                                        <option>None</option>
+                                        <option value="Pop">Pop</option>
+                                        <option value="Rock">Rock</option>
+                                        <option value="Hip Hop/Rap">Hip Hop/Rap</option>
+                                        <option value="Electronic">Electronic</option>
+                                        <option value="R&B/Soul">R&B/Soul</option>
+                                        <option value="Country">Country</option>
+                                        <option value="Jazz">Jazz</option>
+                                        <option value="Reggae">Reggae</option>
+                                        <option value="Classical">Classical</option>
+                                        <option value="Folk">Folk</option>
+                                        <option value="Metal">Metal</option>
+                                        <option value="Blues">Blues</option>
+                                        <option value="Gospel">Gospel</option>
+                                        <option value="World">World</option>
+                                        <option value="Experimental">Experimental</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <label for="explicit" class="explicitLabel2">Explicit</label>
+                                    <input type="checkbox" id="explicit" name="explicit"><!-- explicit -->
+                                    <p style="color: yellow;font-size: 13px; margin-top: 20px;">
+                                        <%= locals.errorSongExists %>
+                                    </p>
+                                </div>
+                                <div>
+                                    <input type="submit" class="submitButton" value="Submit">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="footer">
-                Made by: <a href="https://github.com/valentino-ivanovski" style="color: inherit;">Valentino Ivanovski</a> for Systems 3 - 2024
-                - Welcome, <strong><%= user.username %></strong>
+                Made by: <a href="https://github.com/valentino-ivanovski" style="color: inherit;">Valentino
+                    Ivanovski</a> for Systems 3 - 2024
+                - Welcome, <strong>
+                    <%= user.username %>
+                </strong>
             </div>
         </div>
 
@@ -140,22 +143,22 @@
                     const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
 
                     fetch(geoApiUrl)
-                    .then (res => res.json())
-                    .then (data => {
-                        console.log(data);
-                        console.log(data.principalSubdivision + ", " + data.countryName);
-                        const location = data.principalSubdivision + ", " + data.countryName;
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            console.log(data.principalSubdivision + ", " + data.countryName);
+                            const location = data.principalSubdivision + ", " + data.countryName;
 
-                        fetch('/mainpage/updateUserLocation', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                location: location
+                            fetch('/mainpage/updateUserLocation', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    location: location
+                                })
                             })
                         })
-                    })
                 }
 
                 const error = (error) => {
@@ -174,7 +177,7 @@
                 const genreSelect = document.getElementById('genre1');
                 const explicitCheckbox = document.getElementById('explicit1');
                 const songInfoContainer = document.getElementById('song-info-container');
-                
+
 
                 circle.addEventListener('click', function () {
 
@@ -204,25 +207,24 @@
                         })
                         .then(songs => {
                             // Check if songs array is not empty and extract the first song object
-                            if (songs.length > 0) {
-                                const song = songs[0];
+                            const song = songs[0];
 
-                                // Check for undefined values and display the song details
-                                const title = song.title ? song.title : 'Unknown';
-                                const artist = song.artist ? song.artist : 'Unknown';
-                                const genre = song.genre ? song.genre : 'Unknown';
-                                const explicitStatus = song.explicit ? 'Yes' : 'No';
-                                const uploadDate = new Date(song.upload_date).toLocaleDateString();
-                                const userLocation = song.location = song.location;
-                                const username = song.username;
-                                const spotifyLink = song.spotify_link;
-                                const soundcloudLink = song.soundcloud_link;
-                                const youtubeLink = song.yt_link;
-                                const likes = song.like_count;
-                                const songid = song.song_id;
+                            // Check for undefined values and display the song details
+                            const title = song.title ? song.title : 'Unknown';
+                            const artist = song.artist ? song.artist : 'Unknown';
+                            const genre = song.genre ? song.genre : 'Unknown';
+                            const explicitStatus = song.explicit ? 'Yes' : 'No';
+                            const uploadDate = new Date(song.upload_date).toLocaleDateString();
+                            const userLocation = song.location = song.location;
+                            const username = song.username;
+                            const spotifyLink = song.spotify_link;
+                            const soundcloudLink = song.soundcloud_link;
+                            const youtubeLink = song.yt_link;
+                            const likes = song.like_count;
+                            const songid = song.song_id;
 
-                                /*ova mojs da go naprajs ko so gi napraj buttons i yt viewer*/
-                                const songDetailsHTML = `
+                            /*ova mojs da go naprajs ko so gi napraj buttons i yt viewer*/
+                            const songDetailsHTML = `
                                 <div style="margin-top: -40px">
                                     <h1 style="color: #fff; font-family: "Inter", Helvetica; font-weight: 350; font-size: 17px;">Random Song Details:</h1>
                                     <p>Song: <strong>${title}</strong>, by <strong>${artist}</strong>.</p>
@@ -230,38 +232,65 @@
                                     <p>Uploaded By: <strong>${username}</strong>, on <strong>${uploadDate}</strong> from <strong>${userLocation}</strong></p>
                                 </div>
                                 `;
-                                songInfoContainer.innerHTML = songDetailsHTML;
+                            songInfoContainer.innerHTML = songDetailsHTML;
 
-                    
-                                fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + ' ' + artist)}&key=AIzaSyAwEFqINoDrNr9sWjIXwuNVI4cZvBjW43E&type=video`)
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        if (data.items && data.items.length > 0) {
-                                            const videoId = data.items[0].id.videoId; // Extract the video ID from search results
 
-                                            // Create YouTube player
-                                            const playerContainer = document.createElement('div');
-                                            playerContainer.id = 'player';
-                                            songInfoContainer.appendChild(playerContainer);
+                            fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + ' ' + artist)}&key=AIzaSyAwEFqINoDrNr9sWjIXwuNVI4cZvBjW43E&type=video`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.items && data.items.length > 0) {
+                                        const videoId = data.items[0].id.videoId; // Extract the video ID from search results
 
-                                            const player = new YT.Player('player', {
-                                                height: '40%',
-                                                width: '67%',
-                                                videoId: videoId,
+                                        // Create YouTube player
+                                        const playerContainer = document.createElement('div');
+                                        playerContainer.id = 'player';
+                                        songInfoContainer.appendChild(playerContainer);
+
+                                        const player = new YT.Player('player', {
+                                            height: '40%',
+                                            width: '67%',
+                                            videoId: videoId,
+                                        });
+
+                                        const likeCommentDiv = document.createElement('div');
+                                        likeCommentDiv.style.marginBottom = '-15px';
+                                        likeCommentDiv.style.display = 'flex';
+                                        likeCommentDiv.style.alignItems = 'center';
+                                        likeCommentDiv.style.justifyContent = 'center';
+
+                                        const likeButton = document.createElement('button');
+                                        const likeCount = document.createElement('p');
+                                        likeButton.innerText = 'Like';
+                                        likeButton.className = 'likeButton';
+
+                                        fetch('/mainpage/checkIfUserLiked', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({
+                                                songid: song.song_id,
+                                            })
+                                        })
+                                            .then(response => {
+                                                if (response.ok) {
+                                                    return response.json();
+                                                }
+                                            })
+                                            .then(data => {
+                                                if (data.liked) {
+                                                    likeButton.disabled = true;
+                                                }
                                             });
 
-                                            const likeCommentDiv = document.createElement('div');
-                                            likeCommentDiv.style.marginBottom = '-15px'; 
-                                            likeCommentDiv.style.display = 'flex';
-                                            likeCommentDiv.style.alignItems= 'center';
-                                            likeCommentDiv.style.justifyContent = 'center';
+                                        likeCommentDiv.appendChild(likeButton);
+                                        likeCount.innerText = likes;
+                                        likeCount.style.marginLeft = '10px';
+                                        likeCount.style.marginRight = '20px';
+                                        likeCommentDiv.appendChild(likeCount);
 
-                                            const likeButton = document.createElement('button');
-                                            const likeCount = document.createElement('p');
-                                            likeButton.innerText = 'Like';
-                                            likeButton.className = 'likeButton';
-
-                                            fetch('/mainpage/checkIfUserLiked', {
+                                        likeButton.addEventListener('click', function () {
+                                            fetch('/mainpage/updateLikeCount', {
                                                 method: 'POST',
                                                 headers: {
                                                     'Content-Type': 'application/json'
@@ -270,33 +299,6 @@
                                                     songid: song.song_id,
                                                 })
                                             })
-                                            .then(response => {
-                                                if (response.ok) {
-                                                    return response.json();
-                                                } 
-                                            })
-                                            .then(data => {
-                                                if (data.liked) {
-                                                    likeButton.disabled = true;
-                                                }
-                                            });
-
-                                            likeCommentDiv.appendChild(likeButton);
-                                            likeCount.innerText = likes;
-                                            likeCount.style.marginLeft = '10px';
-                                            likeCount.style.marginRight = '20px';
-                                            likeCommentDiv.appendChild(likeCount);
-
-                                            likeButton.addEventListener('click', function(){
-                                                fetch('/mainpage/updateLikeCount', {
-                                                    method: 'POST',
-                                                    headers: {
-                                                        'Content-Type': 'application/json'
-                                                    },
-                                                    body: JSON.stringify({
-                                                        songid: song.song_id,
-                                                    })
-                                                })
                                                 .then(response => {
                                                     if (response.ok) {
                                                         likeCount.innerText = parseInt(likeCount.innerText) + 1;
@@ -305,72 +307,72 @@
                                                         console.error('Error:', response.statusText);
                                                     }
                                                 })
-                                            })
+                                        })
 
-                                            const commentButton = document.createElement('button');
-                                            commentButton.innerText = 'Comment';
-                                            commentButton.className = 'commentButton';
-                                            likeCommentDiv.appendChild(commentButton);
+                                        const commentButton = document.createElement('button');
+                                        commentButton.innerText = 'Comment';
+                                        commentButton.className = 'commentButton';
+                                        likeCommentDiv.appendChild(commentButton);
 
-                                            commentButton.addEventListener('click', function() {
-                                                
-                                            });
+                                        commentButton.addEventListener('click', function () {
 
-                                            songInfoContainer.appendChild(likeCommentDiv);
+                                        });
 
-                                            
-
-                                            // Create a div to contain the buttons
-                                            const buttonsDiv = document.createElement('div');
-                                            buttonsDiv.style.marginTop = '20px';
-
-                                            // Create buttons
-                                            const spotifyButton = document.createElement('button');
-                                            spotifyButton.innerText = 'Spotify';
-                                            spotifyButton.className = 'spotifyButton';
-                                            spotifyButton.onclick = function () {
-                                                window.open(spotifyLink, '_blank');
-                                            };
-                                            buttonsDiv.appendChild(spotifyButton);
+                                        songInfoContainer.appendChild(likeCommentDiv);
 
 
 
-                                            const soundcloudButton = document.createElement('button');
-                                            soundcloudButton.innerText = 'SoundCloud';
-                                            soundcloudButton.className = 'soundcloudButton';
-                                            soundcloudButton.onclick = function () {
-                                                window.open(soundcloudLink, '_blank');
-                                            };
-                                            buttonsDiv.appendChild(soundcloudButton);
+                                        // Create a div to contain the buttons
+                                        const buttonsDiv = document.createElement('div');
+                                        buttonsDiv.style.marginTop = '20px';
+
+                                        // Create buttons
+                                        const spotifyButton = document.createElement('button');
+                                        spotifyButton.innerText = 'Spotify';
+                                        spotifyButton.className = 'spotifyButton';
+                                        spotifyButton.onclick = function () {
+                                            window.open(spotifyLink, '_blank');
+                                        };
+                                        buttonsDiv.appendChild(spotifyButton);
 
 
 
-                                            const youtubeButton = document.createElement('button');
-                                            youtubeButton.innerText = 'YouTube';
-                                            youtubeButton.className = 'youtubeButton';
-                                            youtubeButton.onclick = function () {
-                                                window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
-                                            };
-                                            buttonsDiv.appendChild(youtubeButton);
+                                        const soundcloudButton = document.createElement('button');
+                                        soundcloudButton.innerText = 'SoundCloud';
+                                        soundcloudButton.className = 'soundcloudButton';
+                                        soundcloudButton.onclick = function () {
+                                            window.open(soundcloudLink, '_blank');
+                                        };
+                                        buttonsDiv.appendChild(soundcloudButton);
 
-                                            // Append the div to the songInfoContainer
-                                            songInfoContainer.appendChild(buttonsDiv);
 
-                                            const arrowDiv = document.createElement('div');
-                                            const arrow = document.createElement('img');
-                                            arrow.src = '/images/downArrow.png';
-                                            arrow.style.width = '20px';
-                                            arrow.style.marginTop = '20px';
-                                            arrowDiv.appendChild(arrow);
-                                            songInfoContainer.appendChild(arrowDiv);
 
-                                            // COMMENT SECTION
-                                            fetch(`/mainpage/comments/${songid}`, {
-                                                method: 'GET',
-                                                headers: {
-                                                    'Content-Type': 'application/json'
-                                                }
-                                            })
+                                        const youtubeButton = document.createElement('button');
+                                        youtubeButton.innerText = 'YouTube';
+                                        youtubeButton.className = 'youtubeButton';
+                                        youtubeButton.onclick = function () {
+                                            window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+                                        };
+                                        buttonsDiv.appendChild(youtubeButton);
+
+                                        // Append the div to the songInfoContainer
+                                        songInfoContainer.appendChild(buttonsDiv);
+
+                                        const arrowDiv = document.createElement('div');
+                                        const arrow = document.createElement('img');
+                                        arrow.src = '/images/downArrow.png';
+                                        arrow.style.width = '20px';
+                                        arrow.style.marginTop = '20px';
+                                        arrowDiv.appendChild(arrow);
+                                        songInfoContainer.appendChild(arrowDiv);
+
+                                        // COMMENT SECTION
+                                        fetch(`/mainpage/comments/${songid}`, {
+                                            method: 'GET',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            }
+                                        })
                                             .then(response => {
                                                 if (!response.ok) {
                                                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -404,7 +406,7 @@
 
                                                 const submitButtonComments = document.createElement('button');
                                                 submitButtonComments.type = 'submit';
-                                                submitButtonComments.innerText = '⬆︎';
+                                                submitButtonComments.innerText = '↑';
 
                                                 comments.forEach(comment => {
                                                     const commentP = document.createElement('p');
@@ -421,31 +423,27 @@
 
                                                     commentsContainer.appendChild(commentP);
                                                 });
-                                            commentsDiv.appendChild(commentsContainer);
-                                            songInfoContainer.appendChild(commentsDiv);
+                                                commentsDiv.appendChild(commentsContainer);
+                                                songInfoContainer.appendChild(commentsDiv);
 
-                                            commentForm.appendChild(commentInput);
-                                            commentForm.appendChild(submitButtonComments);
-                                            commentFormDiv.appendChild(commentForm);
-                                            commentsDiv.appendChild(commentFormDiv);
+                                                commentForm.appendChild(commentInput);
+                                                commentForm.appendChild(submitButtonComments);
+                                                commentFormDiv.appendChild(commentForm);
+                                                commentsDiv.appendChild(commentFormDiv);
 
-                                        })
+                                            })
                                             .catch(error => {
                                                 console.error('Error:', error);
                                             });
 
 
-                                        } else {
-                                            console.error('No YouTube video found for the song');
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Error fetching YouTube video:', error);
-                                    });
-                            } else {
-                                console.error('No songs found');
-                                document.getElementById('error-message').innerText = 'No songs found';
-                            }
+                                    } else {
+                                        console.error('No YouTube video found for the song');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching YouTube video:', error);
+                                });
                         })
 
                         .catch(error => {
