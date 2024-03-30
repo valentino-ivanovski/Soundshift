@@ -420,9 +420,10 @@
                                                     const noCommentsP = document.createElement('p');
                                                     noCommentsP.innerText = 'No comments yet';
                                                     noCommentsP.style.textAlign = 'center';
+                                                    noCommentsP.style.marginTop = '80px';
+                                                    noCommentsP.style.color = 'gray';
                                                     commentsContainer.appendChild(noCommentsP);
                                                 } else {
-
                                                     comments.forEach(comment => {
                                                         const commentP = document.createElement('p');
                                                         commentP.className = 'commentP';
