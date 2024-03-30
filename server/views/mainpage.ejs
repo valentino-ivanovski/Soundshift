@@ -246,7 +246,7 @@
 
                                             const player = new YT.Player('player', {
                                                 height: '40%',
-                                                width: '62%',
+                                                width: '67%',
                                                 videoId: videoId,
                                             });
 
@@ -381,21 +381,54 @@
                                                 console.log(comments); // add this line
 
                                                 const commentsDiv = document.createElement('div');
+                                                commentsDiv.className = 'commentsDiv';
+
+                                                const commentsContainer = document.createElement('div');
+                                                commentsContainer.className = 'commentsContainer';
+
                                                 const commentsHeader = document.createElement('h1');
                                                 commentsHeader.innerText = 'Comments';
                                                 commentsHeader.className = 'commentsHeader';
                                                 commentsDiv.appendChild(commentsHeader);
-                                                commentsDiv.className = 'commentsDiv';
 
+
+                                                const commentFormDiv = document.createElement('div');
+                                                commentFormDiv.className = 'commentFormDiv';
+                                                const commentForm = document.createElement('form');
+                                                commentForm.className = 'commentForm';
+                                                commentForm.action = `/mainpage/comments/add/${songid}`;
+                                                const commentInput = document.createElement('input');
+                                                commentInput.type = 'text';
+                                                commentInput.name = 'comment';
+                                                commentInput.placeholder = 'Write a comment...';
+
+                                                const submitButtonComments = document.createElement('button');
+                                                submitButtonComments.type = 'submit';
+                                                submitButtonComments.innerText = '⬆︎';
 
                                                 comments.forEach(comment => {
                                                     const commentP = document.createElement('p');
                                                     commentP.className = 'commentP';
-                                                    commentP.innerText = `${comment.username}: ${comment.content}`;
-                                                    commentsDiv.appendChild(commentP);
-                                                });
 
+                                                    const usernameLink = document.createElement('a');
+                                                    usernameLink.href = `/users/${comment.user_id}`; // adjust this to the correct URL
+                                                    usernameLink.innerText = comment.username;
+                                                    usernameLink.className = 'usernameLink';
+                                                    commentP.appendChild(usernameLink);
+
+                                                    const commentText = document.createTextNode(`: ${comment.content}`);
+                                                    commentP.appendChild(commentText);
+
+                                                    commentsContainer.appendChild(commentP);
+                                                });
+                                            commentsDiv.appendChild(commentsContainer);
                                             songInfoContainer.appendChild(commentsDiv);
+
+                                            commentForm.appendChild(commentInput);
+                                            commentForm.appendChild(submitButtonComments);
+                                            commentFormDiv.appendChild(commentForm);
+                                            commentsDiv.appendChild(commentFormDiv);
+
                                         })
                                             .catch(error => {
                                                 console.error('Error:', error);

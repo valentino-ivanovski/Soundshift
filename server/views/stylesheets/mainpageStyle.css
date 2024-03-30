@@ -452,19 +452,30 @@ body {
     margin-top: 10px;
 }
 
-.commentsDiv{
+.commentsDiv {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: left;
+    align-items: center;
+    justify-content: center;
     margin-top: 17px;
     margin-bottom: 10px;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 10px;
     background-color: #f5f5f5;
     width: 80%;
+    height: 300px;
     color: #464444;
     text-align: left;
+}
+
+.commentsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 80%; /* adjust this to the desired height */
+    overflow-y: auto;
 }
 
 .commentP{
@@ -472,17 +483,65 @@ body {
     font-family: "Inter", Helvetica;
     font-weight: 350;
     margin-top: 5px;
-    border-radius: 15px;
-    background-color: #e0e0e0;
+    border-radius: 10px;
+    background-color: #ebebeb;
     padding: 10px;
+    width: 85%;   
 }
 
 .commentsHeader{
     font-size: 20px;
     font-family: "Inter", Helvetica;
-    font-weight: 350;
+    font-weight: 650;
     margin-top: 5px;
     border-radius: 15px;
-    background-color: #e0e0e0;
     padding: 10px;
+    padding-bottom: 0px;
+}
+
+.usernameLink{
+    color: #464444;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.usernameLink:hover{
+    color: #464444;
+    text-decoration: underline;
+}
+
+.commentFormDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+}
+
+/* If gap doesn't work, use margins */
+.commentFormDiv input {
+    margin-right: 10px;
+    width: 30wh;
+    padding: 12px;
+    border: none;
+    background-color: rgba(195, 195, 195, 0.279);
+    border-radius: 50px;
+    color: white;
+    font-size: 13px;
+}
+
+.commentFormDiv button {
+    padding: 10px 15px;
+    background-color: #7058fa;
+    color: #fff;
+    text-decoration: none;
+    border: 1.5px solid #7058fa;
+    border-radius: 50%;
+    font-size: 15px;
+    font-family: "Inter", Helvetica;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 }
