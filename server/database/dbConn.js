@@ -240,7 +240,7 @@ function getCommentsBySongId(songId, callback) {
                 FROM comments 
                 INNER JOIN usersNew 
                 ON comments.user_id = usersNew.id 
-                WHERE song_id = 1`;
+                WHERE song_id = ?`; //FIX TH8IS THERE IS A BUG
 
     conn.query(sql, [songId], (err, results) => {
         if (err) {
