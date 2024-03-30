@@ -252,6 +252,14 @@
                                             videoId: videoId,
                                         });
 
+                                    } else {
+                                        console.error('No YouTube video found for the song');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching YouTube video:', error);
+                                });
+
                                         const likeCommentDiv = document.createElement('div');
                                         likeCommentDiv.style.marginBottom = '-15px';
                                         likeCommentDiv.style.display = 'flex';
@@ -443,15 +451,6 @@
                                             .catch(error => {
                                                 console.error('Error:', error);
                                             });
-
-
-                                    } else {
-                                        console.error('No YouTube video found for the song');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error fetching YouTube video:', error);
-                                });
                         })
 
                         .catch(error => {
