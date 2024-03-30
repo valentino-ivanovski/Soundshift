@@ -408,21 +408,29 @@
                                                 submitButtonComments.type = 'submit';
                                                 submitButtonComments.innerText = '↑';
 
-                                                comments.forEach(comment => {
-                                                    const commentP = document.createElement('p');
-                                                    commentP.className = 'commentP';
+                                                if (comments.length === 0) {
+                                                    const noCommentsP = document.createElement('p');
+                                                    noCommentsP.innerText = 'No comments yet';
+                                                    noCommentsP.style.textAlign = 'center';
+                                                    commentsContainer.appendChild(noCommentsP);
+                                                } else {
 
-                                                    const usernameLink = document.createElement('a');
-                                                    usernameLink.href = `/users/${comment.user_id}`; // adjust this to the correct URL
-                                                    usernameLink.innerText = comment.username;
-                                                    usernameLink.className = 'usernameLink';
-                                                    commentP.appendChild(usernameLink);
+                                                    comments.forEach(comment => {
+                                                        const commentP = document.createElement('p');
+                                                        commentP.className = 'commentP';
 
-                                                    const commentText = document.createTextNode(`: ${comment.content}`);
-                                                    commentP.appendChild(commentText);
+                                                        const usernameLink = document.createElement('a');
+                                                        usernameLink.href = `/users/${comment.user_id}`; // adjust this to the correct URL
+                                                        usernameLink.innerText = comment.username;
+                                                        usernameLink.className = 'usernameLink';
+                                                        commentP.appendChild(usernameLink);
 
-                                                    commentsContainer.appendChild(commentP);
-                                                });
+                                                        const commentText = document.createTextNode(`: ${comment.content}`);
+                                                        commentP.appendChild(commentText);
+
+                                                        commentsContainer.appendChild(commentP);
+                                                    });
+                                                }
                                                 commentsDiv.appendChild(commentsContainer);
                                                 songInfoContainer.appendChild(commentsDiv);
 
