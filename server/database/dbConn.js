@@ -152,7 +152,7 @@ function getRandomSongAny(explicit, callback) {
     `;
     } else {
         sql = `
-        SELECT songsNew.*, usersNew.username, usersNew,location 
+        SELECT songsNew.*, usersNew.username, usersNew.location 
         FROM songsNew 
         LEFT JOIN usersNew ON songsNew.user_id = usersNew.id 
         ORDER BY RAND() 
