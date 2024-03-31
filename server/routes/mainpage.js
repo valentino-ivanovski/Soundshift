@@ -155,25 +155,6 @@ router.post('/comments/add/:songid', (req, res) => {
     });
 });
 
-router.post('/comments/report/:commentid', (req, res) => {
-    const reportData = req.body;
-    const userId = req.session.user.id;
-    const reason = reportData.reportReason;
-    const repDate = reportData.reportDate;
-    const commentId = req.params.commentid;
-
-    console.log(reason);
-
-    dbConn.submitReport(userId, reason, repDate, commentId, (err) => {
-        if (err) {
-            console.error('Error submitting report:', err);
-            return res.status(500).send('Error submitting report');
-        }
-        res.status(200).send('Report submitted');
-    })
-
-});
-
 
 router.post
 

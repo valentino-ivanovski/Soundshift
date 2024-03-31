@@ -266,20 +266,6 @@ function insertComment(songId, userId, comment, callback) {
     });
 }
 
-function submitReport(userId, reason, repDate, commentId, callback) {
-    const formattedDate = repDate.toISOString().slice(0, 19).replace('T', ' ');
-    const sql = `INSERT INTO reports (user_id, reason, report_date, comment_id) VALUES (?, ?, ?, ?)`;
-    conn.query(sql, [userId, reason, formattedDate, commentId], (err, results) => {
-        if (err) {
-            console.error("Error executing SQL query:", err);
-            callback(err);
-        } else {
-            console.log("Successfully submitted report:", results.affectedRows);
-            callback(null);
-        }
-    });
-}
-
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -294,5 +280,4 @@ module.exports = {
     checkIfUserLiked,
     getCommentsBySongId,
     insertComment,
-    submitReport
 };

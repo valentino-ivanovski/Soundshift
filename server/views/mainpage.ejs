@@ -436,38 +436,6 @@
                                                         commentsContainer.appendChild(commentP);
 
 
-                                                        reportSpan.addEventListener('click', function() {
-                                                            const commentId = comment.comment_id;
-
-                                                            const reportReason = prompt('Please specify report reasoning');
-                                                            if (reportReason === null || reportReason.trim() === '') {
-                                                                // User cancelled the prompt or entered an empty string, do nothing
-                                                                return;
-                                                            }
-
-                                                            const reportData = {
-                                                                commentId: commentId,
-                                                                reportReason: reportReason,
-                                                                reportDate: new Date().toISOString()
-                                                            };
-
-                                                            fetch(`/mainpage/comments/report/${commentId}`, {
-                                                                method: 'POST',
-                                                                headers: {
-                                                                    'Content-Type': 'application/json',
-                                                                },
-                                                                body: JSON.stringify(reportData),
-                                                            })
-                                                            .then(response => response.json())
-                                                            .then(data => {
-                                                                alert(data.message);
-                                                            })
-                                                            .catch((error) => {
-                                                                console.error('Error:', error);
-                                                            });
-                                                        });
-
-
                                                     });
                                                 }
                                                 commentsDiv.appendChild(commentsContainer);
@@ -477,11 +445,6 @@
                                                 commentForm.appendChild(submitButtonComments);
                                                 commentFormDiv.appendChild(commentForm);
                                                 commentsDiv.appendChild(commentFormDiv);
-
-                                                submitButtonComments.addEventListener('click', function () {
-                                                    alert(response.commentAdded);
-                                                });
-
                                             })
                                             .catch(error => {
                                                 console.error('Error:', error);
