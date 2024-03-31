@@ -266,9 +266,10 @@ function insertComment(songId, userId, comment, callback) {
     });
 }
 
-function submitReport(commentId, userId, reason, repDate, songId, callback) {
-    const sql = `INSERT INTO reports (comment_id, reported_by, report_text, report_date, song_id) VALUES (?, ?, ?, ?, ?)`;
-    conn.query(sql, [commentId, userId, reason, repDate, songId], (err, results) => {
+function submitReport(userId, reason, repDate, commentId, callback) {
+    const formattedDate = repDate.toISOString().slice(0, 19).replace('T', ' ');
+    const sql = `INSERT INTO reports (user_id, reason, report_date, comment_id) VALUES (?, ?, ?, ?)`;
+    conn.query(sql, [userId, reason, formattedDate, commentId], (err, results) => {
         if (err) {
             console.error("Error executing SQL query:", err);
             callback(err);

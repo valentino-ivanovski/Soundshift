@@ -157,15 +157,14 @@ router.post('/comments/add/:songid', (req, res) => {
 
 router.post('/comments/report/:commentid', (req, res) => {
     const reportData = req.body;
-    const commentId = req.params.commentid;
+    const userId = req.session.user.id;
     const reason = reportData.reportReason;
     const repDate = reportData.reportDate;
-    const songId = reportData.songId;
-    const userId = req.session.user.id;
+    const commentId = req.params.commentid;
 
     console.log(reason);
 
-    dbConn.submitReport(commentId, userId, reason, repDate, songId, (err) => {
+    dbConn.submitReport(userId, reason, repDate, commentId, (err) => {
         if (err) {
             console.error('Error submitting report:', err);
             return res.status(500).send('Error submitting report');
