@@ -253,6 +253,32 @@ function getCommentsBySongId(songId, callback) {
     });
 }
 
+function insertComment(songId, userId, comment, callback) {
+    const sql = `INSERT INTO comments (song_id, user_id, content) VALUES (?, ?, ?)`;
+    conn.query(sql, [songId, userId, comment], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully inserted comment:", results.affectedRows);
+            callback(null);
+        }
+    });
+}
+
+function submitReport(commentId, userId, reason, repDate, songId, callback) {
+    const sql = `INSERT INTO reports (comment_id, reported_by, report_text, report_date, song_id) VALUES (?, ?, ?, ?, ?)`;
+    conn.query(sql, [commentId, userId, reason, repDate, songId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully submitted report:", results.affectedRows);
+            callback(null);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -266,4 +292,6 @@ module.exports = {
     recordLike,
     checkIfUserLiked,
     getCommentsBySongId,
+    insertComment,
+    submitReport
 };

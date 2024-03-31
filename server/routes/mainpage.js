@@ -135,9 +135,44 @@ router.get('/comments/:songid', (req, res) => {
             return res.status(500).send('Error fetching comments');
         }
         // Send the comments as a JSON response
-        console.log("comments are:" + comments);
         res.json(comments);
     });
+});
+
+router.post('/comments/add/:songid', (req, res) => {
+    // Get the songId from the request parameters
+    const songId = req.params.songid;
+    const userId = req.session.user.id; // Assuming you also need userId
+    const comment = req.body.comment; // Get the comment from the request body
+
+    // Insert the comment into the database
+    dbConn.insertComment(songId, userId, comment, (err) => {
+        if (err) {
+            console.error('Error inserting comment:', err);
+            return res.status(500).send('Error inserting comment');
+        }
+        res.render('mainpage', { commentAdded: "Comment added!" });
+    });
+});
+
+router.post('/comments/report/:commentid', (req, res) => {
+    const reportData = req.body;
+    const commentId = req.params.commentid;
+    const reason = reportData.reportReason;
+    const repDate = reportData.reportDate;
+    const songId = reportData.songId;
+    const userId = req.session.user.id;
+
+    console.log(reason);
+
+    dbConn.submitReport(commentId, userId, reason, repDate, songId, (err) => {
+        if (err) {
+            console.error('Error submitting report:', err);
+            return res.status(500).send('Error submitting report');
+        }
+        res.status(200).send('Report submitted');
+    })
+
 });
 
 
