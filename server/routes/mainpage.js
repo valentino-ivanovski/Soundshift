@@ -157,6 +157,23 @@ router.post('/comments/add/:songid', (req, res) => {
     });
 });
 
+router.post('/report/:commentid', (req, res) => {  
+    const reason = req.body.reason;
+    const commentId = req.params.commentid;
+    const userId = req.session.user.id;
+
+    if (typeof reason !== 'string') {
+        return res.status(400).json({ error: 'Invalid reason' });
+    }
+
+    dbConn.reportComment(commentId, userId, reason, (err) => {
+        if (err) {
+            console.error('Error reporting comment:', err);
+            return res.status(500).send('Error reporting comment');
+        }
+        res.status(200).send('Comment reported');
+    });
+});
 
 router.post
 

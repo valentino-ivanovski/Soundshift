@@ -266,6 +266,19 @@ function addComment(songId, userId, comment, callback) {
     });
 }
 
+function reportComment (commentId, songid, userId, reason, callback) {
+    const sql = `INSERT INTO reports (comment_id, user_id, reason) VALUES (?, ?, ?)`;
+    conn.query(sql, [commentId, userId, reason], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully reported comment:", results.affectedRows);
+            callback(null);
+        }
+    });
+};
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -279,5 +292,6 @@ module.exports = {
     recordLike,
     checkIfUserLiked,
     getCommentsBySongId,
-    addComment
+    addComment,
+    reportComment
 };

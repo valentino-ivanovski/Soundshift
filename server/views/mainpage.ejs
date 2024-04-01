@@ -421,16 +421,41 @@
 
                                             const usernameLink = document.createElement('a');
                                             usernameLink.href = `/users/${comment.user_id}`; // adjust this to the correct URL
-                                            usernameLink.innerText = comment.username;
+                                            usernameLink.innerText = comment.username + ": ";
                                             usernameLink.className = 'usernameLink';
                                             commentP.appendChild(usernameLink);
 
-                                            const commentText = document.createTextNode(`: ${comment.content}`);
+                                            const commentText = document.createTextNode(`${comment.content}`);
                                             commentP.appendChild(commentText);
 
                                             const reportSpan = document.createElement('span');
                                             reportSpan.textContent = 'Report';
                                             reportSpan.className = 'report-comment';
+
+                                            reportSpan.addEventListener('click', function() {
+                                                const reason = prompt('Please enter a reason for reporting this comment:');
+                                                if (reason) {
+                                                    console.log('Type of reason:', typeof reason); // Log the type of reason
+
+                                                    const commentId = parseInt(comment.comment_id);
+                                                    
+                                                    fetch(`/mainpage/report/${commentId}`, {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        },
+                                                        body: JSON.stringify({ reason: reason, commentId: commentId })
+                                                    })
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        // Handle the response from the server...
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error:', error);
+                                                    });
+                                                }
+                                            });
+
                                             commentP.appendChild(reportSpan);
 
                                             commentsContainer.appendChild(commentP);

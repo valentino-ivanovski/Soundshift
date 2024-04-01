@@ -478,6 +478,8 @@ body {
 }
 
 .commentP{
+    display: flex;
+    align-items:center;
     font-size: 15px;
     font-family: "Inter", Helvetica;
     font-weight: 350;
@@ -487,6 +489,7 @@ body {
     padding: 10px;
     width: 75%;   
     position: relative;
+    padding-right: 40px;
 }
 
 .commentsHeader{
