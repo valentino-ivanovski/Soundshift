@@ -252,196 +252,227 @@
                                             videoId: videoId,
                                         });
 
-                                        const likeCommentDiv = document.createElement('div');
-                                        likeCommentDiv.style.marginBottom = '-15px';
-                                        likeCommentDiv.style.display = 'flex';
-                                        likeCommentDiv.style.alignItems = 'center';
-                                        likeCommentDiv.style.justifyContent = 'center';
-
-                                        const likeButton = document.createElement('button');
-                                        const likeCount = document.createElement('p');
-                                        likeButton.innerText = 'Like';
-                                        likeButton.className = 'likeButton';
-
-                                        fetch('/mainpage/checkIfUserLiked', {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json'
-                                            },
-                                            body: JSON.stringify({
-                                                songid: song.song_id,
-                                            })
-                                        })
-                                            .then(response => {
-                                                if (response.ok) {
-                                                    return response.json();
-                                                }
-                                            })
-                                            .then(data => {
-                                                if (data.liked) {
-                                                    likeButton.disabled = true;
-                                                }
-                                            });
-
-                                        likeCommentDiv.appendChild(likeButton);
-                                        likeCount.innerText = likes;
-                                        likeCount.style.marginLeft = '10px';
-                                        likeCount.style.marginRight = '20px';
-                                        likeCommentDiv.appendChild(likeCount);
-
-                                        likeButton.addEventListener('click', function () {
-                                            fetch('/mainpage/updateLikeCount', {
-                                                method: 'POST',
-                                                headers: {
-                                                    'Content-Type': 'application/json'
-                                                },
-                                                body: JSON.stringify({
-                                                    songid: song.song_id,
-                                                })
-                                            })
-                                                .then(response => {
-                                                    if (response.ok) {
-                                                        likeCount.innerText = parseInt(likeCount.innerText) + 1;
-                                                        likeButton.disabled = true;
-                                                    } else {
-                                                        console.error('Error:', response.statusText);
-                                                    }
-                                                })
-                                        })
-
-                                        songInfoContainer.appendChild(likeCommentDiv);
-
-
-
-                                        // Create a div to contain the buttons
-                                        const buttonsDiv = document.createElement('div');
-                                        buttonsDiv.style.marginTop = '20px';
-
-                                        // Create buttons
-                                        const spotifyButton = document.createElement('button');
-                                        spotifyButton.innerText = 'Spotify';
-                                        spotifyButton.className = 'spotifyButton';
-                                        spotifyButton.onclick = function () {
-                                            window.open(spotifyLink, '_blank');
-                                        };
-                                        buttonsDiv.appendChild(spotifyButton);
-
-
-
-                                        const soundcloudButton = document.createElement('button');
-                                        soundcloudButton.innerText = 'SoundCloud';
-                                        soundcloudButton.className = 'soundcloudButton';
-                                        soundcloudButton.onclick = function () {
-                                            window.open(soundcloudLink, '_blank');
-                                        };
-                                        buttonsDiv.appendChild(soundcloudButton);
-
-
-
-                                        const youtubeButton = document.createElement('button');
-                                        youtubeButton.innerText = 'YouTube';
-                                        youtubeButton.className = 'youtubeButton';
-                                        youtubeButton.onclick = function () {
-                                            window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
-                                        };
-                                        buttonsDiv.appendChild(youtubeButton);
-
-                                        // Append the div to the songInfoContainer
-                                        songInfoContainer.appendChild(buttonsDiv);
-
-                                        const arrowDiv = document.createElement('div');
-                                        const arrow = document.createElement('img');
-                                        arrow.src = '/images/downArrow.png';
-                                        arrow.style.width = '20px';
-                                        arrow.style.marginTop = '20px';
-                                        arrowDiv.appendChild(arrow);
-                                        songInfoContainer.appendChild(arrowDiv);
-
-                                        // COMMENT SECTION
-                                        fetch(`/mainpage/comments/${songid}`, {
-                                            method: 'GET',
-                                            headers: {
-                                                'Content-Type': 'application/json'
-                                            }
-                                        })
-                                            .then(response => {
-                                                if (!response.ok) {
-                                                    throw new Error(`HTTP error! status: ${response.status}`);
-                                                }
-                                                return response.json();
-                                            })
-                                            .then(comments => {
-                                                console.log(comments); // add this line
-
-                                                const commentsDiv = document.createElement('div');
-                                                commentsDiv.className = 'commentsDiv';
-
-                                                const commentsContainer = document.createElement('div');
-                                                commentsContainer.className = 'commentsContainer';
-
-                                                const commentsHeader = document.createElement('h1');
-                                                commentsHeader.innerText = 'Comments';
-                                                commentsHeader.className = 'commentsHeader';
-                                                commentsDiv.appendChild(commentsHeader);
-
-
-                                                const commentFormDiv = document.createElement('div');
-                                                commentFormDiv.className = 'commentFormDiv';
-                                                const commentForm = document.createElement('form');
-                                                commentForm.className = 'commentForm';
-                                                commentForm.action = `/mainpage/comments/add/${songid}`;
-                                                const commentInput = document.createElement('input');
-                                                commentInput.type = 'text';
-                                                commentInput.name = 'comment';
-                                                commentInput.placeholder = 'Write a comment...';
-
-                                                const submitButtonComments = document.createElement('button');
-                                                submitButtonComments.type = 'submit';
-                                                submitButtonComments.innerText = '↑';
-
-                                                if (comments.length === 0) {
-                                                    const noCommentsP = document.createElement('p');
-                                                    noCommentsP.innerText = 'No comments yet';
-                                                    noCommentsP.style.textAlign = 'center';
-                                                    noCommentsP.style.marginTop = '80px';
-                                                    noCommentsP.style.color = 'gray';
-                                                    commentsContainer.appendChild(noCommentsP);
-                                                } else {
-                                                    comments.forEach(comment => {
-                                                        const commentP = document.createElement('p');
-                                                        commentP.className = 'commentP';
-
-                                                        const usernameLink = document.createElement('a');
-                                                        usernameLink.href = `/users/${comment.user_id}`; // adjust this to the correct URL
-                                                        usernameLink.innerText = comment.username;
-                                                        usernameLink.className = 'usernameLink';
-                                                        commentP.appendChild(usernameLink);
-
-                                                        const commentText = document.createTextNode(`: ${comment.content}`);
-                                                        commentP.appendChild(commentText);
-
-                                                        commentsContainer.appendChild(commentP);
-                                                    });
-                                                }
-                                                commentsDiv.appendChild(commentsContainer);
-                                                songInfoContainer.appendChild(commentsDiv);
-
-                                                commentForm.appendChild(commentInput);
-                                                commentForm.appendChild(submitButtonComments);
-                                                commentFormDiv.appendChild(commentForm);
-                                                commentsDiv.appendChild(commentFormDiv);
-
-                                            })
-                                            .catch(error => {
-                                                console.error('Error:', error);
-                                            });
-
-                                        } else {
+                                    } else {
                                         console.error('No YouTube video found for the song');
                                     }
                                 })
                                 .catch(error => {
                                     console.error('Error fetching YouTube video:', error);
+                                });
+
+                            const likeCommentDiv = document.createElement('div');
+                            likeCommentDiv.style.marginBottom = '-15px';
+                            likeCommentDiv.style.display = 'flex';
+                            likeCommentDiv.style.alignItems = 'center';
+                            likeCommentDiv.style.justifyContent = 'center';
+
+                            const likeButton = document.createElement('button');
+                            const likeCount = document.createElement('p');
+                            likeButton.innerText = 'Like';
+                            likeButton.className = 'likeButton';
+
+                            fetch('/mainpage/checkIfUserLiked', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    songid: song.song_id,
+                                })
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        return response.json();
+                                    }
+                                })
+                                .then(data => {
+                                    if (data.liked) {
+                                        likeButton.disabled = true;
+                                    }
+                                });
+
+                            likeCommentDiv.appendChild(likeButton);
+                            likeCount.innerText = likes;
+                            likeCount.style.marginLeft = '10px';
+                            likeCount.style.marginRight = '20px';
+                            likeCommentDiv.appendChild(likeCount);
+
+                            likeButton.addEventListener('click', function () {
+                                fetch('/mainpage/updateLikeCount', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        songid: song.song_id,
+                                    })
+                                })
+                                    .then(response => {
+                                        if (response.ok) {
+                                            likeCount.innerText = parseInt(likeCount.innerText) + 1;
+                                            likeButton.disabled = true;
+                                        } else {
+                                            console.error('Error:', response.statusText);
+                                        }
+                                    })
+                            })
+
+                            songInfoContainer.appendChild(likeCommentDiv);
+
+
+
+                            // Create a div to contain the buttons
+                            const buttonsDiv = document.createElement('div');
+                            buttonsDiv.style.marginTop = '20px';
+
+                            // Create buttons
+                            const spotifyButton = document.createElement('button');
+                            spotifyButton.innerText = 'Spotify';
+                            spotifyButton.className = 'spotifyButton';
+                            spotifyButton.onclick = function () {
+                                window.open(spotifyLink, '_blank');
+                            };
+                            buttonsDiv.appendChild(spotifyButton);
+
+
+
+                            const soundcloudButton = document.createElement('button');
+                            soundcloudButton.innerText = 'SoundCloud';
+                            soundcloudButton.className = 'soundcloudButton';
+                            soundcloudButton.onclick = function () {
+                                window.open(soundcloudLink, '_blank');
+                            };
+                            buttonsDiv.appendChild(soundcloudButton);
+
+
+
+                            const youtubeButton = document.createElement('button');
+                            youtubeButton.innerText = 'YouTube';
+                            youtubeButton.className = 'youtubeButton';
+                            youtubeButton.onclick = function () {
+                                window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+                            };
+                            buttonsDiv.appendChild(youtubeButton);
+
+                            // Append the div to the songInfoContainer
+                            songInfoContainer.appendChild(buttonsDiv);
+
+                            const arrowDiv = document.createElement('div');
+                            const arrow = document.createElement('img');
+                            arrow.src = '/images/downArrow.png';
+                            arrow.style.width = '20px';
+                            arrow.style.marginTop = '20px';
+                            arrowDiv.appendChild(arrow);
+                            songInfoContainer.appendChild(arrowDiv);
+
+                            // COMMENT SECTION
+                            fetch(`/mainpage/comments/${songid}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    }
+                                    return response.json();
+                                })
+                                .then(comments => {
+                                    console.log(comments); // add this line
+
+                                    const commentsDiv = document.createElement('div');
+                                    commentsDiv.className = 'commentsDiv';
+
+                                    const commentsContainer = document.createElement('div');
+                                    commentsContainer.className = 'commentsContainer';
+
+                                    const commentsHeader = document.createElement('h1');
+                                    commentsHeader.innerText = 'Comments';
+                                    commentsHeader.className = 'commentsHeader';
+                                    commentsDiv.appendChild(commentsHeader);
+
+
+                                    const commentFormDiv = document.createElement('div');
+                                    commentFormDiv.className = 'commentFormDiv';
+                                    const commentForm = document.createElement('form');
+                                    commentForm.className = 'commentForm';
+                                    const commentInput = document.createElement('input');
+                                    commentInput.type = 'text';
+                                    commentInput.name = 'comment';
+                                    commentInput.required = true;
+                                    commentInput.placeholder = 'Write a comment...';
+
+                                    const submitButtonComments = document.createElement('button');
+                                    submitButtonComments.type = 'submit';
+                                    submitButtonComments.innerText = '↑';
+
+                                    if (comments.length === 0) {
+                                        const noCommentsP = document.createElement('p');
+                                        noCommentsP.innerText = 'No comments yet';
+                                        noCommentsP.style.textAlign = 'center';
+                                        noCommentsP.style.marginTop = '80px';
+                                        noCommentsP.style.color = 'gray';
+                                        commentsContainer.appendChild(noCommentsP);
+                                    } else {
+                                        comments.forEach(comment => {
+                                            const commentP = document.createElement('p');
+                                            commentP.className = 'commentP';
+
+                                            const usernameLink = document.createElement('a');
+                                            usernameLink.href = `/users/${comment.user_id}`; // adjust this to the correct URL
+                                            usernameLink.innerText = comment.username;
+                                            usernameLink.className = 'usernameLink';
+                                            commentP.appendChild(usernameLink);
+
+                                            const commentText = document.createTextNode(`: ${comment.content}`);
+                                            commentP.appendChild(commentText);
+
+                                            commentsContainer.appendChild(commentP);
+                                        });
+                                    }
+                                    commentsDiv.appendChild(commentsContainer);
+                                    songInfoContainer.appendChild(commentsDiv);
+
+                                    commentForm.appendChild(commentInput);
+                                    commentForm.appendChild(submitButtonComments);
+
+                                    commentForm.addEventListener('submit', function (event) {
+                                        event.preventDefault(); // Prevent the form from being submitted normally
+
+                                        const commentText = commentInput.value; // Get the text from the input field
+                                        const songid = song.song_id;
+
+                                        fetch(`/mainpage/comments/add/${songid})`, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({ comment: commentText, songid: songid }) // Send the comment text in the request body
+                                        })
+                                            .then(response => {
+                                                if (response.ok){
+                                                    commentInput.value = ''; // Clear the input field
+                                                    const successP = document.createElement('p');
+                                                    successP.innerText = 'Comment added successfully';
+                                                    successP.style.color = 'green';
+                                                    successP.style.fontSize = '10px';
+                                                    successP.style.textAlign = 'center';
+                                                    commentsDiv.appendChild(successP);
+                                                }
+                                                return response.json();
+                                            })
+                                            .catch(error => {
+                                                console.error('Error:', error);
+                                            });
+                                    });
+
+                                    commentFormDiv.appendChild(commentForm);
+                                    commentsDiv.appendChild(commentFormDiv);
+
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
                                 });
                         })
 
