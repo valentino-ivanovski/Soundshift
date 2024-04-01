@@ -141,6 +141,42 @@ router.get('/comments/:songid', (req, res) => {
 });
 
 
+router.post('/comments/add/:songid', (req, res) => {
+    // Get the songId, comment, and userId from the request body
+    const songId = req.body.songid;
+    const comment = req.body.comment;
+    const userId = req.session.user.id;
+
+    // Insert the comment into the database
+    dbConn.addComment(songId, userId, comment, (err) => {
+        if (err) {
+            console.error('Error adding comment:', err);
+            return res.status(500).send('Error adding comment');
+        }
+        res.status(200).send('Comment added');
+    });
+});
+
+router.post('/report', (req, res) => {  
+    const reason = req.body.reason;
+    const commentId = req.body.commentId;
+    const userId = req.session.user.id;
+
+    console.log(req.body);
+
+    if (typeof reason !== 'string') {
+        return res.status(400).json({ error: 'Invalid reason' });
+    }
+
+    dbConn.reportComment(userId, reason, commentId, (err) => {
+        if (err) {
+            console.error('Error reporting comment:', err);
+            return res.status(500).send('Error reporting comment');
+        }
+        res.status(200).send('Comment reported');
+    });
+});
+
 router.post
 
 module.exports = router; //exporting the module for users

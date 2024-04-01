@@ -478,6 +478,8 @@ body {
 }
 
 .commentP{
+    display: flex;
+    align-items:center;
     font-size: 15px;
     font-family: "Inter", Helvetica;
     font-weight: 350;
@@ -485,7 +487,9 @@ body {
     border-radius: 10px;
     background-color: #ebebeb;
     padding: 10px;
-    width: 85%;   
+    width: 75%;   
+    position: relative;
+    padding-right: 40px;
 }
 
 .commentsHeader{
@@ -548,4 +552,31 @@ body {
 .commentFormDiv button:hover {
     background-color: #624be8;
     border-color: #624be8;
+}
+
+.commentDate{
+    font-size: 10px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    color: #46444475;
+    position: absolute;
+    right: 80px;
+    margin-top: 5px;
+}
+
+.report-comment{
+    color: #464444;
+    font-size: 13px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 100px;
+    position: absolute;
+    right: 10px;
+}
+
+.report-comment:hover{
+    color: #464444;
+    text-decoration: underline;
 }
