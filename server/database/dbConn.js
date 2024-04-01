@@ -266,9 +266,9 @@ function addComment(songId, userId, comment, callback) {
     });
 }
 
-function reportComment (commentId, songid, userId, reason, callback) {
-    const sql = `INSERT INTO reports (comment_id, user_id, reason) VALUES (?, ?, ?)`;
-    conn.query(sql, [commentId, userId, reason], (err, results) => {
+function reportComment (userId, reason, commentId, callback) {
+    const sql = `INSERT INTO reports (user_id, reason, comment_id) VALUES (?, ?, ?)`;
+    conn.query(sql, [userId, reason, commentId], (err, results) => {
         if (err) {
             console.error("Error executing SQL query:", err);
             callback(err);
