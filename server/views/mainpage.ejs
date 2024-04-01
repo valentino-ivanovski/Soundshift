@@ -428,6 +428,11 @@
                                             const commentText = document.createTextNode(`: ${comment.content}`);
                                             commentP.appendChild(commentText);
 
+                                            const reportSpan = document.createElement('span');
+                                            reportSpan.textContent = 'Report';
+                                            reportSpan.className = 'report-comment';
+                                            commentP.appendChild(reportSpan);
+
                                             commentsContainer.appendChild(commentP);
                                         });
                                     }
