@@ -252,14 +252,6 @@
                                             videoId: videoId,
                                         });
 
-                                    } else {
-                                        console.error('No YouTube video found for the song');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error fetching YouTube video:', error);
-                                });
-
                             const likeCommentDiv = document.createElement('div');
                             likeCommentDiv.style.marginBottom = '-15px';
                             likeCommentDiv.style.display = 'flex';
@@ -432,7 +424,7 @@
                                             reportSpan.textContent = 'Report';
                                             reportSpan.className = 'report-comment';
 
-                                            reportSpan.addEventListener('click', function() {
+                                            reportSpan.addEventListener('click', function () {
                                                 const reason = prompt('Please enter a reason for reporting this comment:');
                                                 if (reason) {
                                                     console.log('Type of reason:', typeof reason); // Log the type of reason
@@ -447,14 +439,14 @@
                                                             'Content-Type': 'application/json'
                                                         },
                                                         body: JSON.stringify({ reason: reason, commentId: commentId })
-                                                    })  
-                                                    .then(response => response.json())
-                                                    .then(data => {
-                                                        // Handle the response from the server...
                                                     })
-                                                    .catch(error => {
-                                                        console.error('Error:', error);
-                                                    });
+                                                        .then(response => response.json())
+                                                        .then(data => {
+                                                            // Handle the response from the server...
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error:', error);
+                                                        });
                                                 }
                                             });
 
@@ -484,7 +476,7 @@
                                             body: JSON.stringify({ comment: commentText, songid: songid }) // Send the comment text in the request body
                                         })
                                             .then(response => {
-                                                if (response.ok){
+                                                if (response.ok) {
                                                     commentInput.value = ''; // Clear the input field
                                                     const successP = document.createElement('p');
                                                     successP.innerText = 'Comment added successfully';
@@ -504,6 +496,15 @@
                                     commentsDiv.appendChild(commentFormDiv);
 
                                 })
+                                
+                            } else {
+                                            console.error('No YouTube video found for the song');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching YouTube video:', error);
+                                    })
+
                                 .catch(error => {
                                     console.error('Error:', error);
                                 });
