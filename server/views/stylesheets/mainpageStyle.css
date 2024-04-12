@@ -364,6 +364,7 @@ body {
 
 .submitButton:hover {
     background-color: #624be8;
+    cursor: pointer;
 }
 
 .spotifyButton, .youtubeButton, .soundcloudButton{
