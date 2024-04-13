@@ -114,7 +114,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 70vh;
-    width: 80%;
+    width: 100%;
     margin-bottom: 60px;
     margin-left: 10px;
     margin-right:50px;
@@ -128,7 +128,12 @@ body {
     overflow: auto;
     padding: 20px;
     max-height: 75%;
+    width: 100%;
 }
+
+.square-innermore::-webkit-scrollbar {
+    display: none;
+  }
 
 .circle-container{
     display: flex;
@@ -580,4 +585,25 @@ body {
 .report-comment:hover{
     color: #464444;
     text-decoration: underline;
+}
+
+.likeButton{
+    padding: 8px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    color: #464444;
+    text-decoration: none;
+    border: 0px solid #ffffff;
+    border-radius: 50px;
+    font-size: 12px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.likeButton:disabled{
+    background-color: #a1a1a1;
+    color: #6c6c6c;
 }

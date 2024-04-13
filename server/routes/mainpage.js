@@ -82,8 +82,10 @@ router.post('/updateUserLocation', (req, res) => {
         if (err) {
             console.error('Error updating location:', err);
             res.status(500).send('Error updating location');
+            console.log("Error updating location");
         } else {
             res.status(200).send('Location updated');
+            console.log("Location updated: " + location);
         }
     });
 

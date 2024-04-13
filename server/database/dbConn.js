@@ -113,7 +113,7 @@ function getRandomSong(songGenre, explicit, callback) {
     let sql = ``;
     if (explicit === false) {
         sql = `
-        SELECT songsNew.*, usersNew.username 
+        SELECT songsNew.*, usersNew.username, usersNew.location 
         FROM songsNew 
         LEFT JOIN usersNew ON songsNew.user_id = usersNew.id 
         WHERE songsNew.genre = ? AND songsNew.explicit = 0
@@ -122,7 +122,7 @@ function getRandomSong(songGenre, explicit, callback) {
     `;
     } else {
         sql = `
-        SELECT songsNew.*, usersNew.username 
+        SELECT songsNew.*, usersNew.username, usersNew.location 
         FROM songsNew 
         LEFT JOIN usersNew ON songsNew.user_id = usersNew.id 
         WHERE songsNew.genre = ? 

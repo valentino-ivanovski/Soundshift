@@ -247,8 +247,8 @@
                                         songInfoContainer.appendChild(playerContainer);
 
                                         const player = new YT.Player('player', {
-                                            height: '40%',
-                                            width: '67%',
+                                            height: '100%',
+                                            width: '50%',
                                             videoId: videoId,
                                         });
 
@@ -260,8 +260,7 @@
 
                                         const likeButton = document.createElement('button');
                                         const likeCount = document.createElement('p');
-                                        likeButton.innerText = 'Like';
-                                        likeButton.className = 'likeButton';
+                                        likeButton.className = 'likeButton';    
 
                                         fetch('/mainpage/checkIfUserLiked', {
                                             method: 'POST',
@@ -287,7 +286,6 @@
                                         likeCount.innerText = likes;
                                         likeCount.style.marginLeft = '10px';
                                         likeCount.style.marginRight = '20px';
-                                        likeCommentDiv.appendChild(likeCount);
 
                                         likeButton.addEventListener('click', function () {
                                             fetch('/mainpage/updateLikeCount', {
@@ -308,7 +306,7 @@
                                                     }
                                                 })
                                         })
-
+                                        likeButton.innerText = '❤️ ' + parseInt(likeCount.innerText);
                                         songInfoContainer.appendChild(likeCommentDiv);
 
 
@@ -413,16 +411,18 @@
 
                                                         const usernameLink = document.createElement('a');
                                                         usernameLink.href = `/users/${comment.user_id}`; // adjust this to the correct URL
-                                                        usernameLink.innerText = comment.username + ": ";
+                                                        usernameLink.innerText = comment.username;
                                                         usernameLink.className = 'usernameLink';
                                                         commentP.appendChild(usernameLink);
+
+                                                        const colonText = document.createTextNode(': ');
+                                                        commentP.appendChild(colonText);
 
                                                         const commentText = document.createTextNode(`${comment.content}`);
                                                         commentP.appendChild(commentText);
 
-
+                                                        
                                                         // NAMESTI DA E DELETE AKO E USEROT KOJ GO NAPRAIL AKO NE TOGAS REPORT
-
 
 
                                                         const reportSpan = document.createElement('span');
