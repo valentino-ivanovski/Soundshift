@@ -137,7 +137,6 @@ router.get('/comments/:songid', (req, res) => {
             return res.status(500).send('Error fetching comments');
         }
         // Send the comments as a JSON response
-        console.log("comments are:" + comments);
         res.json(comments);
     });
 });
