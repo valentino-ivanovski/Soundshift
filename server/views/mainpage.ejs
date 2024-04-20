@@ -420,7 +420,7 @@
 
                                                         const commentText = document.createTextNode(`${comment.content}`);
                                                         commentP.appendChild(commentText);
-
+                                                        commentsContainer.appendChild(commentP);
                                                         
                                                         // NAMESTI DA E DELETE AKO E USEROT KOJ GO NAPRAIL AKO NE TOGAS REPORT
 
@@ -429,36 +429,70 @@
                                                         reportSpan.textContent = 'Report';
                                                         reportSpan.className = 'report-comment';
 
-                                                        reportSpan.addEventListener('click', function () {
-                                                            const reason = prompt('Please enter a reason for reporting this comment:');
-                                                            if (reason) {
-                                                                console.log('Type of reason:', typeof reason); // Log the type of reason
+                                                        const deleteSpan = document.createElement('span');
+                                                        deleteSpan.textContent = 'Delete';
+                                                        deleteSpan.className = 'delete-comment';
 
-                                                                // Access commentId directly from the comment object
-                                                                const commentId = comment.comment_id;
-                                                                console.log('Comment ID:', commentId);
-
-                                                                fetch(`/mainpage/report`, {
-                                                                    method: 'POST',
-                                                                    headers: {
-                                                                        'Content-Type': 'application/json'
-                                                                    },
-                                                                    body: JSON.stringify({ reason: reason, commentId: commentId })
-                                                                })
-                                                                    .then(response => response.json())
-                                                                    .then(data => {
-                                                                        // Handle the response from the server...
-                                                                    })
-                                                                    .catch(error => {
-                                                                        console.error('Error:', error);
-                                                                    });
+                                                        fetch('/mainpage/currentUser', {
+                                                            method: 'GET',
+                                                            headers: {
+                                                                'Content-Type': 'application/json'
                                                             }
+                                                        })
+                                                        .then(response => response.json())
+                                                        .then(data => {
+                                                            const currentUserId = data.currentUserId;
+                                                            const commentid = comment.comment_id;
+
+                                                            if(currentUserId === comment.user_id){
+                                                                deleteSpan.addEventListener('click', function () {
+                                                                    const confirmDelete = confirm('Are you sure you want to delete this comment?');
+                                                                    if (confirmDelete) {
+                                                                        fetch(`/mainpage/comments/delete/${commentid}`, {
+                                                                            method: 'DELETE'
+                                                                        })
+                                                                        .then(response => {
+                                                                            if (response.ok) {
+                                                                                commentP.remove();
+                                                                            }
+                                                                        })
+                                                                        .catch(error => {
+                                                                            console.error('Error:', error);
+                                                                        });
+                                                                    }
+                                                                });
+
+                                                                commentP.appendChild(deleteSpan);
+                                                            } else {
+                                                                reportSpan.addEventListener('click', function () {
+                                                                    const reason = prompt('Please enter a reason for reporting this comment:');
+                                                                    if (reason) {
+                                                                        console.log('Type of reason:', typeof reason); // Log the type of reason
+
+                                                                        // Access commentId directly from the comment object
+                                                                        const commentId = comment.comment_id;
+                                                                        console.log('Comment ID:', commentId);
+
+                                                                        fetch(`/mainpage/report`, {
+                                                                            method: 'POST',
+                                                                            headers: {
+                                                                                'Content-Type': 'application/json'
+                                                                            },
+                                                                            body: JSON.stringify({ reason: reason, commentId: commentId })
+                                                                        })
+                                                                        .then(response => response.json())
+                                                                        .then(data => {
+                                                                            // Handle the response from the server...
+                                                                        })
+                                                                    }
+                                                                });
+
+                                                                commentP.appendChild(reportSpan);
+                                                            }
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error:', error);
                                                         });
-
-
-                                                        commentP.appendChild(reportSpan);
-
-                                                        commentsContainer.appendChild(commentP);
                                                     });
                                                 }
                                                 commentsDiv.appendChild(commentsContainer);

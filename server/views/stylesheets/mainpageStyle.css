@@ -587,6 +587,23 @@ body {
     text-decoration: underline;
 }
 
+.delete-comment{
+    color: #e84949;
+    font-size: 13px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 100px;
+    position: absolute;
+    right: 10px;
+}
+
+.delete-comment:hover{
+    color: #464444;
+    text-decoration: underline;
+}
+
 .likeButton{
     padding: 8px 10px;
     margin-top: 10px;

@@ -279,6 +279,19 @@ function reportComment (userId, reason, commentId, callback) {
     });
 };
 
+function deleteComment(commentId, callback) {
+    const sql = `DELETE FROM comments WHERE comment_id = ?`;
+    conn.query(sql, [commentId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully deleted comment:", results.affectedRows);
+            callback(null);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -293,5 +306,6 @@ module.exports = {
     checkIfUserLiked,
     getCommentsBySongId,
     addComment,
-    reportComment
+    reportComment,
+    deleteComment
 };

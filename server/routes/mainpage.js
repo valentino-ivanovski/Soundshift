@@ -179,6 +179,21 @@ router.post('/report', (req, res) => {
     });
 });
 
-router.post
+router.get('/currentUser', (req, res) => {
+    res.json({ currentUserId: req.session.user.id });
+});
+
+router.delete('/comments/delete/:commentid', (req, res) => {
+    const commentId = req.params.commentid;
+
+    dbConn.deleteComment(commentId, (
+        err) => {
+        if (err) {
+            console.error('Error deleting comment:', err);
+            return res.status(500).send('Error deleting comment');
+        }
+        res.status(200).send('Comment deleted');
+    });
+});
 
 module.exports = router; //exporting the module for users
