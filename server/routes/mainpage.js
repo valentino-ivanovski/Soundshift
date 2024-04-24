@@ -195,4 +195,10 @@ router.delete('/comments/delete/:commentid', (req, res) => {
     });
 });
 
+router.get('/:id', (req, res) => {
+    const userId = req.session.user.id
+    console.log("Profile route reached for user ${userId}");
+    
+});
+
 module.exports = router; //exporting the module for users

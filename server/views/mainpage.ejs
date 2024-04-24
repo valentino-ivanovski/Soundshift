@@ -93,7 +93,7 @@
                                         <option value="Rock">Rock</option>
                                         <option value="Hip Hop/Rap">Hip Hop/Rap</option>
                                         <option value="Electronic">Electronic</option>
-                                        <option value="R&B/Soul">R&B/Soul</option>
+                                        <option value="R&B/Soul">R&BSoul</option>
                                         <option value="Country">Country</option>
                                         <option value="Jazz">Jazz</option>
                                         <option value="Reggae">Reggae</option>
@@ -180,6 +180,8 @@
 
 
                 circle.addEventListener('click', function () {
+
+                    document.getElementById('error-message').innerText = '';
 
                     const genre = genreSelect.value;
                     const explicit = explicitCheckbox.checked;
@@ -550,7 +552,7 @@
 
                         .catch(error => {
                             console.error('Error:', error);
-                            document.getElementById('error-message').innerText = 'Error fetching songs';
+                            document.getElementById('error-message').innerText = 'No songs found for the selected genre.';
                         });
                 });
             });
