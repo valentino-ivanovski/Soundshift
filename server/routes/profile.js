@@ -2,9 +2,18 @@ const express = require("express");
 const router = express.Router();
 const dbConn = require('../database/dbConn'); //importing the database connection module
 
-router.get('/', (req, res) => {
-    console.log("profile route reached");
-    res.render("profile");
-})
+router.get('/me', (req, res) => {
+    const userId = req.session.user.id;
+    console.log(`Profile route reached for user ${userId}`);
+
+    dbConn.getUserData(userId, (err, results) => {
+        if (err) {
+            console.error('Error fetching user data:', err);
+            return res.status(500).send('Error fetching user data');
+        }
+        
+        res.render('profile', { user: results });
+    });
+});
 
 module.exports = router; //exporting the module for users

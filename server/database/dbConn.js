@@ -292,6 +292,19 @@ function deleteComment(commentId, callback) {
     });
 }
 
+function getUserData(userId, callback) {
+    const sql = `SELECT * FROM usersNew WHERE id = ?`;
+    conn.query(sql, [userId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched user data:", results);
+            callback(null, results);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -307,5 +320,6 @@ module.exports = {
     getCommentsBySongId,
     addComment,
     reportComment,
-    deleteComment
+    deleteComment,
+    getUserData
 };
