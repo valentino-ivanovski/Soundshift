@@ -56,4 +56,7 @@ app.use("/register", registerRouter);
 const mainpageRouter = require('./routes/mainpage');
 app.use("/mainpage", requireLogin, mainpageRouter);
 
+const profileRouter = require('./routes/profile');
+app.use("/profile", requireLogin, profileRouter);
+
 app.listen(3000);
