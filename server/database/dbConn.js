@@ -305,6 +305,19 @@ function getUserData(userId, callback) {
     });
 }
 
+function updateBio(userId, newBio, callback) {
+    const sql = `UPDATE usersNew SET bio = ? WHERE id = ?`;
+    conn.query(sql, [newBio, userId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully updated bio:", results.affectedRows);
+            callback(null);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -321,5 +334,6 @@ module.exports = {
     addComment,
     reportComment,
     deleteComment,
-    getUserData
+    getUserData,
+    updateBio
 };

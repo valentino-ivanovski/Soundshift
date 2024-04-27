@@ -13,7 +13,19 @@ router.get('/me', (req, res) => {
         }
         
         res.render('profile', { userr: results[0] });
-        console.log("welcome, " + results[0].username);
+    });
+});
+
+router.post('/me/updatebio', function(req, res) {
+    const userId = req.body.id;
+    const newBio = req.body.bio;
+    dbConn.updateBio(userId, newBio, function(err, user) {
+        if (err) {
+            console.log(err);
+            res.redirect('/profile/me');
+        } else {
+            res.redirect('/profile/me');
+        }
     });
 });
 

@@ -28,7 +28,16 @@
             <div class="content">
 
                 <div class="centerdiv"> 
-                    <h1>Welcome, <%= userr.username %> </h1>
+                    <h1 class="welcome">Welcome, <%= userr.username %> </h1>
+                    <h2 class="location"><%= userr.location %></h2>
+                    <div class="bioDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 60px; margin-top: -20px;">
+                        <p class="bioText"><%= userr.bio %></p>
+                        <form id="editBioForm" action="/profile/me/updatebio" method="POST">
+                            <input type="hidden" name="id" value="<%= userr.id %>">
+                            <input type="hidden" id="newBio" name="bio">
+                            <button type="submit" class="bioButton">Edit Bio</button>
+                        </form>
+                    </div>
                 </div>
 
             </div>
@@ -42,5 +51,16 @@
             </div>
 
         </div>
+        <script>
+            document.querySelector('.bioButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                var newBio = prompt("Please enter your new bio:");
+                if (newBio !== null) {
+                    document.querySelector('#newBio').value = newBio;
+                    document.querySelector('.bioText').textContent = newBio;
+                    document.querySelector('#editBioForm').submit();
+                }
+            });
+            </script>
     </center>
 </body>

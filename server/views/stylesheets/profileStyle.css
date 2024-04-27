@@ -95,11 +95,59 @@ body {
 
 .centerdiv{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     width: 70%;
     height: 70%;
     margin-bottom: 7%;
     background-color: blue;
+}
+
+.welcome {
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 50px;
+    font-weight: 800;
+    color: white;
+    font-variation-settings: "slnt" -10;
+    text-decoration: none;
+    margin-bottom: -22px;
+}
+
+.welcome:hover{
+    cursor: default;
+}
+
+.location{
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.bioText{
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 15px;
+    font-weight: 200;
+    color: white;
+    text-decoration: none;
+}
+
+.bioButton{
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 15px;
+    font-weight: 200;
+    color: rgba(255, 255, 255, 0.514);
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.bioButton:hover{
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .soundshiftText {
