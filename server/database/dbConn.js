@@ -236,7 +236,7 @@ function checkIfUserLiked(songId, userId, callback) {
 }
 
 function getCommentsBySongId(songId, callback) {
-    const sql =`SELECT comments.*, usersNew.username 
+    const sql = `SELECT comments.*, usersNew.username 
                 FROM comments 
                 INNER JOIN usersNew 
                 ON comments.user_id = usersNew.id 
@@ -266,7 +266,7 @@ function addComment(songId, userId, comment, callback) {
     });
 }
 
-function reportComment (userId, reason, commentId, callback) {
+function reportComment(userId, reason, commentId, callback) {
     const sql = `INSERT INTO reports (user_id, reason, comment_id) VALUES (?, ?, ?)`;
     conn.query(sql, [userId, reason, commentId], (err, results) => {
         if (err) {
@@ -277,7 +277,7 @@ function reportComment (userId, reason, commentId, callback) {
             callback(null);
         }
     });
-};
+}
 
 function deleteComment(commentId, callback) {
     const sql = `DELETE FROM comments WHERE comment_id = ?`;
@@ -325,7 +325,10 @@ function updateSpotify(userId, newSpotify, callback) {
             console.error("Error executing SQL query:", err);
             callback(err);
         } else {
-            console.log("Successfully updated Spotify link:", results.affectedRows);
+            console.log(
+                "Successfully updated Spotify link:",
+                results.affectedRows
+            );
             callback(null);
         }
     });
@@ -351,7 +354,10 @@ function updateSoundcloud(userId, newSoundcloud, callback) {
             console.error("Error executing SQL query:", err);
             callback(err);
         } else {
-            console.log("Successfully updated Soundcloud link:", results.affectedRows);
+            console.log(
+                "Successfully updated Soundcloud link:",
+                results.affectedRows
+            );
             callback(null);
         }
     });
@@ -385,7 +391,10 @@ function getSubmittedSongs(userId, callback) {
             console.error("Error executing SQL query:", err);
             callback(err);
         } else {
-            console.log("Successfully fetched submitted songs:", results.length);
+            console.log(
+                "Successfully fetched submitted songs:",
+                results.length
+            );
             callback(null, results);
         }
     });
@@ -399,11 +408,13 @@ function storeRetrievedSong(songId, userId, retrievalDate, callback) {
             console.error("Error executing SQL query:", err);
             callback(err);
         } else {
-            console.log("Successfully stored retrieved song:", results.affectedRows);
+            console.log(
+                "Successfully stored retrieved song:",
+                results.affectedRows
+            );
             callback(null);
         }
     });
-
 }
 
 module.exports = {
@@ -429,5 +440,5 @@ module.exports = {
     updateSoundcloud,
     getLikedSongs,
     getSubmittedSongs,
-    storeRetrievedSong
+    storeRetrievedSong,
 };

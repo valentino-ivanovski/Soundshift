@@ -227,7 +227,7 @@
 
                             //adding the retreived song to the retrievedSongs table
                             const retrievedSongData = {
-                                song_id: songid,
+                                song_id: song.song_id,
                                 retrieval_date: new Date().toISOString().slice(0, 10) // Current date in YYYY-MM-DD format
                             };
 
