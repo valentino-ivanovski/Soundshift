@@ -104,3 +104,16 @@ body {
 .soundshiftText:hover {
     color: rgba(245, 245, 245, 0.5);
 }
+
+.footer {
+    color: rgba(245, 245, 245, 0.5);
+    text-align: center;
+    padding-bottom: 1%;
+    font-size: 12px;
+    position: fixed;
+    /* Changed from position: static */
+    bottom: 0;
+    /* Stick to the bottom */
+    width: 100%;
+    /* Full width */
+}

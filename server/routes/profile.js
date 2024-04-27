@@ -12,7 +12,8 @@ router.get('/me', (req, res) => {
             return res.status(500).send('Error fetching user data');
         }
         
-        res.render('profile', { user: results });
+        res.render('profile', { userr: results[0] });
+        console.log("welcome, " + results[0].username);
     });
 });
 
