@@ -225,6 +225,25 @@
                             const likes = song.like_count;
                             const songid = song.song_id;
 
+                            //adding the retreived song to the retrievedSongs table
+                            const retrievedSongData = {
+                                song_id: songid,
+                                retrieval_date: new Date().toISOString().slice(0, 10) // Current date in YYYY-MM-DD format
+                            };
+
+                            fetch('/mainpage/storeRetrievedSong', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(retrievedSongData)
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    console.error('Error:', response.statusText);
+                                }
+                            });
+
                             /*ova mojs da go naprajs ko so gi napraj buttons i yt viewer*/
                             const songDetailsHTML = `
                                 <div style="margin-top: -40px">

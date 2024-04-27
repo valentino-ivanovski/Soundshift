@@ -391,6 +391,21 @@ function getSubmittedSongs(userId, callback) {
     });
 }
 
+function storeRetrievedSong(songId, userId, retrievalDate, callback) {
+    const query = `INSERT INTO retrievedSongs (song_id, user_id, retrieval_date) VALUES (?, ?, ?)`;
+
+    conn.query(query, [songId, userId, retrievalDate], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully stored retrieved song:", results.affectedRows);
+            callback(null);
+        }
+    });
+
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -413,5 +428,6 @@ module.exports = {
     updateAM,
     updateSoundcloud,
     getLikedSongs,
-    getSubmittedSongs
+    getSubmittedSongs,
+    storeRetrievedSong
 };

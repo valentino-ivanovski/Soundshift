@@ -195,4 +195,18 @@ router.delete('/comments/delete/:commentid', (req, res) => {
     });
 });
 
+router.post('/storeRetrievedSong', (req, res) => {
+    const songId = req.body.song_id;
+    const retrievalDate = req.body.retrieval_date;
+    const userId = req.session.user.id;
+
+    dbConn.storeRetrievedSong(songId, userId, retrievalDate, (err) => {
+        if (err) {
+            console.error('Error storing retrieved song:', err);
+            return res.status(500).send('Error storing retrieved song');
+        }
+        res.status(200).send('Retrieved song stored');
+    });
+});
+
 module.exports = router; //exporting the module for users
