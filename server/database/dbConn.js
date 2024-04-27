@@ -417,6 +417,28 @@ function storeRetrievedSong(songId, userId, retrievalDate, callback) {
     });
 }
 
+function getRetrievedSongs(userId, callback){
+    const query = `
+    SELECT retrievedSongs.*, songsNew.title, songsNew.artist, songsNew.spotify_link 
+    FROM retrievedSongs 
+    LEFT JOIN songsNew ON retrievedSongs.song_id = songsNew.song_id 
+    WHERE retrievedSongs.user_id = ? 
+    ORDER BY retrieval_date DESC`;
+
+    conn.query(query, [userId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log(
+                "Successfully fetched retrieved songs:",
+                results.length
+            );
+            callback(null, results);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -441,4 +463,5 @@ module.exports = {
     getLikedSongs,
     getSubmittedSongs,
     storeRetrievedSong,
+    getRetrievedSongs
 };

@@ -68,46 +68,54 @@
 
                     <div class="subretrDiv">
                     
-                    <div class="likedSongsDiv">
-                        <h2 class="location"> Liked Songs: </h2>
-                        <div class="likedSongs">
-                            <% likedSongs.forEach(function(song) { %>
-                                <% if(song.title && song.artist) { %>
-                                    <div class="song">
-                                        <a class="individualLikedSong" href="<%=song.spotify_link%>">● <strong><%= song.title %></strong> by <%= song.artist %></a>
-                                    </div>
+                        <div class="likedSongsDiv">
+                            <h2 class="location"> Liked Songs: </h2>
+                            <div class="likedSongs">
+                                <% if(likedSongs.length === 0) { %>
+                                    <div style="margin-left: 55px;">Empty</div>
+                                <% } else { %>
+                                    <% likedSongs.forEach(function(song) { %>
+                                        <% if(song.title && song.artist) { %>
+                                            <div>
+                                                <a class="individualLikedSong" href="<%=song.spotify_link%>">● <strong><%= song.title %></strong> by <%= song.artist %></a>
+                                            </div>
+                                        <% } %>
+                                    <% }); %>
                                 <% } %>
-                            <% }); %>
+                            </div>
                         </div>
-                    </div>
-
-                   
-
-                    <div class="submittedSongsDiv">
-                        <h2 class="location"> Submitted Songs: </h2>
-                        <div class="submittedSongs">
-                            <% submittedSongs.forEach(function(song) { %>
-                                <% if(song.title && song.artist) { %>
-                                    <div class="song">
-                                        <a class="individualLikedSong" href="<%=song.spotify_link%>">● <strong><%= song.title %></strong> by <%= song.artist %></a>
-                                    </div>
+                        
+                        <div class="submittedSongsDiv">
+                            <h2 class="location"> Submitted Songs: </h2>
+                            <div class="submittedSongs">
+                                <% if(submittedSongs.length === 0) { %>
+                                    <div style="margin-left: 85px;">Empty</div>
+                                <% } else { %>
+                                    <% submittedSongs.forEach(function(song) { %>
+                                        <% if(song.title && song.artist) { %>
+                                            <div>
+                                                <a class="individualLikedSong" href="<%=song.spotify_link%>">● <strong><%= song.title %></strong> by <%= song.artist %></a>
+                                            </div>
+                                        <% } %>
+                                    <% }); %>
                                 <% } %>
-                            <% }); %>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="retrievedSongsDiv">
-                        <h2 class="location"> Retrieved Songs: </h2>
-                        <div class="retrievedSongs">
-                            <% submittedSongs.forEach(function(song) { %>
-                                <% if(song.title && song.artist) { %>
-                                    <div class="song">
-                                        <a class="individualLikedSong" href="<%=song.spotify_link%>">● <strong><%= song.title %></strong> by <%= song.artist %></a>
-                                    </div>
+                        
+                        <div class="retrievedSongsDiv">
+                            <h2 class="location"> Retrieved Songs: </h2>
+                            <div class="retrievedSongs">
+                                <% if(retrievedSongs.length === 0) { %>
+                                    <div style="margin-left: 80px;">Empty</div>
+                                <% } else { %>
+                                    <% retrievedSongs.forEach(function(song) { %>
+                                        <div>
+                                            <a class="individualLikedSong" href="<%=song.spotify_link%>">● <strong><%= song.title %></strong> by <%= song.artist %></a>
+                                        </div>
+                                    <% }); %>
                                 <% } %>
-                            <% }); %>
+                            </div>
                         </div>
-                    </div>
 
                     </div>
 

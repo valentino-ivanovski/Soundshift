@@ -24,7 +24,15 @@ router.get('/me', (req, res) => {
                     return res.status(500).send('Error fetching submitted songs');
                 }
 
-                res.render('profile', { userr: results[0], likedSongs: songs,  submittedSongs: submittedSongs });
+                dbConn.getRetrievedSongs(userId, (err, retrievedSongs) => {
+                    if (err) {
+                        console.error('Error fetching retrieved songs:', err);
+                        return res.status(500).send('Error fetching retrieved songs');
+                    }
+
+                    res.render('profile', { userr: results[0], likedSongs: songs,  submittedSongs: submittedSongs, retrievedSongs: retrievedSongs});
+                    
+                });
 
             });
         });

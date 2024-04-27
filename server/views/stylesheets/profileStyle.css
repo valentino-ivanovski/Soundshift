@@ -186,7 +186,7 @@ body {
 }
 
 .profile-picture {
-    width: 100px;
+    width: 100px;  
     height: 100px;
     border-radius: 50%;
     background-color: #cccccc5e;
@@ -205,9 +205,10 @@ body {
     gap: 10px;
     text-align: left;
     width: 100%;
+    min-width: 400px;
+    max-width: 400px;
     color: white;
     height: auto;
-    margin-left: 45px;
     max-height: 230px;
     overflow: auto;
     margin-top: -20px;
@@ -220,6 +221,7 @@ body {
 .individualLikedSong {
     text-decoration: none;
     color: white;
+    margin-left: 70px;
 }
 
 .individualLikedSong:hover {
@@ -236,10 +238,11 @@ body {
     gap: 10px;
     text-align: left;
     width: 100%;
+    min-width: 400px;
+    max-width: 400px;
     color: white;
     height: auto;
     max-height: 230px;
-    margin-left: 100px;
     overflow: auto;
     margin-top: -20px;
 }
@@ -258,9 +261,10 @@ body {
     gap: 10px;
     text-align: left;
     width: 100%;
+    min-width: 400px;
+    max-width: 400px;
     color: white;
     height: auto;
-    margin-left: 100px;
     max-height: 230px;
     overflow: auto;
     margin-top: -20px;
