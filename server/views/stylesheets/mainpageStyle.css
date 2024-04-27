@@ -129,6 +129,7 @@ body {
     padding: 20px;
     max-height: 75%;
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .square-innermore::-webkit-scrollbar {
@@ -210,6 +211,7 @@ body {
 .genreExDiv {
     position: static;
     margin-top: 360px;
+    margin-left: 10px;
     width: 100%;
     transition: width 0.5s ease, margin-top 0.5s ease;
 }
