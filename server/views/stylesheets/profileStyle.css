@@ -203,12 +203,12 @@ body {
     flex-direction: column;
     gap: 10px;
     text-align: left;
-    width: 40%;
+    width: 100%;
     color: white;
     height: auto;
+    margin-left: 45px;
     max-height: 230px;
     overflow: auto;
-    margin-left: 100px;
     margin-top: -20px;
 }
 
@@ -233,17 +233,46 @@ body {
     flex-direction: column;
     gap: 10px;
     text-align: left;
-    width: 40%;
+    width: 100%;
     color: white;
     height: auto;
     max-height: 230px;
-    overflow: auto;
     margin-left: 100px;
+    overflow: auto;
     margin-top: -20px;
 }
 
 .submittedSongs::-webkit-scrollbar {
     display: none;
+}
+
+.retrievedSongsDiv{
+    margin-top: 20px;
+}
+
+.retrievedSongs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    width: 100%;
+    color: white;
+    height: auto;
+    margin-left: 100px;
+    max-height: 230px;
+    overflow: auto;
+    margin-top: -20px;  
+}
+
+.retrievedSongs::-webkit-scrollbar {
+    display: none;
+}
+
+.subretrDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .soundshiftText {

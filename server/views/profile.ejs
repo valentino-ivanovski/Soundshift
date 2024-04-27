@@ -65,6 +65,8 @@
                             <button type="submit" class="soundcloudButton">SoundCloud</button>
                         </form>
                     </div>
+
+                    <div class="subretrDiv">
                     
                     <div class="likedSongsDiv">
                         <h2 class="location"> Liked Songs: </h2>
@@ -79,6 +81,8 @@
                         </div>
                     </div>
 
+                   
+
                     <div class="submittedSongsDiv">
                         <h2 class="location"> Submitted Songs: </h2>
                         <div class="submittedSongs">
@@ -90,6 +94,21 @@
                                 <% } %>
                             <% }); %>
                         </div>
+                    </div>
+
+                    <div class="retrievedSongsDiv">
+                        <h2 class="location"> Retrieved Songs: </h2>
+                        <div class="retrievedSongs">
+                            <% submittedSongs.forEach(function(song) { %>
+                                <% if(song.title && song.artist) { %>
+                                    <div class="song">
+                                        <a class="individualLikedSong" href="<%=song.spotify_link%>">● <strong><%= song.title %></strong> by <%= song.artist %></a>
+                                    </div>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                    </div>
+
                     </div>
 
                 </div>
