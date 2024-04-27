@@ -72,7 +72,7 @@
                             <% likedSongs.forEach(function(song) { %>
                                 <% if(song.title && song.artist) { %>
                                     <div class="song">
-                                        <p>● <strong><%= song.title %></strong> by <%= song.artist %></p>
+                                        <a class="individualLikedSong" href="<%=song.spotify_link%>">● <strong><%= song.title %></strong> by <%= song.artist %></a>
                                     </div>
                                 <% } %>
                             <% }); %>
@@ -85,7 +85,7 @@
                             <% submittedSongs.forEach(function(song) { %>
                                 <% if(song.title && song.artist) { %>
                                     <div class="song">
-                                        <p>● <strong><%= song.title %></strong> by <%= song.artist %></p>
+                                        <a class="individualLikedSong" href="<%=song.spotify_link%>">● <strong><%= song.title %></strong> by <%= song.artist %></a>
                                     </div>
                                 <% } %>
                             <% }); %>

@@ -113,6 +113,7 @@ body {
     font-variation-settings: "slnt" -10;
     text-decoration: none;
     margin-bottom: -22px;
+    margin-top: 15px;
 }
 
 .welcome:hover{
@@ -120,6 +121,15 @@ body {
 }
 
 .location{
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.location2{
     font-family: 'Inter', Helvetica Neue;
     font-size: 25px;
     font-weight: 700;
@@ -189,6 +199,9 @@ body {
 }
 
 .likedSongs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     text-align: left;
     width: 40%;
     color: white;
@@ -196,11 +209,19 @@ body {
     max-height: 230px;
     overflow: auto;
     margin-left: 100px;
-    margin-top: -20px;;
+    margin-top: -20px;
 }
 
 .likedSongs::-webkit-scrollbar {
     display: none;
+}
+
+.individualLikedSong{
+    text-decoration: none; color: white;
+}
+
+.individualLikedSong:hover{
+    text-decoration: underline;
 }
 
 .submittedSongsDiv{
@@ -208,6 +229,9 @@ body {
 }
 
 .submittedSongs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     text-align: left;
     width: 40%;
     color: white;
@@ -215,7 +239,7 @@ body {
     max-height: 230px;
     overflow: auto;
     margin-left: 100px;
-    margin-top: -20px;;
+    margin-top: -20px;
 }
 
 .submittedSongs::-webkit-scrollbar {
