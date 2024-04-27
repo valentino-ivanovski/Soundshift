@@ -27,17 +27,71 @@
 
             <div class="content">
 
-                <div class="centerdiv"> 
+                <div class="centerdiv">
+
+                    <div class="profile-picture">
+                        <%= userr.username.charAt(0).toUpperCase() %>
+                    </div>
+
                     <h1 class="welcome">Welcome, <%= userr.username %> </h1>
+
                     <h2 class="location"><%= userr.location %></h2>
-                    <div class="bioDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 60px; margin-top: -20px;">
-                        <p class="bioText"><%= userr.bio %></p>
+
+                    <div class="bioDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 70px; margin-top: -20px;">
+                        <p class="bioText" style="max-width: 500px;"><%= userr.bio %></p>
                         <form id="editBioForm" action="/profile/me/updatebio" method="POST">
                             <input type="hidden" name="id" value="<%= userr.id %>">
                             <input type="hidden" id="newBio" name="bio">
                             <button type="submit" class="bioButton">Edit Bio</button>
                         </form>
                     </div>
+
+                    <div class="linksDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 0px; margin-top: 0px;">
+                        <form id="editSpotifyForm" action="/profile/me/updateSpotify" method="POST">
+                            <input type="hidden" name="id" value="<%= userr.id %>">
+                            <input type="hidden" id="newSpotify" name="spotify">
+                            <button type="submit" class="spotifyButton">Spotify</button>
+                        </form>
+                    
+                        <form id="editAMForm" action="/profile/me/updateAM" method="POST">
+                            <input type="hidden" name="id" value="<%= userr.id %>">
+                            <input type="hidden" id="newAM" name="am">
+                            <button type="submit" class="amButton">Apple Music</button>
+                        </form>
+                    
+                        <form id="editSoundcloudForm" action="/profile/me/updateSoundcloud" method="POST">
+                            <input type="hidden" name="id" value="<%= userr.id %>">
+                            <input type="hidden" id="newSoundcloud" name="soundcloud">
+                            <button type="submit" class="soundcloudButton">SoundCloud</button>
+                        </form>
+                    </div>
+                    
+                    <div class="likedSongsDiv">
+                        <h2 class="location"> Liked Songs: </h2>
+                        <div class="likedSongs">
+                            <% likedSongs.forEach(function(song) { %>
+                                <% if(song.title && song.artist) { %>
+                                    <div class="song">
+                                        <p>● <strong><%= song.title %></strong> by <%= song.artist %></p>
+                                    </div>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                    </div>
+
+                    <div class="submittedSongsDiv">
+                        <h2 class="location"> Submitted Songs: </h2>
+                        <div class="submittedSongs">
+                            <% submittedSongs.forEach(function(song) { %>
+                                <% if(song.title && song.artist) { %>
+                                    <div class="song">
+                                        <p>● <strong><%= song.title %></strong> by <%= song.artist %></p>
+                                    </div>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -59,6 +113,34 @@
                     document.querySelector('#newBio').value = newBio;
                     document.querySelector('.bioText').textContent = newBio;
                     document.querySelector('#editBioForm').submit();
+                }
+            });
+
+            document.querySelector('.spotifyButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                var newSpotify = prompt("Please enter your new Spotify link:");
+                if (newSpotify !== null) {
+                    document.querySelector('#newSpotify').value = newSpotify;
+                    document.querySelector('#editSpotifyForm').submit();
+                    document.querySelector('.spotifyButton').style = "background-color: #1DB954";
+                }
+            });
+
+            document.querySelector('.amButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                var newAM = prompt("Please enter your new AM link:");
+                if (newAM !== null) {
+                    document.querySelector('#newAM').value = newAM;
+                    document.querySelector('#editAMForm').submit();
+                }
+            });
+
+            document.querySelector('.soundcloudButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                var newSoundcloud = prompt("Please enter your new Soundcloud link:");
+                if (newSoundcloud !== null) {
+                    document.querySelector('#newSoundcloud').value = newSoundcloud;
+                    document.querySelector('#editSoundcloudForm').submit();
                 }
             });
             </script>

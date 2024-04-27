@@ -4,7 +4,6 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 .animated-bg {
@@ -90,7 +89,6 @@ body {
     flex-wrap: wrap;
     max-width: 1200px;
     height: 100vh;
-    background-color: yellow;
 }
 
 .centerdiv{
@@ -100,7 +98,11 @@ body {
     width: 70%;
     height: 70%;
     margin-bottom: 7%;
-    background-color: blue;
+    overflow: auto;
+}
+
+.centerdiv::-webkit-scrollbar {
+    display: none;
 }
 
 .welcome {
@@ -138,16 +140,86 @@ body {
     font-family: 'Inter', Helvetica Neue;
     font-size: 15px;
     font-weight: 200;
-    color: rgba(255, 255, 255, 0.514);
+    color: rgba(255, 255, 255, 0.347);
     border: none;
     background-color: transparent;
-    text-decoration: underline;
     transition: color 0.2s;
 }
 
 .bioButton:hover{
     cursor: pointer;
     color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
+}
+
+.linksDiv{
+}
+
+.spotifyButton, .amButton, .soundcloudButton{
+    padding: 10px 15px;
+    margin-right: 10px;
+    background-color: white;
+    color: #464444;
+    text-decoration: none;
+    border: 0px solid #ffffff;
+    border-radius: 50px;
+    font-size: 13px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.likedSongsDiv{
+    margin-top: 20px;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: #fff;
+    text-align: center;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 3px;
+    line-height: 100px;
+    font-size: 40px;
+}
+
+.likedSongs{
+    text-align: left;
+    width: 40%;
+    color: white;
+    height: auto;
+    max-height: 230px;
+    overflow: auto;
+    margin-left: 100px;
+    margin-top: -20px;;
+}
+
+.likedSongs::-webkit-scrollbar {
+    display: none;
+}
+
+.submittedSongsDiv{
+    margin-top: 20px;
+}
+
+.submittedSongs{
+    text-align: left;
+    width: 40%;
+    color: white;
+    height: auto;
+    max-height: 230px;
+    overflow: auto;
+    margin-left: 100px;
+    margin-top: -20px;;
+}
+
+.submittedSongs::-webkit-scrollbar {
+    display: none;
 }
 
 .soundshiftText {
@@ -171,9 +243,6 @@ body {
     padding-bottom: 1%;
     font-size: 12px;
     position: fixed;
-    /* Changed from position: static */
     bottom: 0;
-    /* Stick to the bottom */
     width: 100%;
-    /* Full width */
 }

@@ -318,6 +318,79 @@ function updateBio(userId, newBio, callback) {
     });
 }
 
+function updateSpotify(userId, newSpotify, callback) {
+    const sql = `UPDATE usersNew SET spotify_link = ? WHERE id = ?`;
+    conn.query(sql, [newSpotify, userId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully updated Spotify link:", results.affectedRows);
+            callback(null);
+        }
+    });
+}
+
+function updateAM(userId, newAM, callback) {
+    const sql = `UPDATE usersNew SET applemusic_link = ? WHERE id = ?`;
+    conn.query(sql, [newAM, userId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully updated AM link:", results.affectedRows);
+            callback(null);
+        }
+    });
+}
+
+function updateSoundcloud(userId, newSoundcloud, callback) {
+    const sql = `UPDATE usersNew SET soundcloud_link = ? WHERE id = ?`;
+    conn.query(sql, [newSoundcloud, userId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully updated Soundcloud link:", results.affectedRows);
+            callback(null);
+        }
+    });
+}
+
+function getLikedSongs(userId, callback) {
+    const query = `
+        SELECT songsNew.*
+        FROM liked_songs
+        LEFT JOIN songsNew ON liked_songs.song_id = songsNew.song_id
+        WHERE liked_songs.user_id = ?
+        ORDER BY songsNew.upload_date DESC
+    `;
+
+    conn.query(query, [userId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched liked songs:", results.length);
+            callback(null, results);
+        }
+    });
+}
+
+function getSubmittedSongs(userId, callback) {
+    const query = `SELECT * FROM songsNew WHERE user_id = ? ORDER BY songsNew.upload_date DESC`;
+
+    conn.query(query, [userId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched submitted songs:", results.length);
+            callback(null, results);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -335,5 +408,10 @@ module.exports = {
     reportComment,
     deleteComment,
     getUserData,
-    updateBio
+    updateBio,
+    updateSpotify,
+    updateAM,
+    updateSoundcloud,
+    getLikedSongs,
+    getSubmittedSongs
 };
