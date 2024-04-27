@@ -538,7 +538,7 @@ body {
 /* If gap doesn't work, use margins */
 .commentFormDiv input {
     margin-right: 10px;
-    width: 30wh;
+    width: 70%;
     padding: 12px;
     border: none;
     background-color: rgba(195, 195, 195, 0.279);
@@ -554,10 +554,9 @@ body {
     text-decoration: none;
     border: 1.5px solid #7058fa;
     border-radius: 50%;
-    font-size: 13px;
+    font-size: 15px;
     font-family: "Inter", Helvetica;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
 }
 
 .commentFormDiv button:hover {
