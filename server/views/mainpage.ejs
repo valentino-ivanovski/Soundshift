@@ -250,7 +250,8 @@
                                     <h1 style="color: #fff; font-family: "Inter", Helvetica; font-weight: 350; font-size: 17px;">Random Song Details:</h1>
                                     <p>Song: <strong>${title}</strong>, by <strong>${artist}</strong>.</p>
                                     <p>Genre: <strong>${genre}</strong>, Explicit: <strong>${explicitStatus}</strong></p>
-                                    <p>Uploaded By: <strong>${username}</strong>, on <strong>${uploadDate}</strong> from <strong>${userLocation}</strong></p>
+                                    <p>Uploaded by: <a href="/profile/${username}" style="color: #fff;"><strong>${username}</strong></a>, on <strong>${uploadDate}</strong></p>
+                                    <p>Location: <strong>${userLocation}</strong></p>
                                 </div>
                                 `;
                             songInfoContainer.innerHTML = songDetailsHTML;
@@ -431,7 +432,7 @@
                                                         commentP.className = 'commentP';
 
                                                         const usernameLink = document.createElement('a');
-                                                        usernameLink.href = `/users/${comment.user_id}`; // adjust this to the correct URL
+                                                        usernameLink.href = `/profile/${comment.username}`; // adjust this to the correct URL
                                                         usernameLink.innerText = comment.username;
                                                         usernameLink.className = 'usernameLink';
                                                         commentP.appendChild(usernameLink);
