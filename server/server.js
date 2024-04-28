@@ -2,7 +2,6 @@ const express = require('express');
 const session = require('express-session'); // Import express-session
 require('dotenv').config();
 const app = express();
-const dbConn = require('./database/dbConn');
 const path = require('path');
 
 app.use(express.json());
