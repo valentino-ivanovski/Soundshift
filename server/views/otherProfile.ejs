@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#C16148">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/stylesheets/profileStyle.css"> <!-- Link to the new CSS file -->
+    <link rel="stylesheet" href="/stylesheets/otherProfile.css"> <!-- Link to the new CSS file -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
     <title>Soundshift</title>
 </head>
@@ -33,37 +33,20 @@
                         <%= user.username.charAt(0).toUpperCase() %>
                     </div>
 
-                    <h1 class="welcome">Welcome, <%= userr.username %> </h1>
+                    <h1 class="welcome"><%= userr.username %> </h1>
 
                     <h2 class="location"><%= userr.location %></h2>
 
-                    <div class="bioDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 70px; margin-top: -30px;">
+                    <div class="bioDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 0px; margin-top: -30px;">
                         <p class="bioText" style="max-width: 500px;"><%= userr.bio %></p>
-                        <form id="editBioForm" action="/profile/me/updatebio" method="POST">
-                            <input type="hidden" name="id" value="<%= userr.id %>">
-                            <input type="hidden" id="newBio" name="bio">
-                            <button type="submit" class="bioButton">Edit Bio</button>
-                        </form>
                     </div>
 
                     <div class="linksDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 0px; margin-top: 0px;">
-                        <form id="editSpotifyForm" action="/profile/me/updateSpotify" method="POST">
-                            <input type="hidden" name="id" value="<%= userr.id %>">
-                            <input type="hidden" id="newSpotify" name="spotify">
-                            <button type="submit" class="spotifyButton">Spotify</button>
-                        </form>
+                        <button type="submit" class="spotifyButton" onclick="window.open('<%= userr.spotify_link %>')">Spotify</button>
+
+                        <button type="submit" class="amButton" onclick="window.open('<%= userr.applemusic_link %>')">Apple Music</button>
                     
-                        <form id="editAMForm" action="/profile/me/updateAM" method="POST">
-                            <input type="hidden" name="id" value="<%= userr.id %>">
-                            <input type="hidden" id="newAM" name="am">
-                            <button type="submit" class="amButton">Apple Music</button>
-                        </form>
-                    
-                        <form id="editSoundcloudForm" action="/profile/me/updateSoundcloud" method="POST">
-                            <input type="hidden" name="id" value="<%= userr.id %>">
-                            <input type="hidden" id="newSoundcloud" name="soundcloud">
-                            <button type="submit" class="soundcloudButton">SoundCloud</button>
-                        </form>
+                        <button type="submit" class="soundcloudButton" onclick="window.open('<%= userr.soundcloud_link %>')">SoundCloud</button>
                     </div>
 
                     <div class="subretrDiv">
@@ -133,23 +116,6 @@
 
         </div>
         <script>
-
-            document.querySelector('.profile-picture').addEventListener('click', function(e) {
-                var imageUrl = prompt("Please enter the image URL:");
-                if (imageUrl) {
-                    document.querySelector('.profile-picture').style.backgroundImage = 'url(' + imageUrl + ')';
-                    document.querySelector('.profile-picture').style.backgroundSize = 'cover';
-                    document.querySelector('.profile-picture').style.color = 'transparent';
-
-                    fetch('/profile/me/update-profile-picture', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ imageUrl: imageUrl }),
-                    });
-                }
-            });
 
             document.querySelector('.bioButton').addEventListener('click', function(e) {
                 e.preventDefault();

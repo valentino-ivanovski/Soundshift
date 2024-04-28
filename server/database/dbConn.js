@@ -452,6 +452,24 @@ function getUserByUsername(username, callback) {
     });
 }
 
+function updateProfilePicture(userId, imageUrl, callback) {
+    const query = `UPDATE usersNew SET imageUrl = ? WHERE id = ?`;
+
+    conn.query(query, [imageUrl, userId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+            console.log("Error updating profile picture:", err);
+        } else {
+            console.log(
+                "Successfully updated profile picture:",
+                results.affectedRows
+            );
+            callback(null, results);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -477,5 +495,6 @@ module.exports = {
     getSubmittedSongs,
     storeRetrievedSong,
     getRetrievedSongs,
-    getUserByUsername
+    getUserByUsername,
+    updateProfilePicture
 };

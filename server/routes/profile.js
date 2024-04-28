@@ -72,7 +72,7 @@ router.get('/:username', (req, res) => {
                         return res.status(500).send('Error fetching retrieved songs');
                     }
 
-                    res.render('profile', { userr: user, likedSongs: likedSongs, submittedSongs: submittedSongs, retrievedSongs: retrievedSongs });
+                    res.render('otherProfile', { userr: user, likedSongs: likedSongs, submittedSongs: submittedSongs, retrievedSongs: retrievedSongs });
                 });
             });
         });
@@ -93,7 +93,7 @@ router.post('/me/updatebio', function(req, res) {
 });
 
 router.post('/me/updateSpotify', function(req, res) {
-    const userId = req.body.id;
+    const userId = req.session.user.id;
     const newSpotify = req.body.spotify;
     dbConn.updateSpotify(userId, newSpotify, function(err, user) {
         if (err) {
@@ -122,6 +122,19 @@ router.post('/me/updateSoundcloud', function(req, res) {
     const userId = req.body.id;
     const newSoundcloud = req.body.soundcloud;
     dbConn.updateSoundcloud(userId, newSoundcloud, function(err, user) {
+        if (err) {
+            console.log(err);
+            res.redirect('/profile/me');
+        } else {
+            res.redirect('/profile/me');
+        }
+    });
+});
+
+router.post('/me/update-profile-picture', function(req, res) {
+    const userId = req.session.user.id;;
+    const newProfilePictureUrl = req.body.imageUrl;
+    dbConn.updateProfilePicture(userId, newProfilePictureUrl, function(err, user) {
         if (err) {
             console.log(err);
             res.redirect('/profile/me');
