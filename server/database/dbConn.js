@@ -439,6 +439,19 @@ function getRetrievedSongs(userId, callback){
     });
 }
 
+function getUserByUsername(username, callback) {
+    const query = `SELECT * FROM usersNew WHERE username = ?`;
+
+    conn.query(query, [username], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            callback(null, results[0]);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -463,5 +476,6 @@ module.exports = {
     getLikedSongs,
     getSubmittedSongs,
     storeRetrievedSong,
-    getRetrievedSongs
+    getRetrievedSongs,
+    getUserByUsername
 };

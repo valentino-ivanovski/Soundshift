@@ -39,6 +39,46 @@ router.get('/me', (req, res) => {
     });
 });
 
+router.get('/:username', (req, res) => {
+    const username = req.params.username;
+
+    dbConn.getUserByUsername(username, (err, user) => {
+        if (err) {
+            console.error('Error fetching user:', err);
+            return res.status(500).send('Error fetching user');
+        }
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        const userId = user.id;
+
+        dbConn.getLikedSongs(userId, (err, likedSongs) => {
+            if (err) {
+                console.error('Error fetching liked songs:', err);
+                return res.status(500).send('Error fetching liked songs');
+            }
+
+            dbConn.getSubmittedSongs(userId, (err, submittedSongs) => {
+                if (err) {
+                    console.error('Error fetching submitted songs:', err);
+                    return res.status(500).send('Error fetching submitted songs');
+                }
+
+                dbConn.getRetrievedSongs(userId, (err, retrievedSongs) => {
+                    if (err) {
+                        console.error('Error fetching retrieved songs:', err);
+                        return res.status(500).send('Error fetching retrieved songs');
+                    }
+
+                    res.render('profile', { userr: user, likedSongs: likedSongs, submittedSongs: submittedSongs, retrievedSongs: retrievedSongs });
+                });
+            });
+        });
+    });
+});
+
 router.post('/me/updatebio', function(req, res) {
     const userId = req.body.id;
     const newBio = req.body.bio;

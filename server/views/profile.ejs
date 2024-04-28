@@ -72,7 +72,7 @@
                             <h2 class="location"> Liked Songs: </h2>
                             <div class="likedSongs">
                                 <% if(likedSongs.length === 0) { %>
-                                    <div style="margin-left: 55px;">Empty</div>
+                                    <div class="individualLikedSong">None</div>
                                 <% } else { %>
                                     <% likedSongs.forEach(function(song) { %>
                                         <% if(song.title && song.artist) { %>
@@ -89,7 +89,7 @@
                             <h2 class="location"> Submitted Songs: </h2>
                             <div class="submittedSongs">
                                 <% if(submittedSongs.length === 0) { %>
-                                    <div style="margin-left: 85px;">Empty</div>
+                                    <div class="individualLikedSong">None</div>
                                 <% } else { %>
                                     <% submittedSongs.forEach(function(song) { %>
                                         <% if(song.title && song.artist) { %>
@@ -106,7 +106,7 @@
                             <h2 class="location"> Retrieved Songs: </h2>
                             <div class="retrievedSongs">
                                 <% if(retrievedSongs.length === 0) { %>
-                                    <div style="margin-left: 80px;">Empty</div>
+                                    <div class="individualLikedSong">None</div>
                                 <% } else { %>
                                     <% retrievedSongs.forEach(function(song) { %>
                                         <div>
