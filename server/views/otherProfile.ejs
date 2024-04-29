@@ -115,45 +115,5 @@
             </div>
 
         </div>
-        <script>
-
-            document.querySelector('.bioButton').addEventListener('click', function(e) {
-                e.preventDefault();
-                var newBio = prompt("Please enter your new bio:");
-                if (newBio !== null) {
-                    document.querySelector('#newBio').value = newBio;
-                    document.querySelector('.bioText').textContent = newBio;
-                    document.querySelector('#editBioForm').submit();
-                }
-            });
-
-            document.querySelector('.spotifyButton').addEventListener('click', function(e) {
-                e.preventDefault();
-                var newSpotify = prompt("Please enter your new Spotify link:");
-                if (newSpotify !== null) {
-                    document.querySelector('#newSpotify').value = newSpotify;
-                    document.querySelector('#editSpotifyForm').submit();
-                    document.querySelector('.spotifyButton').style = "background-color: #1DB954";
-                }
-            });
-
-            document.querySelector('.amButton').addEventListener('click', function(e) {
-                e.preventDefault();
-                var newAM = prompt("Please enter your new AM link:");
-                if (newAM !== null) {
-                    document.querySelector('#newAM').value = newAM;
-                    document.querySelector('#editAMForm').submit();
-                }
-            });
-
-            document.querySelector('.soundcloudButton').addEventListener('click', function(e) {
-                e.preventDefault();
-                var newSoundcloud = prompt("Please enter your new Soundcloud link:");
-                if (newSoundcloud !== null) {
-                    document.querySelector('#newSoundcloud').value = newSoundcloud;
-                    document.querySelector('#editSoundcloudForm').submit();
-                }
-            });
-            </script>
     </center>
 </body>

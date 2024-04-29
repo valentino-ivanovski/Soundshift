@@ -247,7 +247,6 @@ function getCommentsBySongId(songId, callback) {
             console.error("Error executing SQL query:", err);
             callback(err);
         } else {
-            console.log("Successfully fetched comments:", results);
             callback(null, results);
         }
     });
@@ -434,6 +433,7 @@ function getRetrievedSongs(userId, callback){
                 "Successfully fetched retrieved songs:",
                 results.length
             );
+            console.log("====================================");
             callback(null, results);
         }
     });
