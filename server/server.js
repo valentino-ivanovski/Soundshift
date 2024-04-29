@@ -59,4 +59,7 @@ app.use("/mainpage", requireLogin, mainpageRouter);
 const profileRouter = require('./routes/profile');
 app.use("/profile", requireLogin, profileRouter);
 
+const searchRouter = require('./routes/search');
+app.use("/search", requireLogin, searchRouter);
+
 app.listen(3000);
