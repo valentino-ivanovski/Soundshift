@@ -28,7 +28,7 @@
             <div class="content">
 
                 <div class="centerdiv">
-                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px;">
+                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
                         <form style="display: flex; flex-direction: column; gap:20px;">
                             <input type="text" id="search" placeholder="Search for a user...">
                             <div class="searchButtons">
@@ -87,7 +87,7 @@
                 event.preventDefault();
                 const query = searchInput.value;
                 const url = songSearch ? `/search/songResults/${query}` : `/search/userResults/${query}`;
-        
+                
                 fetch(url)
                     .then(response => response.json())
                     .then(results => {
@@ -96,10 +96,9 @@
                             const resultDiv = document.createElement('div');
                             if (songSearch) {
                                 resultsWillShowHere.style.display = 'none';
-
+                                resultDiv.className = 'resultDiv';
                                 const singleUnit = document.createElement('div');
                                 singleUnit.className = 'singleUnit';
-
                                 const songInfo = document.createElement('a');
                                 songInfo.textContent = `${result.title}  by: ${result.artist}`;
                                 singleUnit.style.minWidth = '250px';
@@ -135,6 +134,7 @@
                                 resultDiv.appendChild(singleUnit);
                             }
                             resultsContainer.appendChild(resultDiv);
+                            documment.getElementById('centerdiv').appendChild(resultsContainer);
                         });
                     })
                     .catch(err => console.error(err));
