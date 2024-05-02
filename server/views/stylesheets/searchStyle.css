@@ -107,7 +107,7 @@ input {
     height: 40px;
     font-size: 18px;
     padding: 16px; 
-    border-radius: 16px; 
+    border-radius: 10px; 
     border: none; 
     margin-top: 50px;
     font-family: Inter;
@@ -166,7 +166,7 @@ input:focus {
 
 .results{
     overflow: auto;
-    max-height: 400px;
+    max-height: 285px;
     width: 350px;
     min-height: 60px;
     padding: 15px;
@@ -195,5 +195,17 @@ input:focus {
 }
 
 .username:hover{
+    text-decoration: underline;
+}
+
+.songInfo{
+    font-family: Inter, Arial;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.songInfo:hover{
     text-decoration: underline;
 }

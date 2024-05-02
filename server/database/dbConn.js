@@ -471,7 +471,7 @@ function updateProfilePicture(userId, imageUrl, callback) {
 }
 
 function searchSongs(query, callback) {
-    const sql = `SELECT * FROM songsNew WHERE title LIKE ? OR artist LIKE ?`;
+    const sql = `SELECT * FROM songsNew WHERE title LIKE ? OR artist LIKE ? ORDER BY title`;
 
     conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
         if (err) {
@@ -485,7 +485,7 @@ function searchSongs(query, callback) {
 }
 
 function searchUsers(query, callback) {
-    const sql = `SELECT * FROM usersNew WHERE username LIKE ? OR bio LIKE ?`;
+    const sql = `SELECT * FROM usersNew WHERE username LIKE ? OR bio LIKE ? ORDER BY username`;
 
     conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
         if (err) {

@@ -96,7 +96,21 @@
                             const resultDiv = document.createElement('div');
                             if (songSearch) {
                                 resultsWillShowHere.style.display = 'none';
-                                resultDiv.textContent = `Title: ${result.title}, Artist: ${result.artist}`;
+
+                                const singleUnit = document.createElement('div');
+                                singleUnit.className = 'singleUnit';
+
+                                const songInfo = document.createElement('a');
+                                songInfo.textContent = `${result.title}  by: ${result.artist}`;
+                                singleUnit.style.minWidth = '250px';
+                                singleUnit.appendChild(songInfo);
+                                singleUnit.style.padding = '10px';
+                                singleUnit.style.justifyContent = 'center';
+                                singleUnit.style.height = '30px';
+                                resultDiv.appendChild(singleUnit);
+                                songInfo.href = `${result.spotify_link}`;
+                                songInfo.className = 'songInfo';    
+
                             } else {
                                 resultsWillShowHere.style.display = 'none';
                                 const singleUnit = document.createElement('div');
