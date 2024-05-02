@@ -95,6 +95,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
     width: 70%;
     height: 70%;
     margin-bottom: 7%;

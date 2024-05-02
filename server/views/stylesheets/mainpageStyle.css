@@ -538,13 +538,22 @@ body {
 /* If gap doesn't work, use margins */
 .commentFormDiv input {
     margin-right: 10px;
-    width: 70%;
+    width: 50%;
     padding: 12px;
     border: none;
     background-color: rgba(195, 195, 195, 0.279);
     border-radius: 50px;
     color: rgb(0, 0, 0);
     font-size: 13px;
+}
+
+.commentForm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    gap: 0px;
 }
 
 .commentFormDiv button {

@@ -470,6 +470,34 @@ function updateProfilePicture(userId, imageUrl, callback) {
     });
 }
 
+function searchSongs(query, callback) {
+    const sql = `SELECT * FROM songsNew WHERE title LIKE ? OR artist LIKE ?`;
+
+    conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched search results:", results.length);
+            callback(null, results);
+        }
+    });
+}
+
+function searchUsers(query, callback) {
+    const sql = `SELECT * FROM usersNew WHERE username LIKE ? OR bio LIKE ?`;
+
+    conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched search results:", results.length);
+            callback(null, results);
+        }
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -496,5 +524,7 @@ module.exports = {
     storeRetrievedSong,
     getRetrievedSongs,
     getUserByUsername,
-    updateProfilePicture
+    updateProfilePicture,
+    searchSongs,
+    searchUsers
 };

@@ -28,9 +28,15 @@
             <div class="content">
 
                 <div class="centerdiv">
-
-                        <input type="text" id="search" placeholder="Search for a user...">
-
+                    <div class="search-content" style="display: flex; flex-direction: column; gap: 20px;">
+                        <form style="display: flex; flex-direction: column; gap:20px;">
+                            <input type="text" id="search" placeholder="Search for a user...">
+                            <div class="searchButtons">
+                                <button class="buttonSearch">Search</button>
+                                <button type="menu" class="buttonSearch" id="songSearchButton">Song Search: Off</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
             </div>
@@ -45,8 +51,33 @@
 
         </div>
         <script>
+    let songSearch = false;
+    const songSearchButton = document.getElementById('songSearchButton');
+    const form = document.querySelector('form');
+    const searchInput = document.getElementById('search');
 
-            
-        </script>
+    songSearchButton.addEventListener('click', function(event) {
+        event.preventDefault(); //s.t. the form doesnt submit when i press the button
+        if (songSearchButton.textContent === 'Song Search: Off') {
+            songSearchButton.textContent = 'Song Search: On';
+            songSearch = true;
+            document.getElementById('search').placeholder = 'Search for a song...';
+        } else {
+            songSearchButton.textContent = 'Song Search: Off';
+            songSearch = false;
+            document.getElementById('search').placeholder = 'Search for a user...';
+        }
+    });
+
+    form.onsubmit = function(event) {
+        event.preventDefault();
+        const query = searchInput.value;
+        if (songSearch) {
+            window.location.href = `/search/songResults/${query}`;
+        } else {
+            window.location.href = `/search/userResults/${query}`;
+        }
+    };
+</script>
     </center>
 </body>
