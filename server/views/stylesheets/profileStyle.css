@@ -180,10 +180,6 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.likedSongsDiv {
-    margin-top: 20px;
-}
-
 .profile-picture {
     width: 100px;  
     height: 100px;
@@ -202,23 +198,32 @@ body {
     cursor: pointer;
 }
 
+.likedSongsDiv {
+    margin-top: 20px;
+    background-color: #3131313d;
+    padding: 10px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    min-height: 200px;
+    max-height: 300px;
+    width: 370px;
+}
+
 .likedSongs {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    text-align: left;
     width: 100%;
     min-width: 400px;
+    text-align: left;
     max-width: 400px;
     color: white;
     height: auto;
     max-height: 230px;
     overflow: auto;
     margin-top: -20px;
-}
-
-.likedSongs::-webkit-scrollbar {
-    display: none;
+    padding: 10px;
+    margin-left: -75px;
 }
 
 .individualLikedSong {
@@ -233,48 +238,58 @@ body {
 
 .submittedSongsDiv {
     margin-top: 20px;
+    background-color: #3131313d;
+    padding: 10px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    min-height: 200px;
+    max-height: 300px;
+    width: 370px;
 }
 
 .submittedSongs {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    text-align: left;
     width: 100%;
     min-width: 400px;
+    text-align: left;
     max-width: 400px;
     color: white;
     height: auto;
     max-height: 230px;
     overflow: auto;
     margin-top: -20px;
-}
-
-.submittedSongs::-webkit-scrollbar {
-    display: none;
+    padding: 10px;
+    margin-left: -75px;
 }
 
 .retrievedSongsDiv {
     margin-top: 20px;
+    background-color: #3131313d;
+    padding: 10px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    min-height: 200px;
+    max-height: 300px;
+    width: 370px;
 }
 
 .retrievedSongs {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    text-align: left;
     width: 100%;
     min-width: 400px;
+    text-align: left;
     max-width: 400px;
     color: white;
     height: auto;
     max-height: 230px;
     overflow: auto;
     margin-top: -20px;
-}
-
-.retrievedSongs::-webkit-scrollbar {
-    display: none;
+    padding: 10px;
+    margin-left: -75px;
 }
 
 .subretrDiv {

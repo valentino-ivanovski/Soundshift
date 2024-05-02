@@ -37,7 +37,7 @@
 
                     <h2 class="location"><%= userr.location %></h2>
 
-                    <div class="bioDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 0px; margin-top: -30px;">
+                    <div class="bioDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 0px; margin-top: -35px;">
                         <p class="bioText" style="max-width: 500px;"><%= userr.bio %></p>
                     </div>
 
@@ -52,7 +52,7 @@
                     <div class="subretrDiv">
                     
                         <div class="likedSongsDiv">
-                            <h2 class="location"> Liked Songs: </h2>
+                            <h2 class="location" style="margin-top: 12px;"> Liked Songs: </h2>
                             <div class="likedSongs">
                                 <% if(likedSongs.length === 0) { %>
                                     <div class="individualLikedSong">None</div>
@@ -69,7 +69,7 @@
                         </div>
                         
                         <div class="submittedSongsDiv">
-                            <h2 class="location"> Submitted Songs: </h2>
+                            <h2 class="location" style="margin-top: 12px;"> Submitted Songs: </h2>
                             <div class="submittedSongs">
                                 <% if(submittedSongs.length === 0) { %>
                                     <div class="individualLikedSong">None</div>
@@ -86,7 +86,7 @@
                         </div>
                         
                         <div class="retrievedSongsDiv">
-                            <h2 class="location"> Retrieved Songs: </h2>
+                            <h2 class="location" style="margin-top: 12px;"> Retrieved Songs: </h2>
                             <div class="retrievedSongs">
                                 <% if(retrievedSongs.length === 0) { %>
                                     <div class="individualLikedSong">None</div>
