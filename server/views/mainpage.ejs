@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#C16148">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/stylesheets/mainpageStyle.css"> <!-- Link to the new CSS file -->
+    <link rel="stylesheet" href="/stylesheets/mainpageStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
     <title>Soundshift</title>
 </head>
@@ -70,21 +70,19 @@
                         <div class="square-innermore" id="song-info-container">
                             <h1 class="headers" id="submitafavsong">submit a fav song:</h1>
                             <form action="/mainpage/submitsong" method="post">
-                                <!-- Song Title -->
+                                <!-- song title -->
                                 <div style="margin-bottom: 10px;">
                                     <label for="songTitle" class="songTitleLabel">Song Title:</label>
-                                    <input type="text" id="songTitle" placeholder="First Take" name="songTitle"
-                                        required><!-- songTitle -->
+                                    <input type="text" id="songTitle" placeholder="First Take" name="songTitle" required>
                                 </div>
 
-                                <!-- Artist Name -->
+                                <!-- artist name -->
                                 <div style="margin-bottom: 10px;">
                                     <label for="artistName" class="artistLabel">Artist Name:</label>
-                                    <input type="text" id="artistName" placeholder="Travis Scott" name="artistName"
-                                        required> <!-- artistName -->
+                                    <input type="text" id="artistName" placeholder="Travis Scott" name="artistName" required> 
                                 </div>
 
-                                <!-- Genre -->
+                                <!-- genre -->
                                 <div style="margin-bottom: 10px;">
                                     <label for="genre" class="genreLabel">Genre:</label>
                                     <select id="genre" name="genre" required>
@@ -199,13 +197,13 @@
                     const genre = genreSelect.value;
                     const explicit = explicitCheckbox.checked;
 
-                    // Prepare data for POST request
+                    //prepare data for POST request
                     const data = {
                         genre: genre,
                         explicit: explicit
                     };
 
-                    // Send POST request
+                    //send post request
                     fetch('/mainpage/getrandomsong', {
                         method: 'POST',
                         headers: {
@@ -221,10 +219,7 @@
                             }
                         })
                         .then(songs => {
-                            // Check if songs array is not empty and extract the first song object
                             const song = songs[0];
-
-                            // Check for undefined values and display the song details
                             const title = song.title ? song.title : 'Unknown';
                             const artist = song.artist ? song.artist : 'Unknown';
                             const genre = song.genre ? song.genre : 'Unknown';
@@ -391,7 +386,7 @@
                                         arrowDiv.appendChild(arrow);
                                         songInfoContainer.appendChild(arrowDiv);
 
-                                        // COMMENT SECTION
+                                        //COMMENT SECTION
                                         fetch(`/mainpage/comments/${songid}`, {
                                             method: 'GET',
                                             headers: {
@@ -405,7 +400,7 @@
                                                 return response.json();
                                             })
                                             .then(comments => {
-                                                console.log(comments); // add this line
+                                                console.log(comments);
 
                                                 const commentsDiv = document.createElement('div');
                                                 commentsDiv.className = 'commentsDiv';
@@ -458,8 +453,6 @@
                                                         const commentText = document.createTextNode(`${comment.content}`);
                                                         commentP.appendChild(commentText);
                                                         commentsContainer.appendChild(commentP);
-                                                        
-                                                        // NAMESTI DA E DELETE AKO E USEROT KOJ GO NAPRAIL AKO NE TOGAS REPORT
 
 
                                                         const reportSpan = document.createElement('span');
@@ -504,9 +497,8 @@
                                                                 reportSpan.addEventListener('click', function () {
                                                                     const reason = prompt('Please enter a reason for reporting this comment:');
                                                                     if (reason) {
-                                                                        console.log('Type of reason:', typeof reason); // Log the type of reason
+                                                                        console.log('Type of reason:', typeof reason);
 
-                                                                        // Access commentId directly from the comment object
                                                                         const commentId = comment.comment_id;
                                                                         console.log('Comment ID:', commentId);
 
@@ -519,11 +511,12 @@
                                                                         })
                                                                         .then(response => response.json())
                                                                         .then(data => {
-                                                                            // Handle the response from the server...
+                                                                            if (data.reported) {
+                                                                                alert('Comment reported successfully');
+                                                                            }
                                                                         })
                                                                     }
                                                                 });
-
                                                                 commentP.appendChild(reportSpan);
                                                             }
                                                         })
