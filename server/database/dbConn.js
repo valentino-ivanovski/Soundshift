@@ -422,7 +422,8 @@ function getRetrievedSongs(userId, callback){
     FROM retrievedSongs 
     LEFT JOIN songsNew ON retrievedSongs.song_id = songsNew.song_id 
     WHERE retrievedSongs.user_id = ? 
-    ORDER BY retrieval_date DESC`;
+    ORDER BY retrieval_date DESC`
+    LIMIT 50;
 
     conn.query(query, [userId], (err, results) => {
         if (err) {
