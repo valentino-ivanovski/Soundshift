@@ -163,3 +163,25 @@ input:focus {
     bottom: 0;
     width: 100%;
 }
+
+.results{
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.11);
+    max-height: 400px;
+    border-radius: 10px;
+    width: 370px;
+    min-height: 60px;
+    padding: 15px;
+}
+
+.username{
+    font-family: Inter, Arial;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+}
+
+.username:hover{
+    text-decoration: underline;
+}

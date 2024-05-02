@@ -28,7 +28,7 @@
             <div class="content">
 
                 <div class="centerdiv">
-                    <div class="search-content" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="search-content" style="display: flex; flex-direction: column; gap: 40px;">
                         <form style="display: flex; flex-direction: column; gap:20px;">
                             <input type="text" id="search" placeholder="Search for a user...">
                             <div class="searchButtons">
@@ -51,33 +51,83 @@
 
         </div>
         <script>
-    let songSearch = false;
-    const songSearchButton = document.getElementById('songSearchButton');
-    const form = document.querySelector('form');
-    const searchInput = document.getElementById('search');
+            let songSearch = false;
+            const songSearchButton = document.getElementById('songSearchButton');
+            const form = document.querySelector('form');
+            const searchInput = document.getElementById('search');
+            const resultsContainer = document.createElement('div');
+            const resultsWillShowHere = document.createElement('p');
 
-    songSearchButton.addEventListener('click', function(event) {
-        event.preventDefault(); //s.t. the form doesnt submit when i press the button
-        if (songSearchButton.textContent === 'Song Search: Off') {
-            songSearchButton.textContent = 'Song Search: On';
-            songSearch = true;
-            document.getElementById('search').placeholder = 'Search for a song...';
-        } else {
-            songSearchButton.textContent = 'Song Search: Off';
-            songSearch = false;
-            document.getElementById('search').placeholder = 'Search for a user...';
-        }
-    });
+            resultsContainer.className = 'results';
+            resultsWillShowHere.textContent = 'Results will appear here';
+            resultsWillShowHere.style.fontFamily = 'Inter';
+            resultsWillShowHere.style.fontWeight = '600';
+            resultsWillShowHere.style.fontSize = '18px';
+            resultsWillShowHere.style.color = 'rgba(0, 0, 0, 0.3)';
+            resultsContainer.appendChild(resultsWillShowHere);
+        
+            form.parentNode.appendChild(resultsContainer);
+        
+            songSearchButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                if (songSearchButton.textContent === 'Song Search: Off') {
+                    songSearchButton.textContent = 'Song Search: On';
+                    songSearch = true;
+                    document.getElementById('search').placeholder = 'Search for a song...';
+                } else {
+                    songSearchButton.textContent = 'Song Search: Off';
+                    songSearch = false;
+                    document.getElementById('search').placeholder = 'Search for a user...';
+                }
+            });
+        
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                const query = searchInput.value;
+                const url = songSearch ? `/search/songResults/${query}` : `/search/userResults/${query}`;
+        
+                fetch(url)
+                    .then(response => response.json())
+                    .then(results => {
+                        resultsContainer.innerHTML = '';
+                        results.forEach(result => {
+                            const resultDiv = document.createElement('div');
+                            if (songSearch) {
+                                resultsWillShowHere.style.display = 'none';
+                                resultDiv.textContent = `Title: ${result.title}, Artist: ${result.artist}`;
+                            } else {
+                                resultsWillShowHere.style.display = 'none';
+                                const singleUnit = document.createElement('div');
+                                singleUnit.style.display = 'flex';
+                                singleUnit.style.alignItems = 'center';
+                                singleUnit.style.justifyContent = 'left';
+                                singleUnit.style.gap = '10px';
+                                singleUnit.style.flexDirection = 'row';
+                                singleUnit.style.margin = '10px';
+                                singleUnit.style.width = '50%';
+                                
+                                const imageDiv = document.createElement('div');
+                                imageDiv.style.width = '50px';
+                                imageDiv.style.height = '50px';
+                                imageDiv.style.borderRadius = '50%';
+                                imageDiv.style.backgroundImage = `url(${result.imageUrl})`;
+                                imageDiv.style.backgroundSize = 'cover';
 
-    form.onsubmit = function(event) {
-        event.preventDefault();
-        const query = searchInput.value;
-        if (songSearch) {
-            window.location.href = `/search/songResults/${query}`;
-        } else {
-            window.location.href = `/search/userResults/${query}`;
-        }
-    };
-</script>
+                                singleUnit.appendChild(imageDiv);
+
+                                const usernameDiv = document.createElement('a');
+                                usernameDiv.href = `/profile/${result.username}`;
+                                usernameDiv.textContent = result.username;
+                                usernameDiv.className = 'username';
+
+                                singleUnit.appendChild(usernameDiv);
+                                resultDiv.appendChild(singleUnit);
+                            }
+                            resultsContainer.appendChild(resultDiv);
+                        });
+                    })
+                    .catch(err => console.error(err));
+            };
+        </script>
     </center>
 </body>
