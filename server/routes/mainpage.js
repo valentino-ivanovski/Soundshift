@@ -11,6 +11,7 @@ router.post("/submitsong", (req, res) => {
     const { songTitle, artistName, genre } = req.body; //extract data from request body
     const userId = req.session.user.id; //retrieve user ID from session
     const explicit = req.body.explicit === "on"; //true if checked, false otherwise
+    const location = req.session.user.location;
 
     //check if the song already exists
     dbConn.checkSongExists(songTitle, artistName, (err, exists) => {
@@ -31,6 +32,7 @@ router.post("/submitsong", (req, res) => {
                     userId,
                     genre,
                     explicit,
+                    location,
                     (err) => {
                         if (err) {
                             console.error("Error submitting song:", err);

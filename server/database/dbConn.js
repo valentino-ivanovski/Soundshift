@@ -67,7 +67,7 @@ const checkSongExists = (title, artist, callback) => {
 };
 
 //function to insert a new song into the database
-function insertSong(title, artist, userId, genre, explicit, callback) {
+function insertSong(title, artist, userId, genre, explicit, retrLocation, callback) {
     // Generate links
     const ytLink = `https://www.youtube.com/results?search_query=${encodeURIComponent(
         title
@@ -82,9 +82,9 @@ function insertSong(title, artist, userId, genre, explicit, callback) {
     //prepare query and data
     const query = `
         INSERT INTO songsNew 
-            (title, artist, genre, yt_link, spotify_link, soundcloud_link, user_id, upload_date, like_count, comment_count, explicit) 
+            (title, artist, genre, yt_link, spotify_link, soundcloud_link, user_id, upload_date, like_count, comment_count, explicit, retrLocation) 
         VALUES 
-            (?, ?, ?, ?, ?, ?, ?, NOW(), 0, 0, ?)
+            (?, ?, ?, ?, ?, ?, ?, NOW(), 0, 0, ?, ?)
     `;
     const data = [
         title,
@@ -95,6 +95,7 @@ function insertSong(title, artist, userId, genre, explicit, callback) {
         soundcloudLink,
         userId,
         explicit,
+        retrLocation,
     ];
 
     //execute query
