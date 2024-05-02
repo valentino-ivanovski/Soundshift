@@ -166,18 +166,29 @@ input:focus {
 
 .results{
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.11);
     max-height: 400px;
-    border-radius: 10px;
     width: 350px;
     min-height: 60px;
     padding: 15px;
+    margin-top: -25px;
+}
+
+.singleUnit{
+    display: flex; 
+    align-items: center; 
+    justify-content: left; 
+    gap: 10px; 
+    flex-direction: row; 
+    margin: 10px; 
+    width: 50%; 
     background-color: white;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .username{
     font-family: Inter, Arial;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 500;
     color: rgb(0, 0, 0);
     text-decoration: none;

@@ -28,7 +28,7 @@
             <div class="content">
 
                 <div class="centerdiv">
-                    <div class="search-content" style="display: flex; flex-direction: column; gap: 40px;">
+                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px;">
                         <form style="display: flex; flex-direction: column; gap:20px;">
                             <input type="text" id="search" placeholder="Search for a user...">
                             <div class="searchButtons">
@@ -36,6 +36,7 @@
                                 <button type="menu" class="buttonSearch" id="songSearchButton">Song Search: Off</button>
                             </div>
                         </form>
+                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;"> <!-- Add this line -->
                     </div>
                 </div>
 
@@ -63,7 +64,8 @@
             resultsWillShowHere.style.fontFamily = 'Inter';
             resultsWillShowHere.style.fontWeight = '600';
             resultsWillShowHere.style.fontSize = '18px';
-            resultsWillShowHere.style.color = 'rgba(0, 0, 0, 0.3)';
+            resultsWillShowHere.style.color = 'rgba(256, 256, 256, 0.5)';
+            resultsWillShowHere.style.marginTop = '5px';
             resultsContainer.appendChild(resultsWillShowHere);
         
             form.parentNode.appendChild(resultsContainer);
@@ -98,13 +100,7 @@
                             } else {
                                 resultsWillShowHere.style.display = 'none';
                                 const singleUnit = document.createElement('div');
-                                singleUnit.style.display = 'flex';
-                                singleUnit.style.alignItems = 'center';
-                                singleUnit.style.justifyContent = 'left';
-                                singleUnit.style.gap = '10px';
-                                singleUnit.style.flexDirection = 'row';
-                                singleUnit.style.margin = '10px';
-                                singleUnit.style.width = '50%';
+                                singleUnit.className = 'singleUnit';
                                 
                                 const imageDiv = document.createElement('div');
                                 imageDiv.style.width = '50px';
