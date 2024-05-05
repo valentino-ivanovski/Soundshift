@@ -96,7 +96,6 @@
                             const resultDiv = document.createElement('div');
                             if (songSearch) {
                                 resultsWillShowHere.style.display = 'none';
-                                resultDiv.className = 'resultDiv';
                                 const singleUnit = document.createElement('div');
                                 singleUnit.className = 'singleUnit';
                                 const songInfo = document.createElement('a');
@@ -134,7 +133,6 @@
                                 resultDiv.appendChild(singleUnit);
                             }
                             resultsContainer.appendChild(resultDiv);
-                            documment.getElementById('centerdiv').appendChild(resultsContainer);
                         });
                     })
                     .catch(err => console.error(err));
