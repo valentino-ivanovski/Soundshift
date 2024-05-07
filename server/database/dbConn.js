@@ -528,5 +528,5 @@ module.exports = {
     getUserByUsername,
     updateProfilePicture,
     searchSongs,
-    searchUsers
+    searchUsers,
 };

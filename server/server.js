@@ -29,7 +29,7 @@ function requireLogin(req, res, next) {
 }
 
 function requireAdmin(req, res, next) {
-  if (req.session.user && req.session.user.admin === 0) {
+  if (req.session.user && req.session.user.admin === 1) {
       next();
   } else {
       res.redirect('/mainpage');
@@ -39,7 +39,7 @@ function requireAdmin(req, res, next) {
 //SWAP THESE WHEN DONE WITH TESTING
 
 function requireNotAdmin(req, res, next) {
-  if (req.session.user && req.session.user.admin === 1) {
+  if (req.session.user && req.session.user.admin === 0) {
       next();
   } else {
       res.redirect('/adminMainpage');
