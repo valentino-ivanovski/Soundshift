@@ -1,0 +1,329 @@
+body {
+    font-family: Helvetica;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.animated-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-270deg, #5062ee, #2298e6);
+    background-size: 200% 200%;
+    animation: gradient 5s infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 100% 0;
+    }
+
+    50% {
+        background-position: 0 100%;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 25px;
+    align-items: center;
+    height: 10px;
+    background-color: #3e47a74a;
+    box-shadow: 0 2px 15px 0 rgba(142, 57, 57, 0.2);
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 3px;
+    margin-right: 38px;
+}
+
+.navbar li {
+    color: #261f37;
+    display: inline;
+    margin-right: 20px;
+    font-family: 'Inter', Helvetica;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.navbar li a {
+    padding: 11px 17px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: Inter, Helvetica;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    transition: font-weight 0.3s, 0.3s;
+}
+
+.navbar li a:hover {
+    font-weight: 500;
+}
+
+.navbar li aLM {
+    padding: 11px 17px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Inter, Helvetica;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    height: 100vh;
+}
+
+.centerdiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 70%;
+    height: 70%;
+    margin-bottom: 7%;
+    overflow: auto;
+}
+
+.centerdiv::-webkit-scrollbar {
+    display: none;
+}
+
+.welcome {
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 50px;
+    font-weight: 800;
+    color: white;
+    font-variation-settings: "slnt" -10;
+    text-decoration: none;
+    margin-bottom: -22px;
+    margin-top: 15px;
+}
+
+.welcome:hover {
+    cursor: default;
+}
+
+.location {
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.location2 {
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.bioText {
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 15px;
+    font-weight: 200;
+    color: white;
+    text-decoration: none;
+}
+
+.bioButton {
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 15px;
+    font-weight: 200;
+    color: rgba(255, 255, 255, 0.347);
+    border: none;
+    background-color: transparent;
+    transition: color 0.2s;
+}
+
+.bioButton:hover {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
+}
+
+.spotifyButton,
+.amButton,
+.soundcloudButton {
+    padding: 10px 15px;
+    margin-right: 10px;
+    background-color: white;
+    color: #464444;
+    text-decoration: none;
+    border: 0px solid #ffffff;
+    border-radius: 50px;
+    font-size: 13px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.profile-picture {
+    width: 100px;  
+    height: 100px;
+    border-radius: 50%;
+    background-color: #cccccc5e;
+    color: #fff;
+    text-align: center;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 3px;
+    line-height: 100px;
+    font-size: 40px;
+}
+
+.profile-picture:hover {
+    cursor: default;
+}
+
+.individualLikedSong {
+    text-decoration: none;
+    color: white;
+    margin-left: 70px;
+}
+
+.individualLikedSong:hover {
+    text-decoration: underline;
+}
+
+.retrievedSongsDiv {
+    margin-top: 20px;
+}
+
+.likedSongsDiv {
+    margin-top: 20px;
+    background-color: #3131313d;
+    padding: 10px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    min-height: 200px;
+    max-height: 300px;
+    width: 370px;
+}
+
+.likedSongs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    min-width: 400px;
+    text-align: left;
+    max-width: 400px;
+    color: white;
+    height: auto;
+    max-height: 230px;
+    overflow: auto;
+    margin-top: -20px;
+    padding: 10px;
+    margin-left: -75px;
+}
+
+.submittedSongsDiv {
+    margin-top: 20px;
+    background-color: #3131313d;
+    padding: 10px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    min-height: 200px;
+    max-height: 300px;
+    width: 370px;
+}
+
+.submittedSongs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    min-width: 400px;
+    text-align: left;
+    max-width: 400px;
+    color: white;
+    height: auto;
+    max-height: 230px;
+    overflow: auto;
+    margin-top: -20px;
+    padding: 10px;
+    margin-left: -75px;
+}
+
+.retrievedSongsDiv {
+    margin-top: 20px;
+    background-color: #3131313d;
+    padding: 10px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    min-height: 200px;
+    max-height: 300px;
+    width: 370px;
+}
+
+.retrievedSongs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    min-width: 400px;
+    text-align: left;
+    max-width: 400px;
+    color: white;
+    height: auto;
+    max-height: 230px;
+    overflow: auto;
+    margin-top: -20px;
+    padding: 10px;
+    margin-left: -75px;
+}
+
+.subretrDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.soundshiftText {
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 25px;
+    font-weight: 800;
+    color: white;
+    font-variation-settings: "slnt" -10;
+    margin-left: 40px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.soundshiftText:hover {
+    color: rgba(245, 245, 245, 0.5);
+}
+
+.footer {
+    color: rgba(245, 245, 245, 0.5);
+    text-align: center;
+    padding-bottom: 1%;
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

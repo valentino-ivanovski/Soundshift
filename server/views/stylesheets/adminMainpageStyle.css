@@ -1,0 +1,639 @@
+body {
+    font-family: Helvetica;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.animated-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-270deg, #5062ee, #2298e6);
+    background-size: 200% 200%;
+    animation: gradient 5s infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 100% 0;
+    }
+
+    50% {
+        background-position: 0 100%;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 25px;
+    align-items: center;
+    height: 10px;
+    background-color: #3e47a74a;
+    box-shadow: 0 2px 15px 0 rgba(142, 57, 57, 0.2);
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 3px;
+    margin-right: 38px;
+}
+
+.navbar li {
+    color: #261f37;
+    display: inline;
+    margin-right: 20px;
+    font-family: 'Inter', Helvetica;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.navbar li a {
+    padding: 11px 17px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: Inter, Helvetica;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    transition: font-weight 0.3s, 0.3s;
+}
+
+.navbar li a:hover {
+    font-weight: 500;
+}
+
+.navbar li aLM {
+    padding: 11px 17px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Inter, Helvetica;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    height: 100vh;
+}
+
+.left-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.right-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.square-inner {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    width: 100%;
+    margin-bottom: 60px;
+    margin-left: 10px;
+    margin-right:50px;
+}
+/*justify-content: flex-start*/
+.square-innermore{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: auto;
+    padding: 20px;
+    max-height: 75%;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.square-innermore::-webkit-scrollbar {
+    display: none;
+  }
+
+.circle-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 80%;
+    position: relative;
+    margin-bottom: 60px;
+    margin-left: 50px;
+    margin-right:10px;
+}
+
+@keyframes colorfulAnimation {
+    0% {
+        background-color: #f95e5e;
+    }
+
+    20% {
+        background-color: #6eea6e;
+    }
+
+    40% {
+        background-color: #6868d1;
+    }
+
+    60% {
+        background-color: #e665e6;
+    }
+
+    80% {
+        background-color: #00ffff;
+    }
+
+    100% {
+        background-color: #f95e5e;
+    }
+
+    /* Same as the starting color */
+}
+
+.circle-inner {
+    position: absolute;
+    margin-top: 30px;
+    width: 65%;
+    height: auto;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    margin-bottom: 90px;
+    box-shadow: inset 0 0 50px #fff,
+        inset 20px 0 80px #f0f,
+        inset -20px 0 80px #0ff,
+        inset 20px 0 300px #f0f,
+        inset -20px 0 300px #0ff,
+        0 0 50px #fff,
+        10px 0 400px #f0f;
+    transition: box-shadow 0.6s;
+    animation: colorfulAnimation 15s infinite;
+}
+
+.circle-inner:hover {
+    cursor: pointer;
+    box-shadow: inset 0 0 50px #fff,
+        inset 20px 0 80px #fa4554,
+        /* Hot Pink */
+        inset -20px 0 80px #40E0D0,
+        /* Turquoise */
+        inset 20px 0 300px #fa4554,
+        inset -20px 0 300px #40E0D0,
+        0 0 50px #fff,
+        10px 0 400px #FF69B4;
+}
+
+.genreExDiv {
+    position: static;
+    margin-top: 360px;
+    margin-left: 10px;
+    width: 100%;
+    transition: width 0.5s ease, margin-top 0.5s ease;
+}
+
+.circle-label {
+    color: rgba(245, 245, 245, 0.286);
+    position: absolute;
+    right: 90%;
+    top: 50%;
+    transform: translateY(-75%);
+    font-size: 18px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    width: 40%;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 60px;
+    transition: font-size 0.3s, right 0.3s;
+}
+
+@media screen and (max-width: 850px) {
+    .circle-label {
+        font-size: 14px; /* Reduce the font size to 14px when the window is narrower than 800px */
+        right:80%;
+    }
+}
+
+.footer {
+    color: rgba(245, 245, 245, 0.5);
+    text-align: center;
+    padding-bottom: 1%;
+    font-size: 12px;
+    position: fixed;
+    /* Changed from position: static */
+    bottom: 0;
+    /* Stick to the bottom */
+    width: 100%;
+    /* Full width */
+}
+
+.soundshiftText {
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 25px;
+    font-weight: 800;
+    color: white;
+    font-variation-settings: "slnt" -10;
+    margin-left: 40px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.soundshiftText:hover {
+    color: rgba(245, 245, 245, 0.5);
+}
+
+.headers {
+    text-align: center;
+    color: #fff;
+    font-family: "Inter", Helvetica;
+    font-weight: 700;
+    font-variation-settings: "slnt" -10;
+    transition: color 0.4s, 0.4s;
+}
+
+.headers:hover {
+    color: rgb(214, 214, 214);
+    cursor: default;
+}
+
+.labelGenre,
+.songTitleLabel,
+.explicitLabel,
+.explicitLabel2,
+.artistLabel,
+.genreLabel,
+.infoText {
+    color: #fff;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    font-size: 17px;
+}
+
+
+.explicitLabel2 {
+    margin-left: 10px;
+}
+
+#explicit1 {
+    margin-left: 10px;
+}
+
+#genre1,
+#genre {
+    padding: 7px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-family: "Inter", Helvetica;
+    font-size: 12px;
+    /* make the text a bit larger */
+    border-radius: 13px;
+    font-weight: 400;
+    border: 1px solid #e0f7fa;
+    appearance: none;
+    /* removes the default appearance */
+    background-color: #e0f7fa;
+    /* change this to your preferred color */
+    color: #5f5f5f;
+    text-align-last: center;
+    max-width: 80px;
+    /* removes the default outline */
+    /* makes the changes animate smoothly */
+    transition: background-color 0.2s, color 0.2s, border 0.2s;
+}
+
+#genre1:hover,
+#genre:hover {
+    border-color: #e6e6e6;
+    background-color: #e6e6e6;
+    /* moves the element up when hovered over */
+}
+
+#songTitle,
+#artistName {
+    width: 30wh;
+    padding: 12px;
+    border: none;
+    background-color: rgba(245, 245, 245, 0.11);
+    border-radius: 50px;
+    color: white;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+#songTitle:focus,
+#artistName:focus {
+    outline: none;
+}
+
+#songTitle::placeholder,
+#artistName::placeholder {
+    color: rgba(255, 255, 255, 0.30);
+}
+
+.submitButton {
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #c5c5c55c;
+    color: #fff;
+    text-decoration: none;
+    border: 1.5px solid #7058fa00;
+    border-radius: 50px;
+    font-size: 15px;
+    font-family: "Inter", Helvetica;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.submitButton:hover {
+    background-color: #624be8;
+    cursor: pointer;
+}
+
+.spotifyButton, .youtubeButton, .soundcloudButton{
+    padding: 10px 15px;
+    margin-top: 0px;
+    margin-right: 10px;
+    background-color: white;
+    color: #464444;
+    text-decoration: none;
+    border: 0px solid #ffffff;
+    border-radius: 50px;
+    font-size: 15px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.spotifyButton:hover {
+    background-color: #ebebeb;
+    color: #464444;
+}
+
+#player{
+    border-radius: 10px;
+}
+
+
+.soundcloudButton:hover {
+    background-color: #ebebeb;
+    color: #464444;
+}
+
+.youtubeButton:hover {
+    background-color: #ebebeb;
+    color: #464444;
+}
+
+@media screen and (max-width: 975px) {
+    .genreExDiv {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .genreExDiv {
+        width: 70%;
+        margin-top: 350px;
+    }
+}
+
+#error-message {
+    font-family: "Inter", Helvetica;
+    color: yellow;
+    font-size: 13px;
+}
+
+.divider {
+    width: 1px;
+    background-color: #ffffff64;
+    height: 70%;
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes moveLeftRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.clickMeAnimation {
+    animation: moveLeftRight 1s infinite;
+}
+
+.randomSongLabel{
+    
+    margin-top: 10px;
+}
+
+.commentsDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 17px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    width: 70%;
+    height: 300px;
+    color: #464444;
+    text-align: left;
+}
+
+.commentsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 80%; /* adjust this to the desired height */
+    overflow-y: auto;
+}
+
+.commentP{
+    display: flex;
+    align-items:center;
+    font-size: 15px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    margin-top: 5px;
+    border-radius: 10px;
+    background-color: #ebebeb;
+    padding: 10px;
+    width: 75%;   
+    position: relative;
+    padding-right: 40px;
+}
+
+.commentsHeader{
+    font-size: 20px;
+    font-family: "Inter", Helvetica;
+    font-weight: 650;
+    margin-top: 5px;
+    border-radius: 15px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.usernameLink{
+    color: #464444;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.usernameLink:hover{
+    color: #464444;
+    text-decoration: underline;
+}
+
+.commentFormDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+}
+
+/* If gap doesn't work, use margins */
+.commentFormDiv input {
+    margin-right: 10px;
+    width: 50%;
+    padding: 12px;
+    border: none;
+    background-color: rgba(195, 195, 195, 0.279);
+    border-radius: 50px;
+    color: rgb(0, 0, 0);
+    font-size: 13px;
+}
+
+.commentForm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    gap: 0px;
+}
+
+.commentFormDiv button {
+    padding: 5px 7px;
+    background-color: #7862f1;
+    color: #fff;
+    text-decoration: none;
+    border: 1.5px solid #7058fa;
+    border-radius: 50%;
+    font-size: 15px;
+    font-family: "Inter", Helvetica;
+    cursor: pointer;
+}
+
+.commentFormDiv button:hover {
+    background-color: #624be8;
+    border-color: #624be8;
+}
+
+.commentDate{
+    font-size: 10px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    color: #46444475;
+    position: absolute;
+    right: 80px;
+    margin-top: 5px;
+}
+
+.report-comment{
+    color: #464444;
+    font-size: 13px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 100px;
+    position: absolute;
+    right: 10px;
+}
+
+.report-comment:hover{
+    color: #464444;
+    text-decoration: underline;
+}
+
+.delete-comment{
+    color: #e84949;
+    font-size: 13px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 100px;
+    position: absolute;
+    right: 10px;
+}
+
+.delete-comment:hover{
+    color: #464444;
+    text-decoration: underline;
+}
+
+.likeButton{
+    padding: 8px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    color: #464444;
+    text-decoration: none;
+    border: 0px solid #ffffff;
+    border-radius: 50px;
+    font-size: 12px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.likeButton:disabled{
+    background-color: #a1a1a1;
+    color: #6c6c6c;
+}

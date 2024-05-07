@@ -1,5 +1,5 @@
 const express = require('express');
-const session = require('express-session'); // Import express-session
+const session = require('express-session');
 require('dotenv').config();
 const app = express();
 const path = require('path');
@@ -20,12 +20,29 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-// Middleware to check if the user is logged in
 function requireLogin(req, res, next) {
   if (req.session.user) {
-    next(); // Continue to the next middleware or route
+    next();
   } else {
-    res.redirect('/login'); // Redirect to the login page if the user is not logged in
+    res.redirect('/login');
+  }
+}
+
+function requireAdmin(req, res, next) {
+  if (req.session.user && req.session.user.admin === 0) {
+      next();
+  } else {
+      res.redirect('/mainpage');
+  }
+}
+
+//SWAP THESE WHEN DONE WITH TESTING
+
+function requireNotAdmin(req, res, next) {
+  if (req.session.user && req.session.user.admin === 1) {
+      next();
+  } else {
+      res.redirect('/adminMainpage');
   }
 }
 
@@ -54,12 +71,21 @@ const registerRouter = require('./routes/register');
 app.use("/register", registerRouter);
 
 const mainpageRouter = require('./routes/mainpage');
-app.use("/mainpage", requireLogin, mainpageRouter);
+app.use("/mainpage", requireLogin, requireNotAdmin, mainpageRouter);
 
 const profileRouter = require('./routes/profile');
-app.use("/profile", requireLogin, profileRouter);
+app.use("/profile", requireLogin, requireNotAdmin, profileRouter);
 
 const searchRouter = require('./routes/search');
-app.use("/search", requireLogin, searchRouter);
+app.use("/search", requireLogin, requireNotAdmin, searchRouter);
+
+const adminMainpageRouter = require('./routes/adminMainpage');
+app.use("/adminMainpage", requireLogin, requireAdmin, adminMainpageRouter);
+
+const adminSearchRouter = require('./routes/adminSearch');
+app.use("/adminSearch", requireLogin, requireAdmin, adminSearchRouter);
+
+const adminProfileRouter = require('./routes/adminProfile');
+app.use("/adminProfile", requireLogin, requireAdmin, adminProfileRouter);
 
 app.listen(3000);

@@ -24,10 +24,16 @@ router.post('/login', (req, res) => {
           //set the user session
           req.session.user = user;
 
-          res.redirect("/mainpage");
+          if (user.admin === 0) {
+            res.redirect("/adminMainpage");
+        } else {
+            res.redirect("/mainpage");
+        }
       }
   });
 });
+
+
 
 router.get('/mainpage', (req, res) => {
     // Check if the user is logged in

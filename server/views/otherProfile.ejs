@@ -33,7 +33,7 @@
                         <%= user.username.charAt(0).toUpperCase() %>
                     </div>
 
-                    <h1 class="welcome"><%= userr.username %> </h1>
+                    <h1 class="welcome"><%= userr.username %><%= (user.admin === 1) ? '🔸' : '' %></h1>
 
                     <h2 class="location"><%= userr.location %></h2>
 

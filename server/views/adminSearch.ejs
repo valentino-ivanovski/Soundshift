@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4662D8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/stylesheets/adminSearchStyle.css"> <!-- Link to the new CSS file -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
+    <title>Soundshift</title>
+</head>
+
+<body>
+    <center>
+        <div class="animated-bg">
+            <div class="navbar">
+                <a class="soundshiftText" href="/adminMainpage">soundshift</a>
+                <ul>
+                    <li><a href="/adminMainpage" style="font-weight: 500;">Home</a></li>
+                    <li><a href="/adminSearch">Search</a></li>
+                    <li><a href="/adminProfile/me">Profile</a></li>
+                    <li><a href="/adminUsersList">Users</a></li>
+                    <li><a href="/adminSongsList">Songs</a></li>
+                    <li><a href="/adminCommentsList">Comments</a></li>
+                    <li><a href="/adminReportsList">Reports</a></li>
+                </ul>
+                <li><a href="/logout">Log Out</a></li>
+            </div>
+
+            <div class="content">
+
+                <div class="centerdiv">
+                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
+                        <form style="display: flex; flex-direction: column; gap:20px;">
+                            <input type="text" id="search" placeholder="Search for a user...">
+                            <div class="searchButtons">
+                                <button class="buttonSearch">Search</button>
+                                <button type="menu" class="buttonSearch" id="songSearchButton">Song Search: Off</button>
+                            </div>
+                        </form>
+                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;"> <!-- Add this line -->
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer">
+                Made by: <a href="https://github.com/valentino-ivanovski" style="color: inherit;">Valentino
+                    Ivanovski</a> for Systems 3 - 2024
+                - Welcome, <strong>
+                    <%= user.username %>🔸
+                </strong>
+            </div>
+
+        </div>
+        <script>
+            let songSearch = false;
+            const songSearchButton = document.getElementById('songSearchButton');
+            const form = document.querySelector('form');
+            const searchInput = document.getElementById('search');
+            const resultsContainer = document.createElement('div');
+            const resultsWillShowHere = document.createElement('p');
+
+            resultsContainer.className = 'results';
+            resultsWillShowHere.textContent = 'Results will appear here';
+            resultsWillShowHere.style.fontFamily = 'Inter';
+            resultsWillShowHere.style.fontWeight = '400';
+            resultsWillShowHere.style.fontSize = '17px';
+            resultsWillShowHere.style.color = 'rgba(256, 256, 256, 0.5)';
+            resultsWillShowHere.style.marginTop = '5px';
+            resultsContainer.appendChild(resultsWillShowHere);
+        
+            form.parentNode.appendChild(resultsContainer);
+        
+            songSearchButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                if (songSearchButton.textContent === 'Song Search: Off') {
+                    songSearchButton.textContent = 'Song Search: On';
+                    songSearch = true;
+                    document.getElementById('search').placeholder = 'Search for a song...';
+                } else {
+                    songSearchButton.textContent = 'Song Search: Off';
+                    songSearch = false;
+                    document.getElementById('search').placeholder = 'Search for a user...';
+                }
+            });
+        
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                const query = searchInput.value;
+                const url = songSearch ? `/adminSearch/songResults/${query}` : `/adminSearch/userResults/${query}`;
+                
+                fetch(url)
+                    .then(response => response.json())
+                    .then(results => {
+                        resultsContainer.innerHTML = '';
+                        results.forEach(result => {
+                            const resultDiv = document.createElement('div');
+                            if (songSearch) {
+                                resultsWillShowHere.style.display = 'none';
+                                const singleUnit = document.createElement('div');
+                                singleUnit.className = 'singleUnit';
+                                const songInfo = document.createElement('a');
+                                songInfo.textContent = `${result.title}  by: ${result.artist}`;
+                                singleUnit.style.minWidth = '250px';
+                                singleUnit.appendChild(songInfo);
+                                singleUnit.style.padding = '10px';
+                                singleUnit.style.justifyContent = 'center';
+                                singleUnit.style.height = '30px';
+                                resultDiv.appendChild(singleUnit);
+                                songInfo.href = `${result.spotify_link}`;
+                                songInfo.className = 'songInfo';    
+
+                            } else {
+                                resultsWillShowHere.style.display = 'none';
+                                const singleUnit = document.createElement('div');
+                                singleUnit.className = 'singleUnit';
+                                
+                                const imageDiv = document.createElement('div');
+                                imageDiv.style.width = '50px';
+                                imageDiv.style.height = '50px';
+                                imageDiv.style.borderRadius = '50%';
+                                imageDiv.style.backgroundImage = `url(${result.imageUrl})`;
+                                imageDiv.style.backgroundSize = 'cover';
+                                imageDiv.style.outline = '1px solid rgba(0, 0, 0, 0.1)';
+
+                                singleUnit.appendChild(imageDiv);
+
+                                const usernameDiv = document.createElement('a');
+                                usernameDiv.href = `/adminProfile/${result.username}`;
+                                usernameDiv.textContent = result.username;
+                                usernameDiv.className = 'username';
+
+                                singleUnit.appendChild(usernameDiv);
+                                resultDiv.appendChild(singleUnit);
+                            }
+                            resultsContainer.appendChild(resultDiv);
+                        });
+                    })
+                    .catch(err => console.error(err));
+            };
+        </script>
+    </center>
+</body>

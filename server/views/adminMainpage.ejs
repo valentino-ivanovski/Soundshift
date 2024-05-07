@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4662D8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/stylesheets/adminMainpageStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
+    <title>Soundshift</title>
+</head>
+
+<body>
+    <center>
+        <div class="animated-bg">
+            <div class="navbar">
+                <a class="soundshiftText" href="/adminMainpage">soundshift</a>
+                <ul>
+                    <li><a href="/adminMainpage" style="font-weight: 500;">Home</a></li>
+                    <li><a href="/adminSearch">Search</a></li>
+                    <li><a href="/adminProfile/me">Profile</a></li>
+                    <li><a href="/adminUsersList">Users</a></li>
+                    <li><a href="/adminSongsList">Songs</a></li>
+                    <li><a href="/adminCommentsList">Comments</a></li>
+                    <li><a href="/adminReportsList">Reports</a></li>
+                </ul>
+                <li><a href="/logout">Log Out</a></li>
+            </div>
+
+            <div class="content">
+                <div class="left-side">
+                    <div class="circle-container">
+                        <div class="circle-inner">
+                            <div class="circle-label">
+                                <p class="clickMeAnimation">Click Me! -></p>
+                            </div>
+                        </div>
+
+                        <div class="genreExDiv">
+                            <label for="genre1" class="labelGenre">Genre:</label>
+                            <select id="genre1" name="genre1">
+                                <option value="Any">Any</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Rock">Rock</option>
+                                <option value="Hip Hop/Rap">Hip Hop/Rap</option>
+                                <option value="Electronic">Electronic</option>
+                                <option value="R&B/Soul">R&B/Soul</option>
+                                <option value="Country">Country</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Reggae">Reggae</option>
+                                <option value="Classical">Classical</option>
+                                <option value="Folk">Folk</option>
+                                <option value="Metal">Metal</option>
+                                <option value="Blues">Blues</option>
+                                <option value="Gospel">Gospel</option>
+                                <option value="World">World</option>
+                                <option value="Experimental">Experimental</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input type="checkbox" id="explicit1" name="explicit">
+                            <label for="explicit1" class="explicitLabel">Explicit</label>
+                            <p id="error-message"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider">
+
+                </div>
+                <div class="right-side">
+                    <div class="square-inner">
+                        <div class="square-innermore" id="song-info-container">
+                            <h1 class="headers" id="submitafavsong">submit a fav song:</h1>
+                            <form action="/adminMainpage/submitsong" method="post">
+                                <!-- song title -->
+                                <div style="margin-bottom: 10px;">
+                                    <label for="songTitle" class="songTitleLabel">Song Title:</label>
+                                    <input type="text" id="songTitle" placeholder="First Take" name="songTitle" required>
+                                </div>
+
+                                <!-- artist name -->
+                                <div style="margin-bottom: 10px;">
+                                    <label for="artistName" class="artistLabel">Artist Name:</label>
+                                    <input type="text" id="artistName" placeholder="Travis Scott" name="artistName" required> 
+                                </div>
+
+                                <!-- genre -->
+                                <div style="margin-bottom: 10px;">
+                                    <label for="genre" class="genreLabel">Genre:</label>
+                                    <select id="genre" name="genre" required>
+                                        <option>None</option>
+                                        <option value="Pop">Pop</option>
+                                        <option value="Rock">Rock</option>
+                                        <option value="Hip Hop/Rap">Hip Hop/Rap</option>
+                                        <option value="Electronic">Electronic</option>
+                                        <option value="R&B/Soul">R&BSoul</option>
+                                        <option value="Country">Country</option>
+                                        <option value="Jazz">Jazz</option>
+                                        <option value="Reggae">Reggae</option>
+                                        <option value="Classical">Classical</option>
+                                        <option value="Folk">Folk</option>
+                                        <option value="Metal">Metal</option>
+                                        <option value="Blues">Blues</option>
+                                        <option value="Gospel">Gospel</option>
+                                        <option value="World">World</option>
+                                        <option value="Experimental">Experimental</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <label for="explicit" class="explicitLabel2">Explicit</label>
+                                    <input type="checkbox" id="explicit" name="explicit"><!-- explicit -->
+                                    <p style="color: yellow;font-size: 13px; margin-top: 20px;">
+                                        <%= locals.errorSongExists %>
+                                    </p>
+                                </div>
+                                <div>
+                                    <input type="submit" class="submitButton" value="Submit">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                Made by: <a href="https://github.com/valentino-ivanovski" style="color: inherit;">Valentino
+                    Ivanovski</a> for Systems 3 - 2024
+                - Welcome, <strong>
+                    <%= user.username %>🔸
+                </strong>
+            </div>
+        </div>
+
+        <script>
+            /*location fetching for user*/
+            let userLocation = 'Earth';
+            const findMyLocation = () => {
+
+                const success = (position) => {
+                    console.log(position);
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    console.log(latitude, longitude);
+
+                    const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
+
+                    fetch(geoApiUrl)
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            console.log(data.principalSubdivision + ", " + data.countryName);
+                            const location = data.principalSubdivision + ", " + data.countryName;
+
+                            fetch('/adminMainpage/updateUserLocation', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    location: location
+                                })
+                            })
+                        })
+                }
+
+                const error = (error) => {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            console.error("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            console.error("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            console.error("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            console.error("An unknown error occurred.");
+            break;
+    }
+}
+
+                navigator.geolocation.getCurrentPosition(success, error);
+
+            }
+
+            findMyLocation();
+
+            /*retrieving songs and video*/
+            document.addEventListener('DOMContentLoaded', function () {
+                const circle = document.querySelector('.circle-inner');
+                const genreSelect = document.getElementById('genre1');
+                const explicitCheckbox = document.getElementById('explicit1');
+                const songInfoContainer = document.getElementById('song-info-container');
+
+
+                circle.addEventListener('click', function () {
+
+                    document.getElementById('error-message').innerText = '';
+
+                    const genre = genreSelect.value;
+                    const explicit = explicitCheckbox.checked;
+
+                    //prepare data for POST request
+                    const data = {
+                        genre: genre,
+                        explicit: explicit
+                    };
+
+                    //send post request
+                    fetch('/adminMainpage/getrandomsong', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json(); // Parse the response JSON
+                            } else {
+                                console.error('Error:', response.statusText);
+                            }
+                        })
+                        .then(songs => {
+                            const song = songs[0];
+                            const title = song.title ? song.title : 'Unknown';
+                            const artist = song.artist ? song.artist : 'Unknown';
+                            const genre = song.genre ? song.genre : 'Unknown';
+                            const explicitStatus = song.explicit ? 'Yes' : 'No';
+                            const uploadDate = new Date(song.upload_date).toLocaleDateString();
+                            const userLocation = song.location;
+                            const songLocation = song.retrLocation;
+                            const username = song.username;
+                            const spotifyLink = song.spotify_link;
+                            const soundcloudLink = song.soundcloud_link;
+                            const youtubeLink = song.yt_link;
+                            const likes = song.like_count;
+                            const songid = song.song_id;
+
+                            //adding the retreived song to the retrievedSongs table
+                            const retrievedSongData = {
+                                song_id: song.song_id,
+                                retrieval_date: new Date().toISOString().slice(0, 10) // Current date in YYYY-MM-DD format
+                            };
+
+                            fetch('/adminMainpage/storeRetrievedSong', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(retrievedSongData)
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    console.error('Error:', response.statusText);
+                                }
+                            });
+
+                            /*ova mojs da go naprajs ko so gi napraj buttons i yt viewer*/
+                            const songDetailsHTML = `
+                                <div style="margin-top: -40px">
+                                    <h1 style="color: #fff; font-family: "Inter", Helvetica; font-weight: 350; font-size: 17px;">Random Song Details:</h1>
+                                    <p>Song: <strong>${title}</strong>, by <strong>${artist}</strong>.</p>
+                                    <p>Genre: <strong>${genre}</strong>, Explicit: <strong>${explicitStatus}</strong></p>
+                                    <p>Uploaded by: <a href="/otherProfile/${username}" style="color: #fff;"><strong>${username}</strong></a>, on <strong>${uploadDate}</strong></p>
+                                    <p>Location: <strong>${songLocation}</strong></p>
+                                </div>
+                                `;
+                            songInfoContainer.innerHTML = songDetailsHTML;
+
+
+                            fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + ' ' + artist)}&key=AIzaSyAwEFqINoDrNr9sWjIXwuNVI4cZvBjW43E&type=video`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.items && data.items.length > 0) {
+                                        const videoId = data.items[0].id.videoId; // Extract the video ID from search results
+
+                                        // Create YouTube player
+                                        const playerContainer = document.createElement('div');
+                                        playerContainer.id = 'player';
+                                        songInfoContainer.appendChild(playerContainer);
+
+                                        const player = new YT.Player('player', {
+                                            height: '100%',
+                                            width: '50%',
+                                            videoId: videoId,
+                                        });
+
+                                        const likeCommentDiv = document.createElement('div');
+                                        likeCommentDiv.style.marginBottom = '-15px';
+                                        likeCommentDiv.style.display = 'flex';
+                                        likeCommentDiv.style.alignItems = 'center';
+                                        likeCommentDiv.style.justifyContent = 'center';
+
+                                        const likeButton = document.createElement('button');
+                                        const likeCount = document.createElement('p');
+                                        likeButton.className = 'likeButton';    
+
+                                        fetch('/adminMainpage/checkIfUserLiked', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({
+                                                songid: song.song_id,
+                                            })
+                                        })
+                                            .then(response => {
+                                                if (response.ok) {
+                                                    return response.json();
+                                                }
+                                            })
+                                            .then(data => {
+                                                if (data.liked) {
+                                                    likeButton.disabled = true;
+                                                }
+                                            });
+
+                                        likeCommentDiv.appendChild(likeButton);
+                                        likeCount.innerText = likes;
+                                        likeCount.style.marginLeft = '10px';
+                                        likeCount.style.marginRight = '20px';
+
+                                        likeButton.addEventListener('click', function () {
+                                            fetch('/adminMainpage/updateLikeCount', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify({
+                                                    songid: song.song_id,
+                                                })
+                                            })
+                                                .then(response => {
+                                                    if (response.ok) {
+                                                        likeCount.innerText = parseInt(likeCount.innerText) + 1;
+                                                        likeButton.disabled = true;
+                                                    } else {
+                                                        console.error('Error:', response.statusText);
+                                                    }
+                                                })
+                                        })
+                                        likeButton.innerText = '❤️ ' + parseInt(likeCount.innerText);
+                                        songInfoContainer.appendChild(likeCommentDiv);
+
+
+
+                                        // Create a div to contain the buttons
+                                        const buttonsDiv = document.createElement('div');
+                                        buttonsDiv.style.marginTop = '20px';
+
+                                        // Create buttons
+                                        const spotifyButton = document.createElement('button');
+                                        spotifyButton.innerText = 'Spotify';
+                                        spotifyButton.className = 'spotifyButton';
+                                        spotifyButton.onclick = function () {
+                                            window.open(spotifyLink, '_blank');
+                                        };
+                                        buttonsDiv.appendChild(spotifyButton);
+
+
+
+                                        const soundcloudButton = document.createElement('button');
+                                        soundcloudButton.innerText = 'SoundCloud';
+                                        soundcloudButton.className = 'soundcloudButton';
+                                        soundcloudButton.onclick = function () {
+                                            window.open(soundcloudLink, '_blank');
+                                        };
+                                        buttonsDiv.appendChild(soundcloudButton);
+
+
+
+                                        const youtubeButton = document.createElement('button');
+                                        youtubeButton.innerText = 'YouTube';
+                                        youtubeButton.className = 'youtubeButton';
+                                        youtubeButton.onclick = function () {
+                                            window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+                                        };
+                                        buttonsDiv.appendChild(youtubeButton);
+
+                                        // Append the div to the songInfoContainer
+                                        songInfoContainer.appendChild(buttonsDiv);
+
+                                        const arrowDiv = document.createElement('div');
+                                        const arrow = document.createElement('img');
+                                        arrow.src = '/images/downArrow.png';
+                                        arrow.style.width = '20px';
+                                        arrow.style.marginTop = '20px';
+                                        arrowDiv.appendChild(arrow);
+                                        songInfoContainer.appendChild(arrowDiv);
+
+                                        //COMMENT SECTION
+                                        fetch(`/adminMainpage/comments/${songid}`, {
+                                            method: 'GET',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            }
+                                        })
+                                            .then(response => {
+                                                if (!response.ok) {
+                                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                                }
+                                                return response.json();
+                                            })
+                                            .then(comments => {
+                                                console.log(comments);
+
+                                                const commentsDiv = document.createElement('div');
+                                                commentsDiv.className = 'commentsDiv';
+
+                                                const commentsContainer = document.createElement('div');
+                                                commentsContainer.className = 'commentsContainer';
+
+                                                const commentsHeader = document.createElement('h1');
+                                                commentsHeader.innerText = 'Comments';
+                                                commentsHeader.className = 'commentsHeader';
+                                                commentsDiv.appendChild(commentsHeader);
+
+
+                                                const commentFormDiv = document.createElement('div');
+                                                commentFormDiv.className = 'commentFormDiv';
+                                                const commentForm = document.createElement('form');
+                                                commentForm.className = 'commentForm';
+                                                const commentInput = document.createElement('input');
+                                                commentInput.type = 'text';
+                                                commentInput.name = 'comment';
+                                                commentInput.required = true;
+                                                commentInput.placeholder = 'Write a comment...';
+                                                commentInput.style.width = '80%';
+
+                                                const submitButtonComments = document.createElement('button');
+                                                submitButtonComments.type = 'submit';
+                                                submitButtonComments.innerText = '↑';
+
+                                                if (comments.length === 0) {
+                                                    const noCommentsP = document.createElement('p');
+                                                    noCommentsP.innerText = 'No comments yet';
+                                                    noCommentsP.style.textAlign = 'center';
+                                                    noCommentsP.style.marginTop = '80px';
+                                                    noCommentsP.style.color = 'gray';
+                                                    commentsContainer.appendChild(noCommentsP);
+                                                } else {
+                                                    comments.forEach(comment => {
+                                                        const commentP = document.createElement('p');
+                                                        commentP.className = 'commentP';
+
+                                                        const usernameLink = document.createElement('a');
+                                                        usernameLink.href = `/otherProfile/${comment.username}`; // adjust this to the correct URL
+                                                        usernameLink.innerText = comment.username;
+                                                        usernameLink.className = 'usernameLink';
+                                                        commentP.appendChild(usernameLink);
+
+                                                        const colonText = document.createTextNode(': ');
+                                                        commentP.appendChild(colonText);
+
+                                                        const commentText = document.createTextNode(`${comment.content}`);
+                                                        commentP.appendChild(commentText);
+                                                        commentsContainer.appendChild(commentP);
+
+
+                                                        const reportSpan = document.createElement('span');
+                                                        reportSpan.textContent = 'Report';
+                                                        reportSpan.className = 'report-comment';
+
+                                                        const deleteSpan = document.createElement('span');
+                                                        deleteSpan.textContent = 'Delete';
+                                                        deleteSpan.className = 'delete-comment';
+
+                                                        fetch('/adminMainpage/currentUser', {
+                                                            method: 'GET',
+                                                            headers: {
+                                                                'Content-Type': 'application/json'
+                                                            }
+                                                        })
+                                                        .then(response => response.json())
+                                                        .then(data => {
+                                                            const currentUserId = data.currentUserId;
+                                                            const commentid = comment.comment_id;
+
+                                                            if(currentUserId === comment.user_id){
+                                                                deleteSpan.addEventListener('click', function () {
+                                                                    const confirmDelete = confirm('Are you sure you want to delete this comment?');
+                                                                    if (confirmDelete) {
+                                                                        fetch(`/adminMainpage/comments/delete/${commentid}`, {
+                                                                            method: 'DELETE'
+                                                                        })
+                                                                        .then(response => {
+                                                                            if (response.ok) {
+                                                                                commentP.remove();
+                                                                            }
+                                                                        })
+                                                                        .catch(error => {
+                                                                            console.error('Error:', error);
+                                                                        });
+                                                                    }
+                                                                });
+
+                                                                commentP.appendChild(deleteSpan);
+                                                            } else {
+                                                                reportSpan.addEventListener('click', function () {
+                                                                    const reason = prompt('Please enter a reason for reporting this comment:');
+                                                                    if (reason) {
+                                                                        console.log('Type of reason:', typeof reason);
+
+                                                                        const commentId = comment.comment_id;
+                                                                        console.log('Comment ID:', commentId);
+
+                                                                        fetch(`/adminMainpage/report`, {
+                                                                            method: 'POST',
+                                                                            headers: {
+                                                                                'Content-Type': 'application/json'
+                                                                            },
+                                                                            body: JSON.stringify({ reason: reason, commentId: commentId })
+                                                                        })
+                                                                        .then(response => response.json())
+                                                                        .then(data => {
+                                                                            if (data.reported) {
+                                                                                alert('Comment reported successfully');
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                });
+                                                                commentP.appendChild(reportSpan);
+                                                            }
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error:', error);
+                                                        });
+                                                    });
+                                                }
+                                                commentsDiv.appendChild(commentsContainer);
+                                                songInfoContainer.appendChild(commentsDiv);
+
+                                                commentForm.appendChild(commentInput);
+                                                commentForm.appendChild(submitButtonComments);
+
+                                                commentForm.addEventListener('submit', function (event) {
+                                                    event.preventDefault(); // Prevent the form from being submitted normally
+
+                                                    const commentText = commentInput.value; // Get the text from the input field
+                                                    const songid = song.song_id;
+
+                                                    fetch(`/adminMainpage/comments/add/${songid})`, {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        },
+                                                        body: JSON.stringify({ comment: commentText, songid: songid }) // Send the comment text in the request body
+                                                    })
+                                                        .then(response => {
+                                                            if (response.ok) {
+                                                                commentInput.value = ''; // Clear the input field
+                                                                const successP = document.createElement('p');
+                                                                successP.innerText = 'Comment added successfully';
+                                                                successP.style.color = 'green';
+                                                                successP.style.fontSize = '10px';
+                                                                successP.style.textAlign = 'center';
+                                                                commentsDiv.appendChild(successP);
+                                                            }
+                                                            return response.json();
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error:', error);
+                                                        });
+                                                });
+
+                                                commentFormDiv.appendChild(commentForm);
+                                                commentsDiv.appendChild(commentFormDiv);
+
+                                            })
+                                            .catch(error => {
+                                                console.error('Error:', error);
+                                            });
+
+                                    } else {
+                                        console.error('No YouTube video found for the song');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching YouTube video:', error);
+                                });
+                        })
+
+                        .catch(error => {
+                            console.error('Error:', error);
+                            document.getElementById('error-message').innerText = 'No songs found for the selected genre.';
+                        });
+                });
+            });
+        </script>
+    </center>
+</body>
+
+</html>
