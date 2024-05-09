@@ -7,4 +7,27 @@ router.get('/', (req, res) => {
     res.render("adminSongsList");
 })
 
+router.get('/getSongs', (req, res) => {
+    dbConn.getSongs((err, songs) => {
+        if (err) {
+            console.error("Error fetching songs:", err);
+            return res.status(500).send("Error fetching songs");
+        } else{
+            res.json(songs);
+        }
+    });
+});
+
+router.get('/deleteSong/:song_id', (req, res) => {
+    const id = req.params.song_id;
+    dbConn.deleteSong(id, (err, result) => {
+        if (err) {
+            console.error("Error deleting song:", err);
+            return res.status(500).send("Error deleting user");
+        } else {
+            res.render("adminSongsList");
+        }
+    });
+});
+
 module.exports = router;

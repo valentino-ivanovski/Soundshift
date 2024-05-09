@@ -594,6 +594,63 @@ function removeAdmin(username, callback) {
     });
 }
 
+function getSongs(callback) {
+    const sql = `SELECT * FROM songsNew ORDER BY song_id`;
+
+    conn.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched all users:", results.length);
+            callback(null, results);
+        }
+    });
+}
+
+function deleteSong(songId, callback) {
+    conn.beginTransaction(function(err) {
+        if (err) { callback(err); return; }
+
+        async.series([
+            function(callback) {
+                const sql = `DELETE FROM retrievedSongs WHERE song_id = ?`;
+                conn.query(sql, [songId], callback);
+            },
+            function(callback) {
+                const sql = `DELETE FROM liked_songs WHERE song_id = ?`;
+                conn.query(sql, [songId], callback);
+            },
+            function(callback) {
+                const sql = `DELETE FROM comments WHERE song_id = ?`;
+                conn.query(sql, [songId], callback);
+            },
+            function(callback) {
+                const sql = `DELETE FROM songsNew WHERE song_id = ?`;
+                conn.query(sql, [songId], callback);
+            }
+        ], function(err, results) {
+            if (err) {
+                console.error("Error deleting song:", err);
+                conn.rollback(function() {
+                    callback(err);
+                });
+            } else {
+                console.log("Successfully deleted song with id:", songId);
+                conn.commit(function(err) {
+                    if (err) {
+                        conn.rollback(function() {
+                            callback(err);
+                        });
+                    } else {
+                        callback(null, results);
+                    }
+                });
+            }
+        });
+    });
+}
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -626,5 +683,7 @@ module.exports = {
     getUsers,
     makeAdmin,
     removeAdmin,
-    deleteUser
+    deleteUser,
+    getSongs,
+    deleteSong
 };

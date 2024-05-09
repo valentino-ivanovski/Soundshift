@@ -175,7 +175,7 @@ input:focus {
 .singleUnit {
     display: flex; 
     align-items: center; 
-    justify-content: space-between; /* Change from space-around to space-between */
+    justify-content: left; /* Change from space-around to space-between */
     gap: 10px; 
     margin: 10px; 
     width: auto;
@@ -198,6 +198,10 @@ input:focus {
     text-decoration: none;
 }
 
+.deleteUser:hover{
+    text-decoration: underline;
+}
+
 .makeAdmin {
     font-family: Inter, Arial;
     font-size: 15px;
@@ -208,7 +212,7 @@ input:focus {
 
 .id{
     font-family: Inter, Arial;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.382);
     text-decoration: none;

@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#4662D8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/stylesheets/adminSongsListStyle.css">
+    <link rel="stylesheet" href="/stylesheets/adminSongsListStyle.css"> <!-- Link to the new CSS file -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
     <title>Soundshift</title>
 </head>
@@ -31,7 +31,17 @@
 
             <div class="content">
 
-                
+                <div class="centerdiv">
+                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
+                        <form style="display: flex; flex-direction: column; gap:20px;">
+                            <input type="text" id="search" placeholder="Search for a song or artist...">
+                            <div class="searchButtons">
+                                <button class="buttonSearch">Search</button>
+                            </div>
+                        </form>
+                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;"> <!-- Add this line -->
+                    </div>
+                </div>
 
             </div>
 
@@ -45,7 +55,95 @@
 
         </div>
         <script>
-            
+            let songSearch = false;
+            const form = document.querySelector('form');
+            const searchInput = document.getElementById('search');
+            const resultsContainer = document.createElement('div');
+            const resultsWillShowHere = document.createElement('p');
+
+            resultsContainer.className = 'results';
+        
+            form.parentNode.appendChild(resultsContainer);
+
+            fetch(`/adminSongsList/getSongs`)
+                .then(response => response.json())
+                .then(results => {
+                    results.forEach(result => {
+                        const resultDiv = document.createElement('div');
+                        const singleUnit = document.createElement('div');
+                        singleUnit.className = 'singleUnit';
+
+                        const idDiv = document.createElement('p');
+                        idDiv.textContent = result.song_id;
+                        idDiv.className = 'id';
+
+                        singleUnit.appendChild(idDiv);
+
+                        const songTitleDiv = document.createElement('a');
+                        songTitleDiv.href = `${result.spotify_link}`;
+                        songTitleDiv.textContent = result.title + " by " + result.artist;
+                        songTitleDiv.className = 'title';
+
+                        const deleteUser = document.createElement('a');
+                        deleteUser.href =  `/adminSongsList/deleteSong/${result.song_id}`;
+                        deleteUser.textContent = 'Delete';
+                        deleteUser.className = 'deleteUser';
+                        deleteUser.onclick = function() {
+                            return confirm('Are you sure you want to delete this song?');
+                        };
+
+                        singleUnit.appendChild(songTitleDiv);
+                        singleUnit.appendChild(deleteUser);
+                        resultDiv.appendChild(singleUnit);
+                        resultsContainer.appendChild(resultDiv);
+                    });
+                });
+        
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                const query = searchInput.value;
+                const url = `/adminSearch/songResults/${query}`;
+
+                if (query === ""){
+                    
+                }
+                
+                fetch(url)
+                    .then(response => response.json())
+                    .then(results => {
+                        resultsContainer.innerHTML = '';
+                        results.forEach(result => {
+                        const resultDiv = document.createElement('div');
+                        const singleUnit = document.createElement('div');
+                        singleUnit.className = 'singleUnit';
+
+                        const idDiv = document.createElement('p');
+                        idDiv.textContent = result.song_id;
+                        idDiv.className = 'id';
+
+                        singleUnit.appendChild(idDiv);
+
+                        const songTitleDiv = document.createElement('a');
+                        songTitleDiv.href = `${result.spotify_link}`;
+                        songTitleDiv.textContent = result.title + " by " + result.artist;
+                        songTitleDiv.className = 'title';
+
+                        const deleteUser = document.createElement('a');
+                        deleteUser.href =  `/adminSongsList/deleteSong/${result.song_id}`;
+                        deleteUser.textContent = 'Delete';
+                        deleteUser.className = 'deleteUser';
+                        deleteUser.onclick = function() {
+                            return confirm('Are you sure you want to delete this song?');
+                        };
+
+                        singleUnit.appendChild(songTitleDiv);
+                        singleUnit.appendChild(deleteUser);
+                        resultDiv.appendChild(singleUnit);
+                        resultsContainer.appendChild(resultDiv);
+                        });
+                    })
+                    .catch(err => console.error(err));
+            };
         </script>
     </center>
 </body>

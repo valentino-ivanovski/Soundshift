@@ -30,7 +30,7 @@
                 <div class="centerdiv">
                     <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
                         <form style="display: flex; flex-direction: column; gap:20px;">
-                            <input type="text" id="search" placeholder="Search for a user...">
+                            <input type="text" id="search" placeholder="Search for a user or id...">
                             <div class="searchButtons">
                                 <button class="buttonSearch">Search</button>
                                 <button type="menu" class="buttonSearch" id="songSearchButton">Song Search: Off</button>
@@ -75,7 +75,7 @@
                 if (songSearchButton.textContent === 'Song Search: Off') {
                     songSearchButton.textContent = 'Song Search: On';
                     songSearch = true;
-                    document.getElementById('search').placeholder = 'Search for a song...';
+                    document.getElementById('search').placeholder = 'Search for a song or artist...';
                 } else {
                     songSearchButton.textContent = 'Song Search: Off';
                     songSearch = false;
