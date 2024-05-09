@@ -651,6 +651,54 @@ function deleteSong(songId, callback) {
     });
 }
 
+function getComments(callback) {
+    const sql = `SELECT comments.*, songsNew.title 
+                 FROM comments 
+                 LEFT JOIN songsNew ON comments.song_id = songsNew.song_id 
+                 ORDER BY comments.comment_id`;
+
+    conn.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched all comments:", results.length);
+            callback(null, results);
+        }
+    });
+}
+
+function deleteComment(commentId, callback){
+    const sql = `DELETE FROM comments WHERE comment_id = ?`;
+
+    conn.query(sql, [commentId], (err, results) => {
+        if (err) {
+            console.error("Error deleting comment:", err);
+            callback(err);
+        } else {
+            console.log("Successfully deleted comment with id:", commentId);
+            callback(null, results);
+        }
+    });
+}
+
+function searchComments(query, callback) {
+    const sql = `SELECT * FROM comments WHERE content LIKE ? OR user_id LIKE ? ORDER BY comment_id`;
+
+    conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched search results:", results.length);
+            callback(null, results);
+        }
+    });
+}
+
+
+    
+
 module.exports = {
     insertUser,
     checkUserCredentials,
@@ -685,5 +733,8 @@ module.exports = {
     removeAdmin,
     deleteUser,
     getSongs,
-    deleteSong
+    deleteSong,
+    getComments,
+    deleteComment,
+    searchComments
 };

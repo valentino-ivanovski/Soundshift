@@ -31,4 +31,16 @@ router.get('/userResults/:query', (req, res) => {
     });
 });
 
+router.get('/commentsResults/:query', (req, res) => {
+    const query = req.params.query;
+
+    dbConn.searchComments(query, (err, comments) => {
+        if (err) {
+            console.error("Error fetching comments:", err);
+            return res.status(500).send("Error fetching comments");
+        }
+        res.json(comments);
+    });
+});
+
 module.exports = router; //exporting the module for users
