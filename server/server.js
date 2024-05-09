@@ -94,10 +94,10 @@ app.use("/adminSongsList", requireLogin, requireAdmin, adminSongsListRouter);
 const adminUsersListRouter = require('./routes/adminUsersList');
 app.use("/adminUsersList", requireLogin, requireAdmin, adminUsersListRouter);
 
-const adminCommentsListRouter = require('./routes/adminSongsList');
+const adminCommentsListRouter = require('./routes/adminCommentsList');
 app.use("/adminCommentsList", requireLogin, requireAdmin, adminCommentsListRouter);
 
-const adminReportsListRouter = require('./routes/adminSongsList');
+const adminReportsListRouter = require('./routes/adminReportsList');
 app.use("/adminReportsList", requireLogin, requireAdmin, adminReportsListRouter);
 
 
