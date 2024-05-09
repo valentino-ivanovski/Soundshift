@@ -1,0 +1,108 @@
+body {
+    font-family: Helvetica;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.animated-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-270deg, #5062ee, #2298e6);
+    background-size: 200% 200%;
+    animation: gradient 5s infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 100% 0;
+    }
+
+    50% {
+        background-position: 0 100%;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 25px;
+    align-items: center;
+    height: 10px;
+    background-color: #3e47a74a;
+    box-shadow: 0 2px 15px 0 rgba(142, 57, 57, 0.2);
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 3px;
+    margin-right: 38px;
+}
+
+.navbar li {
+    color: #261f37;
+    display: inline;
+    margin-right: 20px;
+    font-family: 'Inter', Helvetica;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.navbar li a {
+    padding: 11px 17px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: Inter, Helvetica;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    transition: font-weight 0.3s, 0.3s;
+}
+
+.navbar li a:hover {
+    font-weight: 500;
+}
+
+.navbar li aLM {
+    padding: 11px 17px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Inter, Helvetica;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.soundshiftText {
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 25px;
+    font-weight: 800;
+    color: white;
+    font-variation-settings: "slnt" -10;
+    margin-left: 40px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.soundshiftText:hover {
+    color: rgba(245, 245, 245, 0.5);
+}
+
+.footer {
+    color: rgba(245, 245, 245, 0.5);
+    text-align: center;
+    padding-bottom: 1%;
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

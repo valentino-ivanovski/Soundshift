@@ -3,7 +3,7 @@ const router = express.Router();
 const dbConn = require('../database/dbConn'); //importing the database connection module
 
 router.get('/', (req, res) => {
-    console.log("profile route reached");
+    console.log("adminSearch route reached");
     res.render("adminSearch");
 })
 

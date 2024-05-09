@@ -88,4 +88,17 @@ app.use("/adminSearch", requireLogin, requireAdmin, adminSearchRouter);
 const adminProfileRouter = require('./routes/adminProfile');
 app.use("/adminProfile", requireLogin, requireAdmin, adminProfileRouter);
 
+const adminSongsListRouter = require('./routes/adminSongsList');
+app.use("/adminSongsList", requireLogin, requireAdmin, adminSongsListRouter);
+
+const adminUsersListRouter = require('./routes/adminUsersList');
+app.use("/adminUsersList", requireLogin, requireAdmin, adminUsersListRouter);
+
+const adminCommentsListRouter = require('./routes/adminSongsList');
+app.use("/adminCommentsList", requireLogin, requireAdmin, adminCommentsListRouter);
+
+const adminReportsListRouter = require('./routes/adminSongsList');
+app.use("/adminReportsList", requireLogin, requireAdmin, adminReportsListRouter);
+
+
 app.listen(3000);
