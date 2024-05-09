@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#4662D8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/stylesheets/adminUsersListStyle.css">
+    <link rel="stylesheet" href="/stylesheets/adminUsersListStyle.css"> <!-- Link to the new CSS file -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
     <title>Soundshift</title>
 </head>
@@ -31,7 +31,17 @@
 
             <div class="content">
 
-                
+                <div class="centerdiv">
+                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
+                        <form style="display: flex; flex-direction: column; gap:20px;">
+                            <input type="text" id="search" placeholder="Search for a user...">
+                            <div class="searchButtons">
+                                <button class="buttonSearch">Search</button>
+                            </div>
+                        </form>
+                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;"> <!-- Add this line -->
+                    </div>
+                </div>
 
             </div>
 
@@ -45,7 +55,137 @@
 
         </div>
         <script>
-            
+            let songSearch = false;
+            const form = document.querySelector('form');
+            const searchInput = document.getElementById('search');
+            const resultsContainer = document.createElement('div');
+            const resultsWillShowHere = document.createElement('p');
+
+            resultsContainer.className = 'results';
+        
+            form.parentNode.appendChild(resultsContainer);
+
+            fetch(`/adminUsersList/getUsers`)
+                .then(response => response.json())
+                .then(results => {
+                    results.forEach(result => {
+                        const resultDiv = document.createElement('div');
+                        resultsWillShowHere.style.display = 'none';
+                        const singleUnit = document.createElement('div');
+                        singleUnit.className = 'singleUnit';
+
+                        const idDiv = document.createElement('p');
+                        idDiv.textContent = result.id;
+                        idDiv.className = 'id';
+
+                        singleUnit.appendChild(idDiv);
+                            
+                        const imageDiv = document.createElement('div');
+                        imageDiv.style.width = '50px';
+                        imageDiv.style.height = '50px';
+                        imageDiv.style.borderRadius = '50%';
+                        imageDiv.style.backgroundImage = `url(${result.imageUrl})`;
+                        imageDiv.style.backgroundSize = 'cover';
+                        imageDiv.style.outline = '1px solid rgba(0, 0, 0, 0.1)';
+
+                        singleUnit.appendChild(imageDiv);
+
+                        const usernameDiv = document.createElement('a');
+                        usernameDiv.href = `/adminProfile/${result.username}`;
+                        usernameDiv.textContent = result.username;
+                        usernameDiv.className = 'username';
+
+                        const infoDiv = document.createElement('div');
+                        infoDiv.className = 'infoDiv';
+
+                        const deleteUser = document.createElement('a');
+                        deleteUser.href =  `/adminUsersList/deleteUser/${result.username}`;
+                        deleteUser.textContent = 'Delete';
+                        deleteUser.className = 'deleteUser';
+
+                        const makeAdmin = document.createElement('a');
+
+                        if( result.admin === 0 ){
+                            makeAdmin.href =  `/adminUsersList/makeAdmin/${result.username}`;
+                            makeAdmin.textContent = 'Make Admin';
+                            makeAdmin.className = 'makeAdmin';
+                            makeAdmin.id = 'makeAdminId';
+                        } else{
+                            makeAdmin.href =  `/adminUsersList/removeAdmin/${result.username}`;
+                            makeAdmin.textContent = 'Remove Admin';
+                            makeAdmin.className = 'makeAdmin';
+                            makeAdmin.id = 'makeAdminId';
+                        }
+
+                        singleUnit.appendChild(usernameDiv);
+                        singleUnit.appendChild(infoDiv);
+                        infoDiv.appendChild(deleteUser);
+                        infoDiv.appendChild(makeAdmin);
+                        resultDiv.appendChild(singleUnit);
+                        resultsContainer.appendChild(resultDiv);
+                    });
+                });
+        
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                const query = searchInput.value;
+                const url = `/adminSearch/userResults/${query}`;
+                
+                fetch(url)
+                    .then(response => response.json())
+                    .then(results => {
+                        resultsContainer.innerHTML = '';
+                        results.forEach(result => {
+                            const resultDiv = document.createElement('div');
+                        resultsWillShowHere.style.display = 'none';
+                        const singleUnit = document.createElement('div');
+                        singleUnit.className = 'singleUnit';
+
+                        const idDiv = document.createElement('p');
+                        idDiv.textContent = result.id;
+                        idDiv.className = 'id';
+
+                        singleUnit.appendChild(idDiv);
+                            
+                        const imageDiv = document.createElement('div');
+                        imageDiv.style.width = '50px';
+                        imageDiv.style.height = '50px';
+                        imageDiv.style.borderRadius = '50%';
+                        imageDiv.style.backgroundImage = `url(${result.imageUrl})`;
+                        imageDiv.style.backgroundSize = 'cover';
+                        imageDiv.style.outline = '1px solid rgba(0, 0, 0, 0.1)';
+
+                        singleUnit.appendChild(imageDiv);
+
+                        const usernameDiv = document.createElement('a');
+                        usernameDiv.href = `/adminProfile/${result.username}`;
+                        usernameDiv.textContent = result.username;
+                        usernameDiv.className = 'username';
+
+                        const infoDiv = document.createElement('div');
+                        infoDiv.className = 'infoDiv';
+
+                        const deleteUser = document.createElement('a');
+                        deleteUser.href =  `/adminUsersList/deleteUser/${result.username}`;
+                        deleteUser.textContent = 'Delete';
+                        deleteUser.className = 'deleteUser';
+
+                        const makeAdmin = document.createElement('a');
+                        makeAdmin.href =  `/adminUsersList/makeAdmin/${result.username}`;
+                        makeAdmin.textContent = 'Make Admin';
+                        makeAdmin.className = 'makeAdmin';
+                        makeAdmin.id = 'makeAdminId';
+
+                        singleUnit.appendChild(usernameDiv);
+                        singleUnit.appendChild(infoDiv);
+                        infoDiv.appendChild(deleteUser);
+                        infoDiv.appendChild(makeAdmin);
+                        resultDiv.appendChild(singleUnit);
+                        resultsContainer.appendChild(resultDiv);
+                        });
+                    })
+                    .catch(err => console.error(err));
+            };
         </script>
     </center>
 </body>

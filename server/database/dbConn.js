@@ -487,7 +487,7 @@ function searchSongs(query, callback) {
 }
 
 function searchUsers(query, callback) {
-    const sql = `SELECT * FROM usersNew WHERE username LIKE ? OR bio LIKE ? ORDER BY username`;
+    const sql = `SELECT * FROM usersNew WHERE username LIKE ? OR id LIKE ? ORDER BY username`;
 
     conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
         if (err) {
@@ -495,6 +495,62 @@ function searchUsers(query, callback) {
             callback(err);
         } else {
             console.log("Successfully fetched search results:", results.length);
+            callback(null, results);
+        }
+    });
+}
+
+function getUsers(callback) {
+    const sql = `SELECT * FROM usersNew ORDER BY id`;
+
+    conn.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched all users:", results.length);
+            callback(null, results);
+        }
+    });
+}
+
+function deleteUser(username, callback) {
+    const sql = `DELETE FROM usersNew WHERE username = ?`;
+
+    conn.query(sql, [username], (err, results) => {
+        if (err) {
+            console.error("Error deleting user:", err);
+            callback(err);
+        } else {
+            console.log("Successfully deleted user:", username);
+            callback(null, results);
+        }
+    });
+}
+
+function makeAdmin(username, callback) {
+    const sql = `UPDATE usersNew SET admin = 1 WHERE username = ?`;
+
+    conn.query(sql, [username], (err, results) => {
+        if (err) {
+            console.error("Error making user admin:", err);
+            callback(err);
+        } else {
+            console.log("Successfully made user admin:", username);
+            callback(null, results);
+        }
+    });
+}
+
+function removeAdmin(username, callback) {
+    const sql = `UPDATE usersNew SET admin = 0 WHERE username = ?`;
+
+    conn.query(sql, [username], (err, results) => {
+        if (err) {
+            console.error("Error removing admin status:", err);
+            callback(err);
+        } else {
+            console.log("Successfully removed admin status:", username);
             callback(null, results);
         }
     });
@@ -529,4 +585,8 @@ module.exports = {
     updateProfilePicture,
     searchSongs,
     searchUsers,
+    getUsers,
+    makeAdmin,
+    removeAdmin,
+    deleteUser
 };
