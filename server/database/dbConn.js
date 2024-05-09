@@ -5,6 +5,7 @@ const conn = mysql.createConnection({
     password: process.env.DB_PASS,
     database: "SoundshiftTest",
 });
+const async = require('async');
 
 conn.connect((err) => {
     if (err) {
@@ -514,17 +515,54 @@ function getUsers(callback) {
     });
 }
 
-function deleteUser(username, callback) {
-    const sql = `DELETE FROM usersNew WHERE username = ?`;
+function deleteUser(userId, callback) {
+    conn.beginTransaction(function(err) {
+        if (err) { callback(err); return; }
 
-    conn.query(sql, [username], (err, results) => {
-        if (err) {
-            console.error("Error deleting user:", err);
-            callback(err);
-        } else {
-            console.log("Successfully deleted user:", username);
-            callback(null, results);
-        }
+        async.series([
+            function(callback) {
+                const sql = `DELETE FROM comments WHERE user_id = ?`;
+                conn.query(sql, [userId], callback);
+            },
+            function(callback) {
+                const sql = `DELETE FROM liked_songs WHERE user_id = ?`;
+                conn.query(sql, [userId], callback);
+            },
+            function(callback) {
+                const sql = `DELETE FROM reports WHERE user_id = ?`;
+                conn.query(sql, [userId], callback);
+            },
+            function(callback) {
+                const sql = `DELETE FROM retrievedSongs WHERE user_id = ?`;
+                conn.query(sql, [userId], callback);
+            },
+            function(callback) {
+                const sql = `DELETE FROM songsNew WHERE user_id = ?`;
+                conn.query(sql, [userId], callback);
+            },
+            function(callback) {
+                const sql = `DELETE FROM usersNew WHERE id = ?`;
+                conn.query(sql, [userId], callback);
+            }
+        ], function(err, results) {
+            if (err) {
+                console.error("Error deleting user:", err);
+                conn.rollback(function() {
+                    callback(err);
+                });
+            } else {
+                console.log("Successfully deleted user with id:", userId);
+                conn.commit(function(err) {
+                    if (err) {
+                        conn.rollback(function() {
+                            callback(err);
+                        });
+                    } else {
+                        callback(null, results);
+                    }
+                });
+            }
+        });
     });
 }
 

@@ -99,9 +99,13 @@
                         infoDiv.className = 'infoDiv';
 
                         const deleteUser = document.createElement('a');
-                        deleteUser.href =  `/adminUsersList/deleteUser/${result.username}`;
+                        deleteUser.href =  `/adminUsersList/deleteUser/${result.id}`;
                         deleteUser.textContent = 'Delete';
                         deleteUser.className = 'deleteUser';
+                        deleteUser.onclick = function() {
+                            return confirm('Are you sure you want to delete this profile?');
+                        };
+
 
                         const makeAdmin = document.createElement('a');
 

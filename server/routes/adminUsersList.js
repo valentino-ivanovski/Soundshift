@@ -18,9 +18,9 @@ router.get('/getUsers', (req, res) => {
     });
 });
 
-router.get('/deleteUser/:username', (req, res) => {
-    const username = req.params.username;
-    dbConn.deleteUser(username, (err, result) => {
+router.get('/deleteUser/:id', (req, res) => {
+    const id = req.params.id;
+    dbConn.deleteUser(id, (err, result) => {
         if (err) {
             console.error("Error deleting user:", err);
             return res.status(500).send("Error deleting user");
