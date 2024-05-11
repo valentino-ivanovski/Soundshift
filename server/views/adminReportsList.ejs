@@ -65,7 +65,7 @@
         
             form.parentNode.appendChild(resultsContainer);
 
-            fetch(`/adminCommentsList/getComments`)
+            fetch(`/adminReportsList/getReports`)
                 .then(response => response.json())
                 .then(results => {
                     results.forEach(result => {
@@ -74,34 +74,48 @@
                         singleUnit.className = 'singleUnit';
 
                         const idDiv = document.createElement('p');
-                        idDiv.textContent = result.comment_id;
+                        idDiv.textContent = result.report_id;
                         idDiv.className = 'id';
 
                         singleUnit.appendChild(idDiv);
 
-                        const commentDiv = document.createElement('p');
-                        const whoCommented = document.createElement('p');
-                        const commentedSong = document.createElement('p');
-                        commentDiv.textContent = result.content;
-                        whoCommented.textContent = "User ID: " + result.user_id;
-                        commentedSong.textContent = "Song: " + result.title;
+                        const reportDiv = document.createElement('p');
+                        const whoReported = document.createElement('p');
+                        const reportedComment = document.createElement('p');
+                        const onWhichSong = document.createElement('p');
+                        reportDiv.textContent = "\"" + result.reason + "\"";
+                        whoReported.textContent = "User: " + result.username;
+                        reportedComment.textContent = "Comment: " + result.content;
+                        onWhichSong.textContent = "Song: " + result.title;
 
-                        commentDiv.className = 'title';
-                        whoCommented.className = 'user';
-                        commentedSong.className = 'song';
+                        reportDiv.className = 'title';
+                        whoReported.className = 'user';
+                        reportedComment.className = 'song';
+                        onWhichSong.className = 'song';
 
-                        const deleteComment = document.createElement('a');
-                        deleteComment.href =  `/adminCommentsList/deleteComment/${result.comment_id}`;
-                        deleteComment.textContent = 'Delete';
-                        deleteComment.className = 'deleteUser';
-                        deleteComment.onclick = function() {
+                        const deleteReport = document.createElement('a');
+                        deleteReport.href =  `/adminReportsList/deleteReport/${result.report_id}`;
+                        deleteReport.textContent = 'Delete';
+                        deleteReport.className = 'deleteUser';
+                        deleteReport.onclick = function() {
                             return confirm('Are you sure you want to delete this song?');
                         };
 
-                        singleUnit.appendChild(commentDiv);
-                        singleUnit.appendChild(whoCommented);
-                        singleUnit.appendChild(commentedSong);
-                        singleUnit.appendChild(deleteComment);
+                        const resolveReport = document.createElement('p');
+                        resolveReport.textContent = result.status;
+                        resolveReport.className = 'song';
+                        resolveReport.onclick = function() {
+                            return confirm('Are you sure you want to resolve this report?');
+                            resolveReport.textContent = 'Resolved';
+                            resolveReport.style.color = 'green';
+                        };
+
+                        singleUnit.appendChild(reportDiv);
+                        singleUnit.appendChild(whoReported);
+                        singleUnit.appendChild(reportedComment);
+                        singleUnit.appendChild(onWhichSong);
+                        singleUnit.appendChild(deleteReport);
+                        singleUnit.appendChild(resolveReport);
                         resultDiv.appendChild(singleUnit);
                         resultsContainer.appendChild(resultDiv);
                     });
@@ -131,16 +145,16 @@
                         commentDiv.textContent = result.content + " by " + result.username + " on song: " + result.title;
                         commentDiv.className = 'title';
 
-                        const deleteComment = document.createElement('a');
-                        deleteComment.href =  `/adminCommentsList/deleteComment/${result.comment_id}`;
-                        deleteComment.textContent = 'Delete';
-                        deleteComment.className = 'deleteUser';
-                        deleteComment.onclick = function() {
-                            return confirm('Are you sure you want to delete this song?');
+                        const deleteReport = document.createElement('a');
+                        deleteReport.href =  `/adminReportsList/deleteReport/${result.comment_id}`;
+                        deleteReport.textContent = 'Delete';
+                        deleteReport.className = 'deleteUser';
+                        deleteReport.onclick = function() {
+                            return confirm('Are you sure you want to delete this report?');
                         };
 
                         singleUnit.appendChild(commentDiv);
-                        singleUnit.appendChild(deleteComment);
+                        singleUnit.appendChild(deleteReport);
                         resultDiv.appendChild(singleUnit);
                         resultsContainer.appendChild(resultDiv);
                         });
