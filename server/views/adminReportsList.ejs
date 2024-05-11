@@ -90,7 +90,7 @@
 
                         reportDiv.className = 'title';
                         whoReported.className = 'user';
-                        reportedComment.className = 'song';
+                        reportedComment.className = 'title';
                         onWhichSong.className = 'song';
 
                         const deleteReport = document.createElement('a');
@@ -98,16 +98,32 @@
                         deleteReport.textContent = 'Delete';
                         deleteReport.className = 'deleteUser';
                         deleteReport.onclick = function() {
-                            return confirm('Are you sure you want to delete this song?');
+                            return confirm('Are you sure you want to delete this report?');
                         };
 
-                        const resolveReport = document.createElement('p');
-                        resolveReport.textContent = result.status;
-                        resolveReport.className = 'song';
-                        resolveReport.onclick = function() {
-                            return confirm('Are you sure you want to resolve this report?');
-                            resolveReport.textContent = 'Resolved';
+                        const resolveReport = document.createElement('a');
+                        resolveReport.className = 'resolve';
+
+                        if (result.status === 'Unsolved'){
+                            resolveReport.href = `/adminReportsList/resolveReport/${result.report_id}`;
+                            resolveReport.textContent = 'Unsolved';
+                            resolveReport.style.color = 'blue';
+                        } else {
+                            resolveReport.href = `/adminReportsList/unResolveReport/${result.report_id}`;
+                            resolveReport.textContent = 'Solved';
                             resolveReport.style.color = 'green';
+                        }
+
+                        resolveReport.onclick = function() {
+                            if (confirm('Are you sure you want to resolve/unresolve this report?')) {
+                                if (result.status === 'Solved') {
+                                    resolveReport.href = `/adminReportsList/unResolveReport/${result.report_id}`;
+                                    resolveReport.textContent = 'Unsolved';
+                                } else {
+                                    resolveReport.textContent = 'Unsolved';
+                                    resolveReport.href = `/adminReportsList/resolveReport/${result.report_id}`;
+                                }
+                            }
                         };
 
                         singleUnit.appendChild(reportDiv);

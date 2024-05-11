@@ -271,3 +271,15 @@ input:focus {
     color: rgb(0, 0, 0);
     text-decoration: none;
 }
+
+.resolve{
+    font-family: Inter, Arial;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.resolve:hover{
+    font-weight: 700;
+}

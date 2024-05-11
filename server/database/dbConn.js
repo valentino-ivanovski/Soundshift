@@ -474,7 +474,7 @@ function updateProfilePicture(userId, imageUrl, callback) {
 }
 
 function searchSongs(query, callback) {
-    const sql = `SELECT * FROM songsNew WHERE title LIKE ? OR artist LIKE ? ORDER BY title`;
+    const sql = `SELECT * FROM songsNew WHERE title LIKE ? OR song_id LIKE ? ORDER BY song_id`;
 
     conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
         if (err) {
@@ -615,7 +615,6 @@ function getSongs(callback) {
 function deleteSong(songId, callback) {
     conn.beginTransaction(function(err) {
         if (err) { callback(err); return; }
-
         async.series([
             function(callback) {
                 const sql = `DELETE FROM retrievedSongs WHERE song_id = ?`;
@@ -676,15 +675,25 @@ function getComments(callback) {
 }   
 
 function deleteComment(commentId, callback){
-    const sql = `DELETE FROM comments WHERE comment_id = ?`;
+    const sqlDeleteReports = `DELETE FROM reports WHERE comment_id = ?`;
+    const sqlDeleteComment = `DELETE FROM comments WHERE comment_id = ?`;
 
-    conn.query(sql, [commentId], (err, results) => {
+    conn.query(sqlDeleteReports, [commentId], (err, results) => {
         if (err) {
-            console.error("Error deleting comment:", err);
+            console.error("Error deleting reports:", err);
             callback(err);
         } else {
-            console.log("Successfully deleted comment with id:", commentId);
-            callback(null, results);
+            console.log("Successfully deleted reports with comment id:", commentId);
+
+            conn.query(sqlDeleteComment, [commentId], (err, results) => {
+                if (err) {
+                    console.error("Error deleting comment:", err);
+                    callback(err);
+                } else {
+                    console.log("Successfully deleted comment with id:", commentId);
+                    callback(null, results);
+                }
+            });
         }
     });
 }
@@ -717,7 +726,7 @@ function getReports(callback) {
         LEFT JOIN usersNew ON reports.user_id = usersNew.id
         LEFT JOIN comments ON reports.comment_id = comments.comment_id
         LEFT JOIN songsNew ON comments.song_id = songsNew.song_id
-        ORDER BY reports.report_id
+        ORDER BY reports.status DESC, reports.report_id ASC;
     `;
 
     conn.query(sql, (err, results) => {
@@ -731,7 +740,47 @@ function getReports(callback) {
     });
 }
 
+function deleteReport(reportId, callback){
+    const sql = `DELETE FROM reports WHERE report_id = ?`;
 
+    conn.query(sql, [reportId], (err, results) => {
+        if (err) {
+            console.error("Error deleting report:", err);
+            callback(err);
+        } else {
+            console.log("Successfully deleted report with id:", reportId);
+            callback(null, results);
+        }
+    });
+}
+
+function resolveReport(reportId, callback){
+    const sql = `UPDATE reports SET status = 'Solved' WHERE report_id = ?`;
+
+    conn.query(sql, [reportId], (err, results) => {
+        if (err) {
+            console.error("Error resolving report:", err);
+            callback(err);
+        } else {
+            console.log("Successfully resolved report with id:", reportId);
+            callback(null, results);
+        }
+    });
+}
+
+function unResolveReport(reportId, callback){
+    const sql = `UPDATE reports SET status = 'Unsolved' WHERE report_id = ?`;
+
+    conn.query(sql, [reportId], (err, results) => {
+        if (err) {
+            console.error("Error resolving report:", err);
+            callback(err);
+        } else {
+            console.log("Successfully resolved report with id:", reportId);
+            callback(null, results);
+        }
+    });
+}
     
 
 module.exports = {
@@ -772,5 +821,8 @@ module.exports = {
     getComments,
     deleteComment,
     searchComments,
-    getReports
+    getReports,
+    deleteReport,
+    resolveReport,
+    unResolveReport
 };

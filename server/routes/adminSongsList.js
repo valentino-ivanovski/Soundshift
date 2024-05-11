@@ -22,7 +22,7 @@ router.get('/deleteSong/:song_id', (req, res) => {
     const id = req.params.song_id;
     dbConn.deleteSong(id, (err, result) => {
         if (err) {
-            console.error("Error deleting song:", err);
+            console.error("Error deleting user:", err);
             return res.status(500).send("Error deleting user");
         } else {
             res.render("adminSongsList");
