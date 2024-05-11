@@ -230,4 +230,18 @@ router.put("/incCommentCount/:songid", (req, res) => {
     });
 });
 
+router.post("/reportSong/:songid", (req, res) => {
+    const songId = req.params.songid;
+    const reason = req.body.reason;
+    const userId = req.session.user.id;
+
+    dbConn.reportSong(userId, reason, songId, (err) => {
+        if (err) {
+            console.error("Error reporting song:", err);
+            return res.status(500).send("Error reporting song");
+        }
+        res.status(200).send("Song reported");
+    });
+});
+
 module.exports = router; //exporting the module for users

@@ -579,6 +579,36 @@
                                                 commentFormDiv.appendChild(commentForm);
                                                 commentsDiv.appendChild(commentFormDiv);
 
+                                                const reportSong = document.createElement('a');
+                                                reportSong.textContent = "Report Song";
+                                                reportSong.className = 'report-song';
+                                                reportSong.href = `/mainpage/reportSong/${songid}`;
+                                                songInfoContainer.appendChild(reportSong);
+
+                                                reportSong.onclick = function(event) {
+                                                    event.preventDefault(); // Prevent the link from being followed
+
+                                                    const reason = window.prompt("Please enter the reason for reporting this song:");
+
+                                                    if (reason) {
+                                                        fetch(`/mainpage/reportSong/${songid}`, {
+                                                            method: 'POST',
+                                                            headers: {
+                                                                'Content-Type': 'application/json'
+                                                            },
+                                                            body: JSON.stringify({ reason: reason }) // Send the reason in the request body
+                                                        })
+                                                            .then(response => {
+                                                                if (!response.ok) {
+                                                                    throw new Error('Network response was not ok');
+                                                                }
+                                                            })
+                                                            .catch(error => {
+                                                                console.error('Error:', error);
+                                                            });
+                                                    }
+                                                };
+
                                             })
                                             .catch(error => {
                                                 console.error('Error:', error);
