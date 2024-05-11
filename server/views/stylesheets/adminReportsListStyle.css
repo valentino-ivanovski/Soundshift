@@ -82,6 +82,62 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    height: 100vh;
+}
+
+.centerdiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 70%;
+    height: 70%;
+    margin-bottom: 7%;
+    overflow: auto;
+}
+
+input {
+    width: 450px;
+    height: 20px;
+    font-size: 16px;
+    padding: 16px; 
+    border-radius: 40px; 
+    border: none; 
+    font-family: Inter;
+}
+input:focus {
+    outline: none;
+}
+
+.searchButtons{
+    display: flex; flex-direction: row; justify-content: center; gap: 10px;
+}
+
+.search-title{
+    font-size: 30px;
+    font-weight: 800;
+    color: white;
+    font-family: 'Inter', Helvetica;
+    margin-top: 50px;
+    margin-bottom: 20px;
+
+}
+
+.buttonSearch{
+    height: 30px; color: rgb(255, 255, 255); font-family: Inter; border: 1px solid rgba(255, 255, 255, 0); border-radius: 7px; background-color: rgba(255, 255, 255, 0.198); padding-top: 7px; padding-bottom: 10px; padding-left: 15px; padding-right: 15px;
+}
+
+.buttonSearch:hover{
+    border: 1px solid rgba(255, 255, 255, 0.582);
+    cursor: pointer;
+}
+
 .soundshiftText {
     font-family: 'Inter', Helvetica Neue;
     font-size: 25px;
@@ -105,4 +161,113 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.results{
+    overflow: auto;
+    max-height: 285px;
+    width: 600px;
+    min-height: 60px;
+    padding: 15px;
+    margin-top: -25px;
+}
+
+.singleUnit {
+    display: flex; 
+    align-items: center; 
+    flex-direction: row;
+
+    justify-content: left; /* Change from space-around to space-between */
+    gap: 10px; 
+    margin: 10px; 
+    width: auto;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.infoDiv {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.deleteUser {
+    font-family: Inter, Arial;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(255, 0, 0);
+    text-decoration: none;
+}
+
+.deleteUser:hover{
+    text-decoration: underline;
+}
+
+.makeAdmin {
+    font-family: Inter, Arial;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(0, 0, 255);
+    text-decoration: none;
+}
+
+.id{
+    font-family: Inter, Arial;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.382);
+    text-decoration: none;
+}
+
+.id:hover{
+    cursor:default;
+}
+
+.username{
+    font-family: Inter, Arial;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.username:hover{
+    text-decoration: underline;
+}
+
+.songInfo{
+    font-family: Inter, Arial;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.songInfo:hover{
+    text-decoration: underline;
+}
+
+.comment{
+    font-family: Inter, Arial;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.user{
+    font-family: Inter, Arial;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.song{
+    font-family: Inter, Arial;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
 }

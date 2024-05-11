@@ -80,8 +80,14 @@
                         singleUnit.appendChild(idDiv);
 
                         const songTitleDiv = document.createElement('a');
+                        const songUsername = document.createElement('a');
+                        const tilde = document.createElement('p');
                         songTitleDiv.href = `${result.spotify_link}`;
+                        songUsername.href = `/adminProfile/${result.username}`;
+                        songUsername.textContent = result.username;
                         songTitleDiv.textContent = result.title + " by " + result.artist;
+                        tilde.textContent = " - ";
+                        songUsername.className = 'title';
                         songTitleDiv.className = 'title';
 
                         const deleteUser = document.createElement('a');
@@ -93,6 +99,8 @@
                         };
 
                         singleUnit.appendChild(songTitleDiv);
+                        singleUnit.appendChild(tilde);
+                        singleUnit.appendChild(songUsername);  
                         singleUnit.appendChild(deleteUser);
                         resultDiv.appendChild(singleUnit);
                         resultsContainer.appendChild(resultDiv);

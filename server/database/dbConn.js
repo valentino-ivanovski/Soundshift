@@ -595,14 +595,18 @@ function removeAdmin(username, callback) {
 }
 
 function getSongs(callback) {
-    const sql = `SELECT * FROM songsNew ORDER BY song_id`;
+    const sql = `
+    SELECT songsNew.*, usersNew.username 
+    FROM songsNew 
+    LEFT JOIN usersNew ON songsNew.user_id = usersNew.id
+    ORDER BY songsNew.song_id`;
 
     conn.query(sql, (err, results) => {
         if (err) {
             console.error("Error executing SQL query:", err);
             callback(err);
         } else {
-            console.log("Successfully fetched all users:", results.length);
+            console.log("Successfully fetched all songs:", results.length);
             callback(null, results);
         }
     });
@@ -652,10 +656,13 @@ function deleteSong(songId, callback) {
 }
 
 function getComments(callback) {
-    const sql = `SELECT comments.*, songsNew.title 
-                 FROM comments 
-                 LEFT JOIN songsNew ON comments.song_id = songsNew.song_id 
-                 ORDER BY comments.comment_id`;
+    const sql = `
+        SELECT comments.*, songsNew.title, usersNew.username, usersNew.id 
+        FROM comments 
+        LEFT JOIN songsNew ON comments.song_id = songsNew.song_id 
+        LEFT JOIN usersNew ON comments.user_id = usersNew.id
+        ORDER BY comments.comment_id
+    `;
 
     conn.query(sql, (err, results) => {
         if (err) {
@@ -666,7 +673,7 @@ function getComments(callback) {
             callback(null, results);
         }
     });
-}
+}   
 
 function deleteComment(commentId, callback){
     const sql = `DELETE FROM comments WHERE comment_id = ?`;
@@ -683,7 +690,14 @@ function deleteComment(commentId, callback){
 }
 
 function searchComments(query, callback) {
-    const sql = `SELECT * FROM comments WHERE content LIKE ? OR user_id LIKE ? ORDER BY comment_id`;
+    const sql = `
+        SELECT comments.*, songsNew.title, usersNew.username, usersNew.id 
+        FROM comments 
+        LEFT JOIN songsNew ON comments.song_id = songsNew.song_id 
+        LEFT JOIN usersNew ON comments.user_id = usersNew.id
+        WHERE comments.content LIKE ? OR comments.comment_id LIKE ? 
+        ORDER BY comments.comment_id
+    `;
 
     conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
         if (err) {

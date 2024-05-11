@@ -264,10 +264,22 @@ input:focus {
     text-decoration: none;
 }
 
+.user:hover{
+    text-decoration: underline;
+}
+
 .song{
     font-family: Inter, Arial;
     font-size: 15px;
     font-weight: 700;
     color: rgb(0, 0, 0);
     text-decoration: none;
+}
+
+.song:hover{
+    cursor: default;
+}
+
+.comment:hover{
+    cursor: default;
 }

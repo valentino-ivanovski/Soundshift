@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#4662D8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/stylesheets/adminReportsListStyle.css">
+    <link rel="stylesheet" href="/stylesheets/adminReportsListStyle.css"> <!-- Link to the new CSS file -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
     <title>Soundshift</title>
 </head>
@@ -31,7 +31,17 @@
 
             <div class="content">
 
-                
+                <div class="centerdiv">
+                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
+                        <form style="display: flex; flex-direction: column; gap:20px;">
+                            <input type="text" id="search" placeholder="Search for a report id or user id...">
+                            <div class="searchButtons">
+                                <button class="buttonSearch">Search</button>
+                            </div>
+                        </form>
+                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;"> <!-- Add this line -->
+                    </div>
+                </div>
 
             </div>
 
@@ -45,7 +55,98 @@
 
         </div>
         <script>
-            
+            let songSearch = false;
+            const form = document.querySelector('form');
+            const searchInput = document.getElementById('search');
+            const resultsContainer = document.createElement('div');
+            const resultsWillShowHere = document.createElement('p');
+
+            resultsContainer.className = 'results';
+        
+            form.parentNode.appendChild(resultsContainer);
+
+            fetch(`/adminCommentsList/getComments`)
+                .then(response => response.json())
+                .then(results => {
+                    results.forEach(result => {
+                        const resultDiv = document.createElement('div');
+                        const singleUnit = document.createElement('div');
+                        singleUnit.className = 'singleUnit';
+
+                        const idDiv = document.createElement('p');
+                        idDiv.textContent = result.comment_id;
+                        idDiv.className = 'id';
+
+                        singleUnit.appendChild(idDiv);
+
+                        const commentDiv = document.createElement('p');
+                        const whoCommented = document.createElement('p');
+                        const commentedSong = document.createElement('p');
+                        commentDiv.textContent = result.content;
+                        whoCommented.textContent = "User ID: " + result.user_id;
+                        commentedSong.textContent = "Song: " + result.title;
+
+                        commentDiv.className = 'title';
+                        whoCommented.className = 'user';
+                        commentedSong.className = 'song';
+
+                        const deleteComment = document.createElement('a');
+                        deleteComment.href =  `/adminCommentsList/deleteComment/${result.comment_id}`;
+                        deleteComment.textContent = 'Delete';
+                        deleteComment.className = 'deleteUser';
+                        deleteComment.onclick = function() {
+                            return confirm('Are you sure you want to delete this song?');
+                        };
+
+                        singleUnit.appendChild(commentDiv);
+                        singleUnit.appendChild(whoCommented);
+                        singleUnit.appendChild(commentedSong);
+                        singleUnit.appendChild(deleteComment);
+                        resultDiv.appendChild(singleUnit);
+                        resultsContainer.appendChild(resultDiv);
+                    });
+                });
+        
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                const query = searchInput.value;
+                const url = `/adminSearch/commentsResults/${query}`;
+                
+                fetch(url)
+                    .then(response => response.json())
+                    .then(results => {
+                        resultsContainer.innerHTML = '';
+                        results.forEach(result => {
+                            const resultDiv = document.createElement('div');
+                        const singleUnit = document.createElement('div');
+                        singleUnit.className = 'singleUnit';
+
+                        const idDiv = document.createElement('p');
+                        idDiv.textContent = result.comment_id;
+                        idDiv.className = 'id';
+
+                        singleUnit.appendChild(idDiv);
+
+                        const commentDiv = document.createElement('p');
+                        commentDiv.textContent = result.content + " by " + result.username + " on song: " + result.title;
+                        commentDiv.className = 'title';
+
+                        const deleteComment = document.createElement('a');
+                        deleteComment.href =  `/adminCommentsList/deleteComment/${result.comment_id}`;
+                        deleteComment.textContent = 'Delete';
+                        deleteComment.className = 'deleteUser';
+                        deleteComment.onclick = function() {
+                            return confirm('Are you sure you want to delete this song?');
+                        };
+
+                        singleUnit.appendChild(commentDiv);
+                        singleUnit.appendChild(deleteComment);
+                        resultDiv.appendChild(singleUnit);
+                        resultsContainer.appendChild(resultDiv);
+                        });
+                    })
+                    .catch(err => console.error(err));
+            };
         </script>
     </center>
 </body>

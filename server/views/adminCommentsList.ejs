@@ -34,7 +34,7 @@
                 <div class="centerdiv">
                     <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
                         <form style="display: flex; flex-direction: column; gap:20px;">
-                            <input type="text" id="search" placeholder="Search for a comment or user id...">
+                            <input type="text" id="search" placeholder="Search for a comment or comment id...">
                             <div class="searchButtons">
                                 <button class="buttonSearch">Search</button>
                             </div>
@@ -80,11 +80,12 @@
                         singleUnit.appendChild(idDiv);
 
                         const commentDiv = document.createElement('p');
-                        const whoCommented = document.createElement('p');
+                        const whoCommented = document.createElement('a');
                         const commentedSong = document.createElement('p');
-                        commentDiv.textContent = result.content;
-                        whoCommented.textContent = "User ID: " + result.user_id;
+                        commentDiv.textContent = "\"" + result.content + "\"";
+                        whoCommented.textContent = "User: " + result.username;
                         commentedSong.textContent = "Song: " + result.title;
+                        whoCommented.href = `/adminProfile/${result.username}`;
 
                         commentDiv.className = 'title';
                         whoCommented.className = 'user';
@@ -97,7 +98,7 @@
                         deleteComment.onclick = function() {
                             return confirm('Are you sure you want to delete this song?');
                         };
-
+                        
                         singleUnit.appendChild(commentDiv);
                         singleUnit.appendChild(whoCommented);
                         singleUnit.appendChild(commentedSong);
@@ -128,8 +129,16 @@
                         singleUnit.appendChild(idDiv);
 
                         const commentDiv = document.createElement('p');
-                        commentDiv.textContent = result.content + " by " + result.username + " on song: " + result.title;
+                        const whoCommented = document.createElement('a');
+                        const commentedSong = document.createElement('p');
+                        commentDiv.textContent = "\"" + result.content + "\"";
+                        whoCommented.textContent = "User: " + result.username;
+                        commentedSong.textContent = "Song: " + result.title;
+                        whoCommented.href = `/adminProfile/${result.username}`;
+
                         commentDiv.className = 'title';
+                        whoCommented.className = 'user';
+                        commentedSong.className = 'song';
 
                         const deleteComment = document.createElement('a');
                         deleteComment.href =  `/adminCommentsList/deleteComment/${result.comment_id}`;
@@ -140,6 +149,8 @@
                         };
 
                         singleUnit.appendChild(commentDiv);
+                        singleUnit.appendChild(whoCommented);
+                        singleUnit.appendChild(commentedSong);
                         singleUnit.appendChild(deleteComment);
                         resultDiv.appendChild(singleUnit);
                         resultsContainer.appendChild(resultDiv);
