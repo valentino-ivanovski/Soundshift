@@ -781,6 +781,27 @@ function unResolveReport(reportId, callback){
         }
     });
 }
+
+function searchReports(query, callback) {
+    const sql = `
+    SELECT reports.*, usersNew.username, comments.content, songsNew.title 
+    FROM reports 
+    LEFT JOIN usersNew ON reports.user_id = usersNew.id
+    LEFT JOIN comments ON reports.comment_id = comments.comment_id
+    LEFT JOIN songsNew ON comments.song_id = songsNew.song_id
+    WHERE reports.reason LIKE ? OR reports.report_id LIKE ?
+    ORDER BY reports.status DESC, reports.report_id ASC;`;
+
+    conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully fetched search results:", results.length);
+            callback(null, results);
+        }
+    });
+}
     
 
 module.exports = {
@@ -824,5 +845,6 @@ module.exports = {
     getReports,
     deleteReport,
     resolveReport,
-    unResolveReport
+    unResolveReport,
+    searchReports
 };

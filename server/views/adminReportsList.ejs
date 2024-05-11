@@ -34,7 +34,7 @@
                 <div class="centerdiv">
                     <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
                         <form style="display: flex; flex-direction: column; gap:20px;">
-                            <input type="text" id="search" placeholder="Search for a report id or user id...">
+                            <input type="text" id="search" placeholder="Search for a reson id or report id...">
                             <div class="searchButtons">
                                 <button class="buttonSearch">Search</button>
                             </div>
@@ -140,7 +140,7 @@
             form.onsubmit = function(event) {
                 event.preventDefault();
                 const query = searchInput.value;
-                const url = `/adminSearch/commentsResults/${query}`;
+                const url = `/adminSearch/reportsResults/${query}`;
                 
                 fetch(url)
                     .then(response => response.json())
@@ -152,25 +152,64 @@
                         singleUnit.className = 'singleUnit';
 
                         const idDiv = document.createElement('p');
-                        idDiv.textContent = result.comment_id;
+                        idDiv.textContent = result.report_id;
                         idDiv.className = 'id';
 
                         singleUnit.appendChild(idDiv);
 
-                        const commentDiv = document.createElement('p');
-                        commentDiv.textContent = result.content + " by " + result.username + " on song: " + result.title;
-                        commentDiv.className = 'title';
+                        const reportDiv = document.createElement('p');
+                        const whoReported = document.createElement('p');
+                        const reportedComment = document.createElement('p');
+                        const onWhichSong = document.createElement('p');
+                        reportDiv.textContent = "\"" + result.reason + "\"";
+                        whoReported.textContent = "User: " + result.username;
+                        reportedComment.textContent = "Comment: " + result.content;
+                        onWhichSong.textContent = "Song: " + result.title;
+
+                        reportDiv.className = 'title';
+                        whoReported.className = 'user';
+                        reportedComment.className = 'title';
+                        onWhichSong.className = 'song';
 
                         const deleteReport = document.createElement('a');
-                        deleteReport.href =  `/adminReportsList/deleteReport/${result.comment_id}`;
+                        deleteReport.href =  `/adminReportsList/deleteReport/${result.report_id}`;
                         deleteReport.textContent = 'Delete';
                         deleteReport.className = 'deleteUser';
                         deleteReport.onclick = function() {
                             return confirm('Are you sure you want to delete this report?');
                         };
 
-                        singleUnit.appendChild(commentDiv);
+                        const resolveReport = document.createElement('a');
+                        resolveReport.className = 'resolve';
+
+                        if (result.status === 'Unsolved'){
+                            resolveReport.href = `/adminReportsList/resolveReport/${result.report_id}`;
+                            resolveReport.textContent = 'Unsolved';
+                            resolveReport.style.color = 'blue';
+                        } else {
+                            resolveReport.href = `/adminReportsList/unResolveReport/${result.report_id}`;
+                            resolveReport.textContent = 'Solved';
+                            resolveReport.style.color = 'green';
+                        }
+
+                        resolveReport.onclick = function() {
+                            if (confirm('Are you sure you want to resolve/unresolve this report?')) {
+                                if (result.status === 'Solved') {
+                                    resolveReport.href = `/adminReportsList/unResolveReport/${result.report_id}`;
+                                    resolveReport.textContent = 'Unsolved';
+                                } else {
+                                    resolveReport.textContent = 'Unsolved';
+                                    resolveReport.href = `/adminReportsList/resolveReport/${result.report_id}`;
+                                }
+                            }
+                        };
+
+                        singleUnit.appendChild(reportDiv);
+                        singleUnit.appendChild(whoReported);
+                        singleUnit.appendChild(reportedComment);
+                        singleUnit.appendChild(onWhichSong);
                         singleUnit.appendChild(deleteReport);
+                        singleUnit.appendChild(resolveReport);
                         resultDiv.appendChild(singleUnit);
                         resultsContainer.appendChild(resultDiv);
                         });

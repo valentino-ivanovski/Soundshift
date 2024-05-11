@@ -43,4 +43,16 @@ router.get('/commentsResults/:query', (req, res) => {
     });
 });
 
+router.get('/reportsResults/:query', (req, res) => {
+    const query = req.params.query;
+
+    dbConn.searchReports(query, (err, reports) => {
+        if (err) {
+            console.error("Error fetching reports:", err);
+            return res.status(500).send("Error fetching reports");
+        }
+        res.json(reports);
+    });
+});
+
 module.exports = router; //exporting the module for users
