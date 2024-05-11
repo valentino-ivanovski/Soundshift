@@ -164,7 +164,7 @@
                         reportDiv.textContent = "\"" + result.reason + "\"";
                         whoReported.textContent = "User: " + result.username;
                         reportedComment.textContent = "Comment: " + result.content;
-                        onWhichSong.textContent = "Song: " + result.title;
+                        onWhichSong.textContent = "Song: " + (result.title ? result.title : result.reported_song_title);
 
                         reportDiv.className = 'title';
                         whoReported.className = 'user';
