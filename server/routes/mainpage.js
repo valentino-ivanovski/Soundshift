@@ -218,4 +218,16 @@ router.post("/storeRetrievedSong", (req, res) => {
     });
 });
 
+router.put("/incCommentCount/:songid", (req, res) => {
+    const songId = req.params.songid;
+
+    dbConn.incCommentCount(songId, (err) => {
+        if (err) {
+            console.error("Error incrementing comment count:", err);
+            return res.status(500).send("Error incrementing comment count");
+        }
+        res.status(200).send("Comment count incremented");
+    });
+});
+
 module.exports = router; //exporting the module for users

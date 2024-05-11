@@ -802,6 +802,21 @@ function searchReports(query, callback) {
         }
     });
 }
+
+function incCommentCount(songid, callout){
+    const sql = `UPDATE songsNew SET comment_count = comment_count + 1 WHERE song_id = ?`;
+
+    conn.query(sql, [songid], (err, results) => {
+        if(err){
+            console.error("Error executing SQL query:", err);
+            callout(err);
+        } else {
+            console.log("Successfully incremented comment count:", results.affectedRows);
+            callout(null);
+        }
+    });
+
+}
     
 
 module.exports = {
@@ -846,5 +861,6 @@ module.exports = {
     deleteReport,
     resolveReport,
     unResolveReport,
-    searchReports
+    searchReports,
+    incCommentCount
 };
