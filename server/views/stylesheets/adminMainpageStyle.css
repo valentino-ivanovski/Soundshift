@@ -635,3 +635,17 @@ body {
     background-color: #a1a1a1;
     color: #6c6c6c;
 }
+
+.report-song{
+    color: #ffffff91;
+    font-size: 16px;
+    font-family: "Inter", Helvetica;
+    font-weight: 350;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 10px;   
+}
+
+.report-song:hover{
+    text-decoration: underline;
+}

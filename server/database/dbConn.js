@@ -721,11 +721,12 @@ function searchComments(query, callback) {
 
 function getReports(callback) {
     const sql = `
-        SELECT reports.*, usersNew.username, comments.content, songsNew.title 
+        SELECT reports.*, usersNew.username, comments.content, songsNew.title, songsNew2.title AS reported_song_title
         FROM reports 
         LEFT JOIN usersNew ON reports.user_id = usersNew.id
         LEFT JOIN comments ON reports.comment_id = comments.comment_id
         LEFT JOIN songsNew ON comments.song_id = songsNew.song_id
+        LEFT JOIN songsNew AS songsNew2 ON reports.song_id = songsNew2.song_id
         ORDER BY reports.status DESC, reports.report_id ASC;
     `;
 
@@ -817,6 +818,19 @@ function incCommentCount(songid, callout){
     });
 
 }
+
+function reportSong(userId, reason, songId, callback) {
+    const sql = `INSERT INTO reports (user_id, reason, song_id) VALUES (?, ?, ?)`;
+    conn.query(sql, [userId, reason, songId], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            callback(err);
+        } else {
+            console.log("Successfully reported song:", results.affectedRows);
+            callback(null);
+        }
+    });
+}
     
 
 module.exports = {
@@ -862,5 +876,6 @@ module.exports = {
     resolveReport,
     unResolveReport,
     searchReports,
-    incCommentCount
+    incCommentCount,
+    reportSong
 };
