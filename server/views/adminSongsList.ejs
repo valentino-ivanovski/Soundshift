@@ -82,10 +82,25 @@
                         const songTitleDiv = document.createElement('a');
                         const songUsername = document.createElement('a');
                         const tilde = document.createElement('p');
+                        const genre = document.createElement('p');
+                        const uploadDate = document.createElement('p');
+                        const likes = document.createElement('p');
+                        const comments = document.createElement('p');
+                        const explicit = document.createElement('p');
                         songTitleDiv.href = `${result.spotify_link}`;
                         songUsername.href = `/adminProfile/${result.username}`;
+                        songUsername.style.textDecoration = 'underline';
                         songUsername.textContent = result.username;
                         songTitleDiv.textContent = result.title + " by " + result.artist;
+                        songTitleDiv.style.textDecoration = 'underline';
+                        likes.textContent = "Likes: " + result.like_count;
+                        comments.textContent = "Comments: " + result.comment_count;
+                        uploadDate.textContent = result.upload_date;
+                        uploadDate.textContent = new Date(result.upload_date).toISOString().slice(0, 10);
+                        uploadDate.style.color = 'blue';
+                        genre.textContent = "("+result.genre+")";
+                        genre.style.color = 'gray';
+                        explicit.textContent = result.explicit ? "Explicit" : "Clean";
                         tilde.textContent = " - ";
                         songUsername.className = 'title';
                         songTitleDiv.className = 'title';
@@ -99,6 +114,11 @@
                         };
 
                         singleUnit.appendChild(songTitleDiv);
+                        singleUnit.appendChild(genre);
+                        singleUnit.appendChild(uploadDate);
+                        singleUnit.appendChild(likes);
+                        singleUnit.appendChild(comments);
+                        singleUnit.appendChild(explicit);
                         singleUnit.appendChild(tilde);
                         singleUnit.appendChild(songUsername);  
                         singleUnit.appendChild(deleteUser);
