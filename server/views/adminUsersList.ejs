@@ -92,7 +92,7 @@
 
                         const usernameDiv = document.createElement('a');
                         usernameDiv.href = `/adminProfile/${result.username}`;
-                        usernameDiv.textContent = result.username;
+                        usernameDiv.textContent = result.admin === 1 ? result.username + "🔸" : result.username;
                         usernameDiv.className = 'username';
 
                         const infoDiv = document.createElement('div');
@@ -165,7 +165,7 @@
                         usernameDiv.href = `/adminProfile/${result.username}`;
                         usernameDiv.textContent = result.username;
                         usernameDiv.className = 'username';
-
+                        
                         const infoDiv = document.createElement('div');
                         infoDiv.className = 'infoDiv';
 
