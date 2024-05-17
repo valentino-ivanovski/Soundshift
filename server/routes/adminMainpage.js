@@ -4,7 +4,7 @@ const dbConn = require("../database/dbConn"); //importing the database connectio
 
 router.get("/", (req, res) => {
     console.log("adminMainpage route reached");
-    res.render("adminMainpage");
+    res.render("adminMainpage", { apiVariable: process.env.YOUTUBE_API_KEY });
 });
 
 router.post("/submitsong", (req, res) => {
