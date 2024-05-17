@@ -32,14 +32,16 @@
             <div class="content">
 
                 <div class="centerdiv">
-                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
+                    <div class="search-content"
+                        style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
                         <form style="display: flex; flex-direction: column; gap:20px;">
                             <input type="text" id="search" placeholder="Search for a user or id...">
                             <div class="searchButtons">
                                 <button class="buttonSearch">Search</button>
                             </div>
                         </form>
-                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;"> <!-- Add this line -->
+                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;">
+                        <!-- Add this line -->
                     </div>
                 </div>
 
@@ -62,7 +64,7 @@
             const resultsWillShowHere = document.createElement('p');
 
             resultsContainer.className = 'results';
-        
+
             form.parentNode.appendChild(resultsContainer);
 
             fetch(`/adminUsersList/getUsers`)
@@ -79,7 +81,7 @@
                         idDiv.className = 'id';
 
                         singleUnit.appendChild(idDiv);
-                            
+
                         const imageDiv = document.createElement('div');
                         imageDiv.style.width = '50px';
                         imageDiv.style.height = '50px';
@@ -92,36 +94,45 @@
 
                         const usernameDiv = document.createElement('a');
                         usernameDiv.href = `/adminProfile/${result.username}`;
-                        usernameDiv.textContent = result.username;
+                        usernameDiv.textContent = result.admin === 1 ? result.username + "🔸" : result.username;
                         usernameDiv.className = 'username';
 
                         const infoDiv = document.createElement('div');
                         infoDiv.className = 'infoDiv';
 
                         const deleteUser = document.createElement('a');
-                        deleteUser.href =  `/adminUsersList/deleteUser/${result.id}`;
+                        deleteUser.href = `/adminUsersList/deleteUser/${result.id}`;
                         deleteUser.textContent = 'Delete';
                         deleteUser.className = 'deleteUser';
-                        deleteUser.onclick = function() {
+                        deleteUser.onclick = function () {
                             return confirm('Are you sure you want to delete this profile?');
                         };
 
 
                         const makeAdmin = document.createElement('a');
 
-                        if( result.admin === 0 ){
-                            makeAdmin.href =  `/adminUsersList/makeAdmin/${result.username}`;
+                        if (result.admin === 0) {
+                            makeAdmin.href = `/adminUsersList/makeAdmin/${result.username}`;
                             makeAdmin.textContent = 'Make Admin';
                             makeAdmin.className = 'makeAdmin';
                             makeAdmin.id = 'makeAdminId';
-                        } else{
-                            makeAdmin.href =  `/adminUsersList/removeAdmin/${result.username}`;
+                        } else {
+                            makeAdmin.href = `/adminUsersList/removeAdmin/${result.username}`;
                             makeAdmin.textContent = 'Remove Admin';
                             makeAdmin.className = 'makeAdmin';
                             makeAdmin.id = 'makeAdminId';
                         }
 
+                        const location = document.createElement('p');
+                        location.textContent = result.location;
+                        location.style.color = 'grey';
+
+                        const email = document.createElement('p');
+                        email.textContent = result.email;
+
                         singleUnit.appendChild(usernameDiv);
+                        singleUnit.appendChild(location);
+                        singleUnit.appendChild(email);
                         singleUnit.appendChild(infoDiv);
                         infoDiv.appendChild(deleteUser);
                         infoDiv.appendChild(makeAdmin);
@@ -129,64 +140,74 @@
                         resultsContainer.appendChild(resultDiv);
                     });
                 });
-        
-            form.onsubmit = function(event) {
+
+            form.onsubmit = function (event) {
                 event.preventDefault();
                 const query = searchInput.value;
                 const url = `/adminSearch/userResults/${query}`;
-                
+
                 fetch(url)
                     .then(response => response.json())
                     .then(results => {
                         resultsContainer.innerHTML = '';
-                        results.forEach(result => {
-                            const resultDiv = document.createElement('div');
-                        resultsWillShowHere.style.display = 'none';
-                        const singleUnit = document.createElement('div');
-                        singleUnit.className = 'singleUnit';
+                        if (results.length === 0) {
+                            const noResults = document.createElement('p');
+                            noResults.textContent = 'No Results';
+                            noResults.style.fontFamily = 'Inter';
+                            noResults.style.fontWeight = '500';
+                            noResults.style.fontSize = '18px';
+                            noResults.style.color = 'rgba(255, 255, 255, 0.451)';
+                            resultsContainer.appendChild(noResults);
+                        } else {
+                            results.forEach(result => {
+                                const resultDiv = document.createElement('div');
+                                resultsWillShowHere.style.display = 'none';
+                                const singleUnit = document.createElement('div');
+                                singleUnit.className = 'singleUnit';
 
-                        const idDiv = document.createElement('p');
-                        idDiv.textContent = result.id;
-                        idDiv.className = 'id';
+                                const idDiv = document.createElement('p');
+                                idDiv.textContent = result.id;
+                                idDiv.className = 'id';
 
-                        singleUnit.appendChild(idDiv);
-                            
-                        const imageDiv = document.createElement('div');
-                        imageDiv.style.width = '50px';
-                        imageDiv.style.height = '50px';
-                        imageDiv.style.borderRadius = '50%';
-                        imageDiv.style.backgroundImage = `url(${result.imageUrl})`;
-                        imageDiv.style.backgroundSize = 'cover';
-                        imageDiv.style.outline = '1px solid rgba(0, 0, 0, 0.1)';
+                                singleUnit.appendChild(idDiv);
 
-                        singleUnit.appendChild(imageDiv);
+                                const imageDiv = document.createElement('div');
+                                imageDiv.style.width = '50px';
+                                imageDiv.style.height = '50px';
+                                imageDiv.style.borderRadius = '50%';
+                                imageDiv.style.backgroundImage = `url(${result.imageUrl})`;
+                                imageDiv.style.backgroundSize = 'cover';
+                                imageDiv.style.outline = '1px solid rgba(0, 0, 0, 0.1)';
 
-                        const usernameDiv = document.createElement('a');
-                        usernameDiv.href = `/adminProfile/${result.username}`;
-                        usernameDiv.textContent = result.username;
-                        usernameDiv.className = 'username';
+                                singleUnit.appendChild(imageDiv);
 
-                        const infoDiv = document.createElement('div');
-                        infoDiv.className = 'infoDiv';
+                                const usernameDiv = document.createElement('a');
+                                usernameDiv.href = `/adminProfile/${result.username}`;
+                                usernameDiv.textContent = result.username;
+                                usernameDiv.className = 'username';
 
-                        const deleteUser = document.createElement('a');
-                        deleteUser.href =  `/adminUsersList/deleteUser/${result.username}`;
-                        deleteUser.textContent = 'Delete';
-                        deleteUser.className = 'deleteUser';
+                                const infoDiv = document.createElement('div');
+                                infoDiv.className = 'infoDiv';
 
-                        const makeAdmin = document.createElement('a');
-                        makeAdmin.href =  `/adminUsersList/makeAdmin/${result.username}`;
-                        makeAdmin.textContent = 'Make Admin';
-                        makeAdmin.className = 'makeAdmin';
-                        makeAdmin.id = 'makeAdminId';
+                                const deleteUser = document.createElement('a');
+                                deleteUser.href = `/adminUsersList/deleteUser/${result.username}`;
+                                deleteUser.textContent = 'Delete';
+                                deleteUser.className = 'deleteUser';
 
-                        singleUnit.appendChild(usernameDiv);
-                        singleUnit.appendChild(infoDiv);
-                        infoDiv.appendChild(deleteUser);
-                        infoDiv.appendChild(makeAdmin);
-                        resultDiv.appendChild(singleUnit);
-                        resultsContainer.appendChild(resultDiv);
-                        });
+                                const makeAdmin = document.createElement('a');
+                                makeAdmin.href = `/adminUsersList/makeAdmin/${result.username}`;
+                                makeAdmin.textContent = 'Make Admin';
+                                makeAdmin.className = 'makeAdmin';
+                                makeAdmin.id = 'makeAdminId';
+
+                                singleUnit.appendChild(usernameDiv);
+                                singleUnit.appendChild(infoDiv);
+                                infoDiv.appendChild(deleteUser);
+                                infoDiv.appendChild(makeAdmin);
+                                resultDiv.appendChild(singleUnit);
+                                resultsContainer.appendChild(resultDiv);
+                            });
+                        }
                     })
                     .catch(err => console.error(err));
             };

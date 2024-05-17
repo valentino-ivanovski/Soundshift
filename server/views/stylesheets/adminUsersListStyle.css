@@ -164,10 +164,7 @@ input:focus {
 }
 
 .results{
-    overflow: auto;
-    max-height: 285px;
-    width: 400px;
-    min-height: 60px;
+    width: 700px;
     padding: 15px;
     margin-top: -25px;
 }
@@ -175,7 +172,7 @@ input:focus {
 .singleUnit {
     display: flex; 
     align-items: center; 
-    justify-content: left; /* Change from space-around to space-between */
+    justify-content: left;
     gap: 10px; 
     margin: 10px; 
     width: auto;

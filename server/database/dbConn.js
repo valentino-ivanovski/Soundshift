@@ -474,7 +474,12 @@ function updateProfilePicture(userId, imageUrl, callback) {
 }
 
 function searchSongs(query, callback) {
-    const sql = `SELECT * FROM songsNew WHERE title LIKE ? OR song_id LIKE ? ORDER BY song_id`;
+    const sql = `
+    SELECT songsNew.*, usersNew.username 
+        FROM songsNew 
+        LEFT JOIN usersNew ON songsNew.user_id = usersNew.id
+        WHERE CONCAT(songsNew.title, songsNew.artist, songsNew.song_id) LIKE ? 
+        ORDER BY songsNew.song_id`;
 
     conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
         if (err) {
@@ -700,12 +705,12 @@ function deleteComment(commentId, callback){
 
 function searchComments(query, callback) {
     const sql = `
-        SELECT comments.*, songsNew.title, usersNew.username, usersNew.id 
-        FROM comments 
-        LEFT JOIN songsNew ON comments.song_id = songsNew.song_id 
-        LEFT JOIN usersNew ON comments.user_id = usersNew.id
-        WHERE comments.content LIKE ? OR comments.comment_id LIKE ? 
-        ORDER BY comments.comment_id
+    SELECT comments.*, songsNew.title, usersNew.username, usersNew.id 
+    FROM comments 
+    LEFT JOIN songsNew ON comments.song_id = songsNew.song_id 
+    LEFT JOIN usersNew ON comments.user_id = usersNew.id
+    WHERE CONCAT(comments.content, comments.comment_id, songsNew.title, usersNew.username) LIKE ? 
+    ORDER BY comments.comment_id
     `;
 
     conn.query(sql, [`%${query}%`, `%${query}%`], (err, results) => {
