@@ -32,14 +32,17 @@
             <div class="content">
 
                 <div class="centerdiv">
-                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
+                    <div class="search-content"
+                        style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
                         <form style="display: flex; flex-direction: column; gap:20px;">
-                            <input type="text" id="search" placeholder="Search for a comment or comment id...">
+                            <input type="text" id="search"
+                                placeholder="Search for a comment, comment id, user or song...">
                             <div class="searchButtons">
                                 <button class="buttonSearch">Search</button>
                             </div>
                         </form>
-                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;"> <!-- Add this line -->
+                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;">
+                        <!-- Add this line -->
                     </div>
                 </div>
 
@@ -62,7 +65,7 @@
             const resultsWillShowHere = document.createElement('p');
 
             resultsContainer.className = 'results';
-        
+
             form.parentNode.appendChild(resultsContainer);
 
             fetch(`/adminCommentsList/getComments`)
@@ -92,13 +95,13 @@
                         commentedSong.className = 'song';
 
                         const deleteComment = document.createElement('a');
-                        deleteComment.href =  `/adminCommentsList/deleteComment/${result.comment_id}`;
+                        deleteComment.href = `/adminCommentsList/deleteComment/${result.comment_id}`;
                         deleteComment.textContent = 'Delete';
                         deleteComment.className = 'deleteUser';
-                        deleteComment.onclick = function() {
+                        deleteComment.onclick = function () {
                             return confirm('Are you sure you want to delete this song?');
                         };
-                        
+
                         singleUnit.appendChild(commentDiv);
                         singleUnit.appendChild(whoCommented);
                         singleUnit.appendChild(commentedSong);
@@ -107,54 +110,64 @@
                         resultsContainer.appendChild(resultDiv);
                     });
                 });
-        
-            form.onsubmit = function(event) {
+
+            form.onsubmit = function (event) {
                 event.preventDefault();
                 const query = searchInput.value;
                 const url = `/adminSearch/commentsResults/${query}`;
-                
+
                 fetch(url)
                     .then(response => response.json())
                     .then(results => {
                         resultsContainer.innerHTML = '';
-                        results.forEach(result => {
-                            const resultDiv = document.createElement('div');
-                        const singleUnit = document.createElement('div');
-                        singleUnit.className = 'singleUnit';
+                        if (results.length === 0) {
+                            const noResults = document.createElement('p');
+                            noResults.textContent = 'No Results';
+                            noResults.style.fontFamily = 'Inter';
+                            noResults.style.fontWeight = '500';
+                            noResults.style.fontSize = '18px';
+                            noResults.style.color = 'rgba(255, 255, 255, 0.451)';
+                            resultsContainer.appendChild(noResults);
+                        } else {
+                            results.forEach(result => {
+                                const resultDiv = document.createElement('div');
+                                const singleUnit = document.createElement('div');
+                                singleUnit.className = 'singleUnit';
 
-                        const idDiv = document.createElement('p');
-                        idDiv.textContent = result.comment_id;
-                        idDiv.className = 'id';
+                                const idDiv = document.createElement('p');
+                                idDiv.textContent = result.comment_id;
+                                idDiv.className = 'id';
 
-                        singleUnit.appendChild(idDiv);
+                                singleUnit.appendChild(idDiv);
 
-                        const commentDiv = document.createElement('p');
-                        const whoCommented = document.createElement('a');
-                        const commentedSong = document.createElement('p');
-                        commentDiv.textContent = "\"" + result.content + "\"";
-                        whoCommented.textContent = "User: " + result.username;
-                        commentedSong.textContent = "Song: " + result.title;
-                        whoCommented.href = `/adminProfile/${result.username}`;
+                                const commentDiv = document.createElement('p');
+                                const whoCommented = document.createElement('a');
+                                const commentedSong = document.createElement('p');
+                                commentDiv.textContent = "\"" + result.content + "\"";
+                                whoCommented.textContent = "User: " + result.username;
+                                commentedSong.textContent = "Song: " + result.title;
+                                whoCommented.href = `/adminProfile/${result.username}`;
 
-                        commentDiv.className = 'title';
-                        whoCommented.className = 'user';
-                        commentedSong.className = 'song';
+                                commentDiv.className = 'title';
+                                whoCommented.className = 'user';
+                                commentedSong.className = 'song';
 
-                        const deleteComment = document.createElement('a');
-                        deleteComment.href =  `/adminCommentsList/deleteComment/${result.comment_id}`;
-                        deleteComment.textContent = 'Delete';
-                        deleteComment.className = 'deleteUser';
-                        deleteComment.onclick = function() {
-                            return confirm('Are you sure you want to delete this song?');
-                        };
+                                const deleteComment = document.createElement('a');
+                                deleteComment.href = `/adminCommentsList/deleteComment/${result.comment_id}`;
+                                deleteComment.textContent = 'Delete';
+                                deleteComment.className = 'deleteUser';
+                                deleteComment.onclick = function () {
+                                    return confirm('Are you sure you want to delete this song?');
+                                };
 
-                        singleUnit.appendChild(commentDiv);
-                        singleUnit.appendChild(whoCommented);
-                        singleUnit.appendChild(commentedSong);
-                        singleUnit.appendChild(deleteComment);
-                        resultDiv.appendChild(singleUnit);
-                        resultsContainer.appendChild(resultDiv);
-                        });
+                                singleUnit.appendChild(commentDiv);
+                                singleUnit.appendChild(whoCommented);
+                                singleUnit.appendChild(commentedSong);
+                                singleUnit.appendChild(deleteComment);
+                                resultDiv.appendChild(singleUnit);
+                                resultsContainer.appendChild(resultDiv);
+                            });
+                        }
                     })
                     .catch(err => console.error(err));
             };
