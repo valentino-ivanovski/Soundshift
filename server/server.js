@@ -58,12 +58,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    // Clear the user session to log out
+    //clear the user session to log out
     req.session.user = null;
     res.redirect('/');
   });
 
-// Routing
+//routing
 const loginRouter = require('./routes/login');
 app.use("/login", loginRouter);
 
