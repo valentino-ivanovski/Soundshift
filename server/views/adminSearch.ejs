@@ -32,7 +32,8 @@
             <div class="content">
 
                 <div class="centerdiv">
-                    <div class="search-content" style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
+                    <div class="search-content"
+                        style="display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center;">
                         <form style="display: flex; flex-direction: column; gap:20px;">
                             <input type="text" id="search" placeholder="Search for a user...">
                             <div class="searchButtons">
@@ -40,7 +41,8 @@
                                 <button type="menu" class="buttonSearch" id="songSearchButton">Song Search: Off</button>
                             </div>
                         </form>
-                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;"> <!-- Add this line -->
+                        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%;">
+                        <!-- Add this line -->
                     </div>
                 </div>
 
@@ -71,10 +73,10 @@
             resultsWillShowHere.style.color = 'rgba(256, 256, 256, 0.5)';
             resultsWillShowHere.style.marginTop = '5px';
             resultsContainer.appendChild(resultsWillShowHere);
-        
+
             form.parentNode.appendChild(resultsContainer);
-        
-            songSearchButton.addEventListener('click', function(event) {
+
+            songSearchButton.addEventListener('click', function (event) {
                 event.preventDefault();
                 if (songSearchButton.textContent === 'Song Search: Off') {
                     songSearchButton.textContent = 'Song Search: On';
@@ -86,58 +88,68 @@
                     document.getElementById('search').placeholder = 'Search for a user or id...';
                 }
             });
-        
-            form.onsubmit = function(event) {
+
+            form.onsubmit = function (event) {
                 event.preventDefault();
                 const query = searchInput.value;
                 const url = songSearch ? `/adminSearch/songResults/${query}` : `/adminSearch/userResults/${query}`;
-                
+
                 fetch(url)
                     .then(response => response.json())
                     .then(results => {
                         resultsContainer.innerHTML = '';
-                        results.forEach(result => {
-                            const resultDiv = document.createElement('div');
-                            if (songSearch) {
-                                resultsWillShowHere.style.display = 'none';
-                                const singleUnit = document.createElement('div');
-                                singleUnit.className = 'singleUnit';
-                                const songInfo = document.createElement('a');
-                                songInfo.textContent = `${result.title}  by: ${result.artist}`;
-                                singleUnit.style.minWidth = '250px';
-                                singleUnit.appendChild(songInfo);
-                                singleUnit.style.padding = '10px';
-                                singleUnit.style.justifyContent = 'center';
-                                singleUnit.style.height = '30px';
-                                resultDiv.appendChild(singleUnit);
-                                songInfo.href = `${result.spotify_link}`;
-                                songInfo.className = 'songInfo';    
+                        if (results.length === 0) {
+                            const noResults = document.createElement('p');
+                            noResults.textContent = 'No Results';
+                            noResults.style.fontFamily = 'Inter';
+                            noResults.style.fontWeight = '500';
+                            noResults.style.fontSize = '18px';
+                            noResults.style.color = 'rgba(255, 255, 255, 0.451)';
+                            resultsContainer.appendChild(noResults);
+                        } else {
+                            results.forEach(result => {
+                                const resultDiv = document.createElement('div');
+                                if (songSearch) {
+                                    resultsWillShowHere.style.display = 'none';
+                                    const singleUnit = document.createElement('div');
+                                    singleUnit.className = 'singleUnit';
+                                    const songInfo = document.createElement('a');
+                                    songInfo.textContent = `${result.title}  by: ${result.artist}`;
+                                    singleUnit.style.minWidth = '250px';
+                                    singleUnit.appendChild(songInfo);
+                                    singleUnit.style.padding = '10px';
+                                    singleUnit.style.justifyContent = 'center';
+                                    singleUnit.style.height = '30px';
+                                    resultDiv.appendChild(singleUnit);
+                                    songInfo.href = `${result.spotify_link}`;
+                                    songInfo.className = 'songInfo';
 
-                            } else {
-                                resultsWillShowHere.style.display = 'none';
-                                const singleUnit = document.createElement('div');
-                                singleUnit.className = 'singleUnit';
-                                
-                                const imageDiv = document.createElement('div');
-                                imageDiv.style.width = '50px';
-                                imageDiv.style.height = '50px';
-                                imageDiv.style.borderRadius = '50%';
-                                imageDiv.style.backgroundImage = `url(${result.imageUrl})`;
-                                imageDiv.style.backgroundSize = 'cover';
-                                imageDiv.style.outline = '1px solid rgba(0, 0, 0, 0.1)';
+                                } else {
+                                    resultsWillShowHere.style.display = 'none';
+                                    const singleUnit = document.createElement('div');
+                                    singleUnit.className = 'singleUnit';
 
-                                singleUnit.appendChild(imageDiv);
+                                    const imageDiv = document.createElement('div');
+                                    imageDiv.style.width = '50px';
+                                    imageDiv.style.height = '50px';
+                                    imageDiv.style.borderRadius = '50%';
+                                    imageDiv.style.backgroundImage = `url(${result.imageUrl})`;
+                                    imageDiv.style.backgroundSize = 'cover';
+                                    imageDiv.style.outline = '1px solid rgba(0, 0, 0, 0.1)';
 
-                                const usernameDiv = document.createElement('a');
-                                usernameDiv.href = `/adminProfile/${result.username}`;
-                                usernameDiv.textContent = result.username;
-                                usernameDiv.className = 'username';
+                                    singleUnit.appendChild(imageDiv);
 
-                                singleUnit.appendChild(usernameDiv);
-                                resultDiv.appendChild(singleUnit);
-                            }
-                            resultsContainer.appendChild(resultDiv);
-                        });
+                                    const usernameDiv = document.createElement('a');
+                                    usernameDiv.href = `/adminProfile/${result.username}`;
+                                    usernameDiv.textContent = result.username;
+                                    usernameDiv.className = 'username';
+
+                                    singleUnit.appendChild(usernameDiv);
+                                    resultDiv.appendChild(singleUnit);
+                                }
+                                resultsContainer.appendChild(resultDiv);
+                            });
+                        }
                     })
                     .catch(err => console.error(err));
             };

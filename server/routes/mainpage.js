@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const dbConn = require("../database/dbConn"); //importing the database connection module
+require('dotenv').config();
 
 router.get("/", (req, res) => {
     console.log("mainpage route reached");
-    res.render("mainpage");
+    res.render("mainpage", { apiVariable: process.env.YOUTUBE_API_KEY });
 });
 
 router.post("/submitsong", (req, res) => {

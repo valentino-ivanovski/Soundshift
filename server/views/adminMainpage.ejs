@@ -269,8 +269,9 @@
                                 `;
                             songInfoContainer.innerHTML = songDetailsHTML;
 
+                            const apikey = "<%=apiVariable%>";
 
-                            fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + ' ' + artist)}&key=AIzaSyAwEFqINoDrNr9sWjIXwuNVI4cZvBjW43E&type=video`)
+                            fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + ' ' + artist)}&key=${apikey}&type=video`)
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.items && data.items.length > 0) {
