@@ -33,8 +33,9 @@
 
                 <div class="centerdiv">
 
-                    <div class="profile-picture" style="background-image: url('<%= userr.imageUrl %>'); background-size: cover; color: transparent;">
+                    <div class="profile-picture" style="background-image: url('<%= userr.imageUrl %>'); background-size: cover; color: transparent; display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px;">
                         <%= user.username.charAt(0).toUpperCase() %>
+                        <button class="pfpButton" id="pfpButton">Edit Picture</button>
                     </div>
 
                     <h1 class="welcome">Welcome, <%= userr.username %>🔸</h1>
@@ -192,6 +193,25 @@
                     document.querySelector('#editSoundcloudForm').submit();
                 }
             });
+
+            document.getElementById('pfpButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                var imageUrl = prompt("Paste an image URL:");
+                if (imageUrl) {
+                    document.querySelector('.profile-picture').style.backgroundImage = 'url(' + imageUrl + ')';
+                    document.querySelector('.profile-picture').style.backgroundSize = 'cover';
+                    document.querySelector('.profile-picture').style.color = 'transparent';
+
+                    fetch('/profile/me/update-profile-picture', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ imageUrl: imageUrl }),
+                    });
+                }
+            });
+
             </script>
     </center>
 </body>

@@ -154,7 +154,27 @@ body {
     color: rgba(255, 255, 255, 0.347);
     border: none;
     background-color: transparent;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 90px;
+    margin-left: -5px;
     transition: color 0.2s;
+}
+
+.pfpButton{
+    font-family: 'Inter', Helvetica Neue;
+    font-size: 15px;
+    font-weight: 200;
+    color: rgba(255, 255, 255, 0.347);
+    border: none;
+    background-color: transparent;
+    transition: color 0.2s;
+}
+
+.pfpButton:hover {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
 }
 
 .bioButton:hover {
