@@ -85,6 +85,7 @@ p{
     font-size: 18px;
     font-family: Inter, Helvetica;
     cursor: pointer;
+    margin-left: 20%;
     transition: background-color 0.3s, color 0.3s;
     margin-top: 30px;
 }
@@ -99,6 +100,7 @@ p{
     font-size: 90px;
     color: #fff;
     transition: 0.5s;
+    margin-left: 20%;
     font-variation-settings: "slnt" -10;
 }
 
@@ -110,6 +112,7 @@ p{
 .welcome2 {
     font-family: 'Inter', sans-serif; /* Use Inter font */
     font-size: 20px;
+    margin-left: 20%;
     color: #fff;
     font-weight: 300;
 }
@@ -121,10 +124,12 @@ p{
 @media screen and (max-width: 768px) {
     .welcome1 {
         font-size: 60px;
+        margin-left: 0%;
     }
 
     .welcome2 {
         font-size: 20px;
+        margin-left: 0%;
     }
 
     .login-register {
@@ -132,6 +137,15 @@ p{
         right: 40px;
         display: flex;
         gap: 20px;
+    }
+
+    .buttonLM{
+        margin-left: 0%;
+        font-size: 15px;
+    }
+
+    .button{
+        font-size: 15px;
     }
 
 }

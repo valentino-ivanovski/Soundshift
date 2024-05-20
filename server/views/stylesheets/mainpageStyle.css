@@ -57,6 +57,19 @@ body {
     margin-bottom: 3px;
 }
 
+.navbar p a{
+    margin-right: 55px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: Inter, Helvetica;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    transition: font-weight 0.3s, 0.3s;
+
+}
+
 .navbar li a {
     padding: 11px 17px;
     color: #fff;
@@ -85,7 +98,7 @@ body {
 
 .content {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     max-width: 1200px;
     height: 100vh;
 }
@@ -650,4 +663,96 @@ body {
 
 .report-song:hover{
     text-decoration: underline;
+}
+
+@media screen and (max-width: 700px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        max-width: 1200px;
+        height: 100vh;
+    }
+    .navbar{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        width: 100%;
+        padding-left: 10px;
+        background-color: #a7533e4a;
+        box-shadow: 0 2px 15px 0 rgba(142, 57, 57, 0.2);
+    }
+    .navbar ul {
+
+        list-style: none;
+        margin-bottom: 0px;
+        margin-right: 0px;
+        margin-top: 10px;
+    }
+    
+    .navbar p a{
+        margin-right: 20px;
+    }
+
+    .soundshiftText{
+        margin-right: 55px;
+        margin-top: 45px;
+    }
+
+    #logoutButton {
+        position: relative;
+        top: -75px; /* Adjust this value as needed */
+        margin-left: 370px; /* Adjust this value as needed */
+    }
+
+    #logoutButton::before {
+        content: '↩️';
+    }
+    #logoutButton span {
+        display: none;
+    }
+
+    .divider{
+        display: none;
+    }
+
+    .circle-container{
+        margin: 0px;
+        padding: 0px;
+        margin-top: -10px;
+    }
+
+    .right-side{
+        height: 90vh;
+        padding-bottom: 105px;
+    }
+
+    .left-side{
+        margin-top: 50px;
+    }
+
+    .square-inner{
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+    }
+
+    .clickMeAnimation{
+        display: none;
+    }
+
+    html, body{
+        overflow: auto;
+    }
+
+    .animated-bg {
+        position:fixed;
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-270deg, #ee5050, #e622a5);
+        background-size: 200% 200%;
+        animation: gradient 5s infinite;
+    }
 }
