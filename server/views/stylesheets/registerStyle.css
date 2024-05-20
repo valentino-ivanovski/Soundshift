@@ -35,7 +35,10 @@ body {
 }
 
 .container {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 50%;
     height: 50%;
 }
@@ -44,19 +47,16 @@ h1 {
     font-size: 24px;
 }
 
-form {
-    text-align: center;
-}
-
 input {
-    width: 30%;
+    width: 50%;
+    min-width: 300px;
     padding: 15px;
-    margin: 15px 10px;
+    margin: 15px 0;
     border: none;
     background-color: rgba(245, 245, 245, 0.11);
     border-radius: 50px;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
 }
 input:focus {
     outline: none;
@@ -68,20 +68,19 @@ input::placeholder {
 
 button {
     padding: 13px 20px;
-    background-color: transparent;
-    color: #fff;
+    background-color: #fff;
+    color: #000000;
     text-decoration: none;
-    border: 1.5px solid #fff;
+    border: 0px solid #fff;
     border-radius: 50px;
-    font-size: 17px;
+    font-size: 15px;
     font-family: Inter, Helvetica;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
 
 button:hover {
-    background-color: #513ad0;
-    border: 1.5px solid #513ad0;
+    background-color: #d9d9d9;
 }
 
 .error {

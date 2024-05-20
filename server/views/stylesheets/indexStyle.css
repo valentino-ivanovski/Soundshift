@@ -86,7 +86,6 @@ p{
     font-family: Inter, Helvetica;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
-    margin-left: 20%;
     margin-top: 30px;
 }
 
@@ -99,10 +98,8 @@ p{
     font-family: 'Inter', sans-serif; /* Use Inter font */
     font-size: 90px;
     color: #fff;
-    margin-left: 20%;
     transition: 0.5s;
-    font-variation-settings:
-"slnt" -10;
+    font-variation-settings: "slnt" -10;
 }
 
 .welcome1:hover{
@@ -114,7 +111,6 @@ p{
     font-family: 'Inter', sans-serif; /* Use Inter font */
     font-size: 20px;
     color: #fff;
-    margin-left: 20%;
     font-weight: 300;
 }
 
@@ -130,6 +126,14 @@ p{
     .welcome2 {
         font-size: 20px;
     }
+
+    .login-register {
+        top: 30px;
+        right: 40px;
+        display: flex;
+        gap: 20px;
+    }
+
 }
 
 #welcomeContainer {
