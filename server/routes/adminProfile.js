@@ -131,7 +131,7 @@ router.post('/me/updateSoundcloud', function(req, res) {
 });
 
 router.post('/me/update-profile-picture', function(req, res) {
-    const userId = req.session.user.id;;
+    const userId = req.session.user.id;
     const newProfilePictureUrl = req.body.imageUrl;
     dbConn.updateProfilePicture(userId, newProfilePictureUrl, function(err, user) {
         if (err) {

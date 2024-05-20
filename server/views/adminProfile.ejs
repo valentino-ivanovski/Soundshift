@@ -43,7 +43,7 @@
 
                     <div class="bioDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 70px; margin-top: -35px;">
                         <p class="bioText" style="max-width: 500px;"><%= userr.bio %></p>
-                        <form id="editBioForm" action="/profile/me/updatebio" method="POST">
+                        <form id="editBioForm" action="/adminProfile/me/updatebio" method="POST">
                             <input type="hidden" name="id" value="<%= userr.id %>">
                             <input type="hidden" id="newBio" name="bio">
                             <button type="submit" class="bioButton">Edit Bio</button>
@@ -51,19 +51,19 @@
                     </div>
 
                     <div class="linksDiv" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; margin-left: 0px; margin-top: 0px;">
-                        <form id="editSpotifyForm" action="/profile/me/updateSpotify" method="POST">
+                        <form id="editSpotifyForm" action="/adminProfile/me/updateSpotify" method="POST">
                             <input type="hidden" name="id" value="<%= userr.id %>">
                             <input type="hidden" id="newSpotify" name="spotify">
                             <button type="submit" class="spotifyButton">Spotify</button>
                         </form>
                     
-                        <form id="editAMForm" action="/profile/me/updateAM" method="POST">
+                        <form id="editAMForm" action="/adminProfile/me/updateAM" method="POST">
                             <input type="hidden" name="id" value="<%= userr.id %>">
                             <input type="hidden" id="newAM" name="am">
                             <button type="submit" class="amButton">Apple Music</button>
                         </form>
                     
-                        <form id="editSoundcloudForm" action="/profile/me/updateSoundcloud" method="POST">
+                        <form id="editSoundcloudForm" action="/adminProfile/me/updateSoundcloud" method="POST">
                             <input type="hidden" name="id" value="<%= userr.id %>">
                             <input type="hidden" id="newSoundcloud" name="soundcloud">
                             <button type="submit" class="soundcloudButton">SoundCloud</button>
@@ -145,7 +145,7 @@
                     document.querySelector('.profile-picture').style.backgroundSize = 'cover';
                     document.querySelector('.profile-picture').style.color = 'transparent';
 
-                    fetch('/profile/me/update-profile-picture', {
+                    fetch('/adminProfile/me/update-profile-picture', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
