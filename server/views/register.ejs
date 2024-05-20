@@ -12,10 +12,11 @@
         <div class="container">
             <h1 style="font-family: 'Inter', Helvetica; font-size: 80px; color: white; margin: 0; margin-bottom: 20px; cursor: default;">
                 Register</h1>
-            <form action="/register/registerUser" method="POST">
+            <form action="/register/registerUser" id="registerForm method="POST">
                 <input type="text" placeholder="Username" name="username" required>
                 <input type="text" placeholder="Email" name="email" required>
                 <input type="password" placeholder="Password" name="password" required>
+                <input id="confirmPassword" type="password" placeholder="Confirm Password" name="confirmPassword" required>
                 <p class="error">
                     <%= locals.errorReg %>
                 </p>
@@ -25,4 +26,15 @@
         </div>
     </div>
 </body>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match.');
+            event.preventDefault();
+        }
+    });
+</script>
 </html>
