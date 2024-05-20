@@ -36,8 +36,8 @@ body {
     padding: 25px;
     align-items: center;
     height: 10px;
-    background-color: #a7533e4a;
-    box-shadow: 0 2px 15px 0 rgba(142, 57, 57, 0.2);
+    background-color: #3e47a74a;
+    box-shadow: 0 2px 15px 0 rgba(63, 57, 142, 0.2);
 }
 
 .navbar ul {
@@ -680,8 +680,8 @@ body {
         height: 70px;
         width: 100%;
         padding-left: 10px;
-        background-color: #a7533e4a;
-        box-shadow: 0 2px 15px 0 rgba(142, 57, 57, 0.2);
+        background-color: #3e47a74a;
+        box-shadow: 0 2px 15px 0 rgba(57, 71, 142, 0.2);
     }
     .navbar ul {
 
