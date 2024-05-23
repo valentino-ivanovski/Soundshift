@@ -1,6 +1,6 @@
 # Soundshift
 
-[Soundshift](http://88.200.63.148:3000) is an information system that allows users to discover songs, which entries are being submitted by other users.
+[Soundshift](http://88.200.63.148:3000) is an information system that allows users to discover songs, which entries are being submitted by other users. The website is not yet updated for mobile devices.
 
 More info can be found in the report.
 
