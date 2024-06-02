@@ -88,8 +88,8 @@ router.post("/getrandomsong", (req, res) => {
 });
 
 router.post("/updateUserLocation", (req, res) => {
-    const location = req.body.location; // Retrieve location from request body
-    const userId = req.session.user.id; // Assuming you also need userId
+    const location = req.body.location;
+    const userId = req.session.user.id;
 
     dbConn.updateLocation(location, userId, (err) => {
         if (err) {
@@ -104,8 +104,8 @@ router.post("/updateUserLocation", (req, res) => {
 });
 
 router.post("/updateLikeCount", (req, res) => {
-    const songId = req.body.songid; // Retrieve songId from request body
-    const userId = req.session.user.id; // Assuming you also need userId
+    const songId = req.body.songid;
+    const userId = req.session.user.id;
 
     dbConn.incrementLikeCount(songId, (err) => {
         if (err) {
