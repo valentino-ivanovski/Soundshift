@@ -212,7 +212,7 @@
                     })
                         .then(response => {
                             if (response.ok) {
-                                return response.json(); // Parse the response JSON
+                                return response.json(); //parse the response JSON
                             } else {
                                 console.error('Error:', response.statusText);
                             }
@@ -236,7 +236,7 @@
                             //adding the retreived song to the retrievedSongs table
                             const retrievedSongData = {
                                 song_id: song.song_id,
-                                retrieval_date: new Date().toISOString().slice(0, 10) // Current date in YYYY-MM-DD format
+                                retrieval_date: new Date().toISOString().slice(0, 10) //current date in YYYY-MM-DD format
                             };
 
                             fetch('/mainpage/storeRetrievedSong', {
@@ -270,9 +270,9 @@
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.items && data.items.length > 0) {
-                                        const videoId = data.items[0].id.videoId; // Extract the video ID from search results
+                                        const videoId = data.items[0].id.videoId; //extract the video id from search results
 
-                                        // Create YouTube player
+                                        //create YouTube player
                                         const playerContainer = document.createElement('div');
                                         playerContainer.id = 'player';
                                         songInfoContainer.appendChild(playerContainer);
@@ -341,12 +341,10 @@
                                         songInfoContainer.appendChild(likeCommentDiv);
 
 
-
-                                        // Create a div to contain the buttons
                                         const buttonsDiv = document.createElement('div');
                                         buttonsDiv.style.marginTop = '20px';
 
-                                        // Create buttons
+
                                         const spotifyButton = document.createElement('button');
                                         spotifyButton.innerText = 'Spotify';
                                         spotifyButton.className = 'spotifyButton';
@@ -375,7 +373,6 @@
                                         };
                                         buttonsDiv.appendChild(youtubeButton);
 
-                                        // Append the div to the songInfoContainer
                                         songInfoContainer.appendChild(buttonsDiv);
 
                                         const arrowDiv = document.createElement('div');
@@ -442,7 +439,7 @@
                                                         commentP.className = 'commentP';
 
                                                         const usernameLink = document.createElement('a');
-                                                        usernameLink.href = `/profile/${comment.username}`; // adjust this to the correct URL
+                                                        usernameLink.href = `/profile/${comment.username}`;
                                                         usernameLink.innerText = comment.username;
                                                         usernameLink.className = 'usernameLink';
                                                         commentP.appendChild(usernameLink);
@@ -532,9 +529,9 @@
                                                 commentForm.appendChild(submitButtonComments);
 
                                                 commentForm.addEventListener('submit', function (event) {
-                                                    event.preventDefault(); // Prevent the form from being submitted normally
+                                                    event.preventDefault();
 
-                                                    const commentText = commentInput.value; // Get the text from the input field
+                                                    const commentText = commentInput.value;
                                                     const songid = song.song_id;
 
                                                     fetch(`/mainpage/comments/add/${songid})`, {
@@ -542,11 +539,11 @@
                                                         headers: {
                                                             'Content-Type': 'application/json'
                                                         },
-                                                        body: JSON.stringify({ comment: commentText, songid: songid }) // Send the comment text in the request body
+                                                        body: JSON.stringify({ comment: commentText, songid: songid })
                                                     })
                                                         .then(response => {
                                                             if (response.ok) {
-                                                                commentInput.value = ''; // Clear the input field
+                                                                commentInput.value = '';
                                                                 const successP = document.createElement('p');
                                                                 successP.innerText = 'Comment added successfully';
                                                                 successP.style.color = 'green';
@@ -586,7 +583,7 @@
                                                 songInfoContainer.appendChild(reportSong);
 
                                                 reportSong.onclick = function(event) {
-                                                    event.preventDefault(); // Prevent the link from being followed
+                                                    event.preventDefault();
 
                                                     const reason = window.prompt("Please enter the reason for reporting this song:");
 
@@ -596,7 +593,7 @@
                                                             headers: {
                                                                 'Content-Type': 'application/json'
                                                             },
-                                                            body: JSON.stringify({ reason: reason }) // Send the reason in the request body
+                                                            body: JSON.stringify({ reason: reason })
                                                         })
                                                             .then(response => {
                                                                 if (!response.ok) {

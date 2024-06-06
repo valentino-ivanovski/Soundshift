@@ -10,12 +10,12 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'views')));
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); //for using req.body data in HTTP requests
 
 const secretKey = require('crypto').randomBytes(32).toString('hex');
-// Configure express-session middleware
+
 app.use(session({
-  secret: secretKey, // Change this to a secure secret key
+  secret: secretKey,
   resave: false,
   saveUninitialized: true,
 }));

@@ -96,7 +96,7 @@ p{
 }
 
 .welcome1 {
-    font-family: 'Inter', sans-serif; /* Use Inter font */
+    font-family: 'Inter', sans-serif;
     font-size: 90px;
     color: #fff;
     transition: 0.5s;
@@ -110,7 +110,7 @@ p{
 }
 
 .welcome2 {
-    font-family: 'Inter', sans-serif; /* Use Inter font */
+    font-family: 'Inter', sans-serif;
     font-size: 20px;
     margin-left: 20%;
     color: #fff;

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const dbConn = require('../database/dbConn'); //importing the database connection module
+const dbConn = require('../database/dbConn');
 
 router.get('/', (req, res) => {
     console.log("profile route reached");
@@ -31,4 +31,4 @@ router.get('/userResults/:query', (req, res) => {
     });
 });
 
-module.exports = router; //exporting the module for users
+module.exports = router;

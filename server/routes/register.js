@@ -10,14 +10,13 @@ router.get('/', (req, res) => {
 router.post('/registerUser', (req, res) => {
     const { username, email, password } = req.body;
 
-    // Generate hashed password
     const saltRounds = 10;
     bcrypt.hash(password, saltRounds, function(err, hashedPassword) {
         if (err) {
             console.error("Error hashing password:", err);
             res.status(500).send("Registration failed. Please try again.");
         } else {
-            // Check if the username already exists
+            //check if the username already exists
             dbConn.checkUsernameExists(username, email, (err, exists) => {
                 if (err) {
                     console.error("Error checking username:", err);
@@ -25,14 +24,14 @@ router.post('/registerUser', (req, res) => {
                 } else if (exists) {
                     res.render('register', { errorReg: "Username or email already exists." });
                 } else {
-                    // Username doesn't exist, proceed with registration
+                    //username doesn't exist, proceed with registration
                     dbConn.insertUser(username, email, hashedPassword, (err, result) => {
                         if (err) {
                             console.error("Error inserting user:", err);
                             res.status(500).send("Registration failed. Please try again.");
                         } else {
                             console.log("User registered successfully");
-                            res.redirect('/'); // Redirect to the login page after successful registration
+                            res.redirect('/'); 
                         }
                     });
                 }
@@ -42,10 +41,4 @@ router.post('/registerUser', (req, res) => {
 });
 
 
-module.exports = router; //exporting the module for users
-
-// also, it's better to rename this file by the name of the endpoint (in this case /users.js), and place here all routes related to users, which are
-
-// creating user: router.post('/users', (req, res) => {})
-// editing user: router.put('/users/{id}', (req, res) => {})
-// deleting user: router.delete('/users/{id}', (req, res) => {})
+module.exports = router;

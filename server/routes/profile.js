@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const dbConn = require('../database/dbConn'); //importing the database connection module
+const dbConn = require('../database/dbConn');
 
 router.get('/me', (req, res) => {
     const userId = req.session.user.id;
@@ -144,4 +144,4 @@ router.post('/me/update-profile-picture', function(req, res) {
     });
 });
 
-module.exports = router; //exporting the module for users
+module.exports = router;

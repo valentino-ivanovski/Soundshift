@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const dbConn = require("../database/dbConn"); //importing the database connection module
+const dbConn = require("../database/dbConn");
 require('dotenv').config();
 
 router.get("/", (req, res) => {
@@ -10,23 +10,20 @@ router.get("/", (req, res) => {
 
 router.post("/submitsong", (req, res) => {
     const { songTitle, artistName, genre } = req.body; //extract data from request body
-    const userId = req.session.user.id; //retrieve user ID from session
+    const userId = req.session.user.id;
     const explicit = req.body.explicit === "on"; //true if checked, false otherwise
     const location = req.session.user.location;
 
-    //check if the song already exists
     dbConn.checkSongExists(songTitle, artistName, (err, exists) => {
         if (err) {
             console.error("Error checking song:", err);
             res.status(500).send("Error checking song");
         } else {
             if (exists) {
-                //song already exists, send an error message
                 res.render("mainpage", {
                     errorSongExists: "Song already exists.",
                 });
             } else {
-                //song doesn't exist, insert it into the database
                 dbConn.insertSong(
                     songTitle,
                     artistName,

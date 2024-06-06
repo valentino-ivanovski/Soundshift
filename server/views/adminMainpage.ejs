@@ -108,7 +108,7 @@
                                         <option value="Experimental">Experimental</option>
                                     </select>
                                     <label for="explicit" class="explicitLabel2">Explicit</label>
-                                    <input type="checkbox" id="explicit" name="explicit"><!-- explicit -->
+                                    <input type="checkbox" id="explicit" name="explicit">
                                     <p style="color: yellow;font-size: 13px; margin-top: 20px;">
                                         <%= locals.errorSongExists %>
                                     </p>
@@ -200,13 +200,11 @@
                     const genre = genreSelect.value;
                     const explicit = explicitCheckbox.checked;
 
-                    //prepare data for POST request
                     const data = {
                         genre: genre,
                         explicit: explicit
                     };
 
-                    //send post request
                     fetch('/adminMainpage/getrandomsong', {
                         method: 'POST',
                         headers: {
@@ -216,7 +214,7 @@
                     })
                         .then(response => {
                             if (response.ok) {
-                                return response.json(); // Parse the response JSON
+                                return response.json();
                             } else {
                                 console.error('Error:', response.statusText);
                             }
@@ -240,7 +238,7 @@
                             //adding the retreived song to the retrievedSongs table
                             const retrievedSongData = {
                                 song_id: song.song_id,
-                                retrieval_date: new Date().toISOString().slice(0, 10) // Current date in YYYY-MM-DD format
+                                retrieval_date: new Date().toISOString().slice(0, 10) //current date in YYYY-MM-DD format
                             };
 
                             fetch('/adminMainpage/storeRetrievedSong', {
@@ -274,9 +272,9 @@
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.items && data.items.length > 0) {
-                                        const videoId = data.items[0].id.videoId; // Extract the video ID from search results
+                                        const videoId = data.items[0].id.videoId; //extract the video ID from search results
 
-                                        // Create YouTube player
+                                        //create YouTube player
                                         const playerContainer = document.createElement('div');
                                         playerContainer.id = 'player';
                                         songInfoContainer.appendChild(playerContainer);
@@ -345,12 +343,10 @@
                                         songInfoContainer.appendChild(likeCommentDiv);
 
 
-
-                                        // Create a div to contain the buttons
                                         const buttonsDiv = document.createElement('div');
                                         buttonsDiv.style.marginTop = '20px';
 
-                                        // Create buttons
+
                                         const spotifyButton = document.createElement('button');
                                         spotifyButton.innerText = 'Spotify';
                                         spotifyButton.className = 'spotifyButton';
@@ -535,9 +531,9 @@
                                                 commentForm.appendChild(submitButtonComments);
 
                                                 commentForm.addEventListener('submit', function (event) {
-                                                    event.preventDefault(); // Prevent the form from being submitted normally
+                                                    event.preventDefault();
 
-                                                    const commentText = commentInput.value; // Get the text from the input field
+                                                    const commentText = commentInput.value;
                                                     const songid = song.song_id;
 
                                                     fetch(`/adminMainpage/comments/add/${songid})`, {
@@ -545,7 +541,7 @@
                                                         headers: {
                                                             'Content-Type': 'application/json'
                                                         },
-                                                        body: JSON.stringify({ comment: commentText, songid: songid }) // Send the comment text in the request body
+                                                        body: JSON.stringify({ comment: commentText, songid: songid })
                                                     })
                                                         .then(response => {
                                                             if (response.ok) {
@@ -589,7 +585,7 @@
                                                 songInfoContainer.appendChild(reportSong);
 
                                                 reportSong.onclick = function(event) {
-                                                    event.preventDefault(); // Prevent the link from being followed
+                                                    event.preventDefault();
 
                                                     const reason = window.prompt("Please enter the reason for reporting this song:");
 
@@ -599,7 +595,7 @@
                                                             headers: {
                                                                 'Content-Type': 'application/json'
                                                             },
-                                                            body: JSON.stringify({ reason: reason }) // Send the reason in the request body
+                                                            body: JSON.stringify({ reason: reason })
                                                         })
                                                             .then(response => {
                                                                 if (!response.ok) {
