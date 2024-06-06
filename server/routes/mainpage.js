@@ -5,7 +5,7 @@ require('dotenv').config();
 
 router.get("/", (req, res) => {
     console.log("mainpage route reached");
-    res.render("mainpage", { apiVariable: process.env.YOUTUBE_API_KEY });
+    res.render("mainpage");
 });
 
 router.post("/submitsong", (req, res) => {
