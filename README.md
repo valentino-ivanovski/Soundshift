@@ -1,6 +1,6 @@
 # Soundshift
 
-[Soundshift](http://88.200.63.148:3000) is an information system that allows users to discover songs, which entries are being submitted by other users. The website is not yet updated for mobile devices. Inspired by [James Turrell](https://www.pacegallery.com/artists/james-turrell/)
+[Soundshift](http://88.200.63.148:3001) is an information system that allows users to discover songs, which entries are being submitted by other users. The website is not yet updated for mobile devices. Inspired by [James Turrell](https://www.pacegallery.com/artists/james-turrell/)
 
 More info can be found in the report.
 
